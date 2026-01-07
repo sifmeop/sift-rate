@@ -16,7 +16,7 @@ export const RatingList = ({ items }: IRatingListProps) => {
   return (
     <RatingListProvider>
       <div className='flex flex-col gap-3'>
-        <div className='grid grid-cols-[200px_1fr] gap-3'>
+        <div className='grid gap-3 md:grid-cols-[200px_1fr]'>
           <RatingListTabs />
           <RatingListSearch />
         </div>

@@ -2,7 +2,7 @@
 
 import { cn } from '@heroui/theme'
 import dayjs from 'dayjs'
-import { motion } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { Calendar, Quote } from 'lucide-react'
 import { Badge } from '~/components/ui/badge'
 import { ReviewCover } from '~/components/ui/review-cover'
@@ -12,6 +12,23 @@ import type { IRatingCardData } from '../../types/rating.types'
 import { DeleteReview } from './DeleteReview'
 import { Rating } from './Rating'
 import { UpdateReview } from './UpdateReview'
+
+const cardVariants: Variants = {
+  initial: {
+    opacity: 0,
+    y: 20,
+    scale: 0.95
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.3,
+      ease: [0.34, 1.56, 0.64, 1]
+    }
+  }
+}
 
 type IRatingCardProps = IRatingCardData
 
@@ -34,6 +51,7 @@ export const RatingCard = ({
   return (
     <motion.div
       key={id}
+      variants={cardVariants}
       className={cn(
         'group relative flex flex-col gap-4 rounded-xl border p-4 transition-all duration-300 hover:shadow-lg md:flex-row',
         isTopRated

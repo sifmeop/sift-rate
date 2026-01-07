@@ -64,10 +64,11 @@ enum ContentType {
 }
 
 model ItemReview {
-  id       String   @id @default(cuid())
-  title    String
-  coverUrl String?
-  reviews  Review[]
+  id         String   @id @default(cuid())
+  externalId String   @unique
+  title      String
+  coverUrl   String?
+  reviews    Review[]
 }
 
 model Review {

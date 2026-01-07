@@ -16,7 +16,7 @@ export const StarRating = ({ rating, onChange }: IStarRatingProps) => {
           <button
             key={index}
             type='button'
-            className='size-7 cursor-pointer transition-transform hover:scale-120'>
+            className='size-6 cursor-pointer transition-transform hover:scale-120 md:size-7'>
             <StarIcon
               className={cn(
                 'size-full transition-colors',
@@ -27,7 +27,7 @@ export const StarRating = ({ rating, onChange }: IStarRatingProps) => {
           </button>
         )
       })}
-      <span className='text-muted-foreground ml-2 text-base font-semibold'>
+      <span className='text-muted-foreground ml-2 text-sm font-semibold md:text-base'>
         / {rating}
       </span>
     </div>

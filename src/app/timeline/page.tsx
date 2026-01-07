@@ -1,4 +1,10 @@
+import type { Metadata } from 'next'
 import { TimelinePage } from '~/screens/timeline'
+
+export const metadata: Metadata = {
+  title: 'Sift Rate — Таймлайн отзывов',
+  description: 'Отзывы и оценки пользователя'
+}
 
 interface ITimelineProps {
   searchParams: Promise<{

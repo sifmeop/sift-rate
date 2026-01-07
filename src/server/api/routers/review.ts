@@ -21,6 +21,7 @@ export const reviewRouter = createTRPCRouter({
 
       itemReview ??= await ctx.db.itemReview.create({
         data: {
+          externalId: input.externalId,
           title: input.title,
           coverUrl: input.coverUrl
         }

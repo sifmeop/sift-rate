@@ -159,6 +159,7 @@ exports.Prisma.VerificationTokenScalarFieldEnum = {
 
 exports.Prisma.ItemReviewScalarFieldEnum = {
   id: 'id',
+  externalId: 'externalId',
   title: 'title',
   coverUrl: 'coverUrl'
 };

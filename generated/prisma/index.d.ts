@@ -5769,18 +5769,21 @@ export namespace Prisma {
 
   export type ItemReviewMinAggregateOutputType = {
     id: string | null
+    externalId: string | null
     title: string | null
     coverUrl: string | null
   }
 
   export type ItemReviewMaxAggregateOutputType = {
     id: string | null
+    externalId: string | null
     title: string | null
     coverUrl: string | null
   }
 
   export type ItemReviewCountAggregateOutputType = {
     id: number
+    externalId: number
     title: number
     coverUrl: number
     _all: number
@@ -5789,18 +5792,21 @@ export namespace Prisma {
 
   export type ItemReviewMinAggregateInputType = {
     id?: true
+    externalId?: true
     title?: true
     coverUrl?: true
   }
 
   export type ItemReviewMaxAggregateInputType = {
     id?: true
+    externalId?: true
     title?: true
     coverUrl?: true
   }
 
   export type ItemReviewCountAggregateInputType = {
     id?: true
+    externalId?: true
     title?: true
     coverUrl?: true
     _all?: true
@@ -5880,6 +5886,7 @@ export namespace Prisma {
 
   export type ItemReviewGroupByOutputType = {
     id: string
+    externalId: string
     title: string
     coverUrl: string | null
     _count: ItemReviewCountAggregateOutputType | null
@@ -5903,6 +5910,7 @@ export namespace Prisma {
 
   export type ItemReviewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    externalId?: boolean
     title?: boolean
     coverUrl?: boolean
     reviews?: boolean | ItemReview$reviewsArgs<ExtArgs>
@@ -5911,23 +5919,26 @@ export namespace Prisma {
 
   export type ItemReviewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    externalId?: boolean
     title?: boolean
     coverUrl?: boolean
   }, ExtArgs["result"]["itemReview"]>
 
   export type ItemReviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    externalId?: boolean
     title?: boolean
     coverUrl?: boolean
   }, ExtArgs["result"]["itemReview"]>
 
   export type ItemReviewSelectScalar = {
     id?: boolean
+    externalId?: boolean
     title?: boolean
     coverUrl?: boolean
   }
 
-  export type ItemReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "coverUrl", ExtArgs["result"]["itemReview"]>
+  export type ItemReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "externalId" | "title" | "coverUrl", ExtArgs["result"]["itemReview"]>
   export type ItemReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviews?: boolean | ItemReview$reviewsArgs<ExtArgs>
     _count?: boolean | ItemReviewCountOutputTypeDefaultArgs<ExtArgs>
@@ -5942,6 +5953,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      externalId: string
       title: string
       coverUrl: string | null
     }, ExtArgs["result"]["itemReview"]>
@@ -6369,6 +6381,7 @@ export namespace Prisma {
    */
   interface ItemReviewFieldRefs {
     readonly id: FieldRef<"ItemReview", 'String'>
+    readonly externalId: FieldRef<"ItemReview", 'String'>
     readonly title: FieldRef<"ItemReview", 'String'>
     readonly coverUrl: FieldRef<"ItemReview", 'String'>
   }
@@ -7992,6 +8005,7 @@ export namespace Prisma {
 
   export const ItemReviewScalarFieldEnum: {
     id: 'id',
+    externalId: 'externalId',
     title: 'title',
     coverUrl: 'coverUrl'
   };
@@ -8371,6 +8385,7 @@ export namespace Prisma {
     OR?: ItemReviewWhereInput[]
     NOT?: ItemReviewWhereInput | ItemReviewWhereInput[]
     id?: StringFilter<"ItemReview"> | string
+    externalId?: StringFilter<"ItemReview"> | string
     title?: StringFilter<"ItemReview"> | string
     coverUrl?: StringNullableFilter<"ItemReview"> | string | null
     reviews?: ReviewListRelationFilter
@@ -8378,6 +8393,7 @@ export namespace Prisma {
 
   export type ItemReviewOrderByWithRelationInput = {
     id?: SortOrder
+    externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrderInput | SortOrder
     reviews?: ReviewOrderByRelationAggregateInput
@@ -8385,16 +8401,18 @@ export namespace Prisma {
 
   export type ItemReviewWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    externalId?: string
     AND?: ItemReviewWhereInput | ItemReviewWhereInput[]
     OR?: ItemReviewWhereInput[]
     NOT?: ItemReviewWhereInput | ItemReviewWhereInput[]
     title?: StringFilter<"ItemReview"> | string
     coverUrl?: StringNullableFilter<"ItemReview"> | string | null
     reviews?: ReviewListRelationFilter
-  }, "id">
+  }, "id" | "externalId">
 
   export type ItemReviewOrderByWithAggregationInput = {
     id?: SortOrder
+    externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrderInput | SortOrder
     _count?: ItemReviewCountOrderByAggregateInput
@@ -8407,6 +8425,7 @@ export namespace Prisma {
     OR?: ItemReviewScalarWhereWithAggregatesInput[]
     NOT?: ItemReviewScalarWhereWithAggregatesInput | ItemReviewScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"ItemReview"> | string
+    externalId?: StringWithAggregatesFilter<"ItemReview"> | string
     title?: StringWithAggregatesFilter<"ItemReview"> | string
     coverUrl?: StringNullableWithAggregatesFilter<"ItemReview"> | string | null
   }
@@ -8753,6 +8772,7 @@ export namespace Prisma {
 
   export type ItemReviewCreateInput = {
     id?: string
+    externalId: string
     title: string
     coverUrl?: string | null
     reviews?: ReviewCreateNestedManyWithoutItemReviewInput
@@ -8760,6 +8780,7 @@ export namespace Prisma {
 
   export type ItemReviewUncheckedCreateInput = {
     id?: string
+    externalId: string
     title: string
     coverUrl?: string | null
     reviews?: ReviewUncheckedCreateNestedManyWithoutItemReviewInput
@@ -8767,6 +8788,7 @@ export namespace Prisma {
 
   export type ItemReviewUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewUpdateManyWithoutItemReviewNestedInput
@@ -8774,6 +8796,7 @@ export namespace Prisma {
 
   export type ItemReviewUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
     reviews?: ReviewUncheckedUpdateManyWithoutItemReviewNestedInput
@@ -8781,18 +8804,21 @@ export namespace Prisma {
 
   export type ItemReviewCreateManyInput = {
     id?: string
+    externalId: string
     title: string
     coverUrl?: string | null
   }
 
   export type ItemReviewUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ItemReviewUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -9181,18 +9207,21 @@ export namespace Prisma {
 
   export type ItemReviewCountOrderByAggregateInput = {
     id?: SortOrder
+    externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrder
   }
 
   export type ItemReviewMaxOrderByAggregateInput = {
     id?: SortOrder
+    externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrder
   }
 
   export type ItemReviewMinOrderByAggregateInput = {
     id?: SortOrder
+    externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrder
   }
@@ -10117,12 +10146,14 @@ export namespace Prisma {
 
   export type ItemReviewCreateWithoutReviewsInput = {
     id?: string
+    externalId: string
     title: string
     coverUrl?: string | null
   }
 
   export type ItemReviewUncheckedCreateWithoutReviewsInput = {
     id?: string
+    externalId: string
     title: string
     coverUrl?: string | null
   }
@@ -10176,12 +10207,14 @@ export namespace Prisma {
 
   export type ItemReviewUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ItemReviewUncheckedUpdateWithoutReviewsInput = {
     id?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
   }

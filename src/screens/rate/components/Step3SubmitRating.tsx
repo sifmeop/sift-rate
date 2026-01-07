@@ -26,7 +26,7 @@ export const Step3SubmitRating = ({
 
   return (
     <form onSubmit={onSubmit}>
-      <div className='border-border relative mb-8 rounded-xl border p-6'>
+      <div className='md:border-border relative mb-4 rounded-xl md:mb-8 md:border md:p-6'>
         <Badge
           type={selectedTargetItem.type}
           className='absolute top-6 right-6'

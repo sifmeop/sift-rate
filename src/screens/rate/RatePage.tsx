@@ -25,12 +25,12 @@ export const RatePage = () => {
       {!selectedType ? (
         <Step1SelectCategory setSelectedType={setSelectedType} />
       ) : (
-        <div className='flex flex-col gap-3'>
+        <div>
           <Button
             variant='light'
             startContent={<FaArrowLeft />}
             onPress={handleBack}
-            className='w-fit'>
+            className='mb-4 w-fit'>
             Назад
           </Button>
           <h1 className='mb-8 text-3xl font-bold'>{title}</h1>

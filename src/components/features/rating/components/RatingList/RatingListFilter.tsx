@@ -16,19 +16,26 @@ interface IRatingListFilterProps {
 export const RatingListFilter = ({ items }: IRatingListFilterProps) => {
   const { state, setFilter } = useRatingList()
 
-  const ratings = items.reduce<Record<string, number>>((acc, item) => {
-    acc[item.rating] = (acc[item.rating] ?? 0) + 1
-    return acc
-  }, {})
+  const ratings = items.reduce<Record<string, number>>(
+    (acc, item) => {
+      acc[item.rating] = (acc[item.rating] ?? 0) + 1
+      return acc
+    },
+    {
+      all: items.length
+    }
+  )
 
   const tab = state.tab
   const isDisabled = tab === 'best'
-  const filter = isDisabled ? 'all' : state.filter
+  const filter = isDisabled ? '10' : state.filter
 
   const selectedKeys = new Set([filter])
   const sortedRatings = [
-    ['all', items.length],
-    ...[...Object.entries(ratings)].sort((a, b) => +b[0] - +a[0])
+    ['all', ratings.all],
+    ...[...Object.entries(ratings).filter(([key]) => key !== 'all')].sort(
+      (a, b) => +b[0] - +a[0]
+    )
   ]
 
   const onSelectionChange = (keys: SharedSelection) => {
