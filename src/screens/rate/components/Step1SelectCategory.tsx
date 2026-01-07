@@ -64,7 +64,7 @@ export const Step1SelectCategory = ({
           <button
             key={category}
             onClick={() => setSelectedType(category)}
-            className='bg-card border-border hover:border-secondary hover:bg-secondary/5 group flex cursor-pointer flex-col items-center gap-3 rounded-xl border p-6 transition-all'>
+            className='bg-card-background border-border hover:border-secondary hover:bg-secondary/5 group z-px relative flex cursor-pointer flex-col items-center gap-3 rounded-xl border p-6 transition-all'>
             <div className='bg-muted text-muted-foreground group-hover:text-secondary grid size-14 place-items-center rounded-full transition-colors'>
               <Icon className='size-7' />
             </div>

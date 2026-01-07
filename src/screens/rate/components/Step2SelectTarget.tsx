@@ -63,11 +63,11 @@ export const Step2SelectTarget = ({
           Ничего не найдено
         </p>
       )}
-      <div className='scrollbar-hide flex h-137.5 flex-col gap-3 overflow-y-auto'>
+      <div className='scrollbar-hide z-px relative flex h-137.5 flex-col gap-3 overflow-y-auto'>
         {result?.map((result) => (
           <button
             key={result.id}
-            className='bg-card border-border hover:border-secondary group flex w-full cursor-pointer items-center gap-4 rounded-xl border p-4 transition-all'
+            className='bg-card-background border-border hover:border-secondary group flex w-full cursor-pointer items-center gap-4 rounded-xl border p-4 transition-all'
             onClick={() => selectTarget(result)}>
             <ReviewCover
               title={result.title}

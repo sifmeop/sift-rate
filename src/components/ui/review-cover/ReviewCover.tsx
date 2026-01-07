@@ -9,7 +9,7 @@ interface IProps {
 
 export const ReviewCover = ({ coverUrl, type, title }: IProps) => {
   const isMusic = type === ContentType.SONG || type === ContentType.ALBUM
-  const cover = coverUrl ?? '/no-poster-available.webp'
+  const cover = coverUrl ?? '/images/no-poster-available.webp'
 
   return (
     <div

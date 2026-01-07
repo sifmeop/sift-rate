@@ -1,4 +1,6 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
+import { LoadingSpinner } from '~/components/ui/loading-spinner'
 import { TimelinePage } from '~/screens/timeline'
 
 export const metadata: Metadata = {
@@ -17,8 +19,8 @@ export default async function Timeline({ searchParams }: ITimelineProps) {
   const { year = new Date().getFullYear() + '' } = await searchParams
 
   return (
-    // <Suspense key={year} fallback={<LoadingSpinner />}>
-    <TimelinePage year={year} />
-    // </Suspense>
+    <Suspense fallback={<LoadingSpinner />}>
+      <TimelinePage year={year} />
+    </Suspense>
   )
 }
