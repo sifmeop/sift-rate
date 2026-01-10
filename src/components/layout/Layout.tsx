@@ -12,12 +12,12 @@ export const Layout = async ({ children }: React.PropsWithChildren) => {
     <>
       <SeasonalEffect />
       <Header email={user.email} />
-      <MobileNav />
       <Main>{children}</Main>
+      <MobileNav />
     </>
   ) : (
     <>{children}</>
   )
 
-  return <div className='dark min-h-dvh'>{content}</div>
+  return <div>{content}</div>
 }

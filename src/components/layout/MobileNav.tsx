@@ -9,7 +9,7 @@ export const MobileNav = () => {
   const pathname = usePathname()
 
   return (
-    <div className='border-border bg-background-primary/95 fixed right-0 bottom-0 left-0 z-50 border-t pt-1 pb-[calc(6px+env(safe-area-inset-bottom))] backdrop-blur-xl md:hidden'>
+    <div className='border-border bg-background-primary/60 pb-safe fixed right-0 bottom-0 left-0 z-50 border-t pt-1 backdrop-blur-xl md:hidden'>
       <nav
         style={{
           gridTemplateColumns: `repeat(${NAV_LINKS.length}, 1fr)`

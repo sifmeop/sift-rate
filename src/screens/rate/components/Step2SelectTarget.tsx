@@ -72,7 +72,7 @@ export const Step2SelectTarget = ({
           Ничего не найдено
         </p>
       )}
-      <div className='z-px relative flex flex-col gap-3 overflow-y-auto'>
+      <div className='z-px flex flex-col gap-3'>
         {result?.map((result) => (
           <button
             key={result.id}
@@ -102,7 +102,7 @@ export const Step2SelectTarget = ({
         <Pagination
           showControls
           classNames={{
-            base: 'sticky bottom-18 md:bottom-4',
+            base: 'sticky bottom-18 md:bottom-2',
             wrapper: 'mx-auto'
           }}
           page={currentPage}

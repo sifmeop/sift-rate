@@ -23,8 +23,8 @@ export const Header = ({ email }: IHeaderProps) => {
   }
 
   return (
-    <header className='border-b-border bg-background-primary/80 sticky top-0 z-50 w-full border-b backdrop-blur-xl'>
-      <div className='app-container flex h-15 items-center justify-center gap-4 md:justify-between'>
+    <header className='border-b-border bg-background-primary/60 pt-safe fixed top-0 z-50 h-15 w-full border-b backdrop-blur-xl'>
+      <div className='app-container flex h-full items-center justify-center gap-4 md:justify-between'>
         <Link
           href={ROUTES.REVIEWS}
           className='flex shrink-0 items-center gap-2'>

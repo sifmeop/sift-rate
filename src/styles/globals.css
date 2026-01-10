@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'tailwindcss-safe-area';
 @plugin '../hero.ts';
 @plugin "tailwindcss-device";
 @source '../../node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}';
@@ -29,8 +30,13 @@
   --color-border: #292932;
 }
 
+html,
 body {
-  @apply font-manrope bg-background-primary text-foreground overflow-x-hidden text-lg font-normal antialiased;
+  @apply min-h-dvh;
+}
+
+body {
+  @apply font-manrope bg-background-primary text-foreground dark overflow-x-hidden text-lg font-normal antialiased;
 }
 
 .app-container {
