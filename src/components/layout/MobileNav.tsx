@@ -9,7 +9,7 @@ export const MobileNav = () => {
   const pathname = usePathname()
 
   return (
-    <div className='border-border bg-background-primary/95 fixed right-0 bottom-0 left-0 z-50 border-t backdrop-blur-xl md:hidden'>
+    <div className='border-border bg-background-primary/95 fixed right-0 bottom-0 left-0 z-50 border-t pt-1 pb-[calc(1rem+env(safe-area-inset-bottom))] backdrop-blur-xl md:hidden'>
       <nav
         style={{
           gridTemplateColumns: `repeat(${NAV_LINKS.length}, 1fr)`
@@ -22,7 +22,7 @@ export const MobileNav = () => {
               key={href}
               href={href}
               className={cn(
-                'flex flex-col items-center gap-1 rounded-lg px-4 py-2 transition-colors duration-300',
+                'flex h-full flex-col items-center justify-center gap-1 rounded-lg px-4 py-2 transition-colors duration-300',
                 isActive
                   ? 'text-secondary'
                   : 'text-muted-foreground hover:text-white'

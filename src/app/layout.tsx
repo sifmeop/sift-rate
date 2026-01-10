@@ -2,13 +2,12 @@ import '~/styles/globals.css'
 
 import { cn } from '@heroui/theme'
 import dayjs from 'dayjs'
-import { type Metadata } from 'next'
+import { type Metadata, type Viewport } from 'next'
 import { Manrope, Roboto_Slab } from 'next/font/google'
 import { TRPCReactProvider } from '~/trpc/react'
 import { Providers } from './providers'
 
 import 'dayjs/locale/ru'
-import Head from 'next/head'
 
 dayjs.locale('ru')
 
@@ -50,6 +49,13 @@ export const metadata: Metadata = {
   }
 }
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover'
+}
+
 const manrope = Manrope({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-manrope'
@@ -68,12 +74,6 @@ export default function RootLayout({
       suppressHydrationWarning
       lang='ru'
       className={cn(manrope.variable, robotoSlab.variable)}>
-      <Head>
-        <meta
-          name='viewport'
-          content='width=device-width, initial-scale=1, maximum-scale=1'
-        />
-      </Head>
       <body>
         <TRPCReactProvider>
           <Providers>{children}</Providers>
