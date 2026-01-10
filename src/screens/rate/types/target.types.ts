@@ -1,5 +1,12 @@
 import type { ContentType } from 'generated/prisma'
 
+export interface ISearchResult {
+  items: ITargetItem[]
+  page: number
+  totalPages: number
+  totalResults: number
+}
+
 export interface ITargetItem {
   id: string
   title: string

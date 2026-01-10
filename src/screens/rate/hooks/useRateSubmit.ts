@@ -1,8 +1,9 @@
 import { addToast } from '@heroui/toast'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { createReviewAction } from '~/actions/reviews.actions'
+import type { IRatingCardData } from '~/components/features/rating'
+import { MAX_RATING } from '~/constants/review'
+import { api } from '~/trpc/react'
 import {
   createReviewSchema,
   type CreateReviewSchemaType
@@ -13,7 +14,56 @@ export const useRateSubmit = (
   selectedTargetItem: ISelectedTargetItem,
   reset: () => void
 ) => {
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const utils = api.useUtils()
+  const { mutateAsync, isPending: isCreating } = api.review.create.useMutation({
+    onSuccess: (data, variables) => {
+      const transformedData: IRatingCardData = {
+        createdAt: data.createdAt,
+        id: data.id,
+        itemReview: {
+          title: variables.title,
+          coverUrl: variables.coverUrl ?? null
+        },
+        itemReviewId: data.itemReviewId,
+        rating: data.rating,
+        review: data.review,
+        type: data.type,
+        userId: data.userId
+      }
+
+      utils.review.getReviews.setData(undefined, (oldData) => {
+        if (!oldData) return
+        return [transformedData, ...oldData]
+      })
+
+      const currentYear = new Date().getFullYear()
+      const currentMonth = new Date().getMonth()
+
+      utils.review.getTimelineStats.setData(undefined, (oldData) => {
+        if (oldData?.[currentYear]?.months?.[currentMonth]) {
+          const isBest = data.rating === MAX_RATING
+
+          oldData[currentYear].total++
+          oldData[currentYear].months[currentMonth].total++
+
+          if (isBest) {
+            oldData[currentYear].best++
+            oldData[currentYear].months[currentMonth].best++
+          }
+        }
+
+        return oldData
+      })
+
+      const from = new Date(currentYear, 0, 1).toISOString()
+      const to = new Date(currentYear, 11, 31).toISOString()
+
+      utils.review.getReviewsByDate.setData({ from, to }, (oldData) => {
+        if (!oldData) return
+        return [transformedData, ...oldData]
+      })
+    }
+  })
 
   const { register, setValue, handleSubmit, watch } =
     useForm<CreateReviewSchemaType>({
@@ -30,10 +80,8 @@ export const useRateSubmit = (
     })
 
   const onSubmit = handleSubmit(async (data: CreateReviewSchemaType) => {
-    setIsSubmitting(true)
-
     try {
-      await createReviewAction(data)
+      await mutateAsync(data)
 
       reset()
       addToast({
@@ -52,15 +100,13 @@ export const useRateSubmit = (
           ? 'Отзыв на этот объект уже создан'
           : 'При создании отзыва произошла ошибка'
       })
-    } finally {
-      setIsSubmitting(false)
     }
   })
 
   return {
     register,
     setValue,
-    isSubmitting,
+    isCreating,
     watch,
     onSubmit
   }

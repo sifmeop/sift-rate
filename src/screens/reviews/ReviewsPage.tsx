@@ -1,13 +1,10 @@
 import { RatingList } from '~/components/features/rating'
-import { EmptyState } from '~/components/ui/query'
-import { api } from '~/trpc/server'
+import { api } from '~/trpc/react'
 
-export const ReviewsPage = async () => {
-  const items = await api.review.getReviews()
+export const ReviewsPage = () => {
+  const { data, isLoading, error } = api.review.getReviews.useQuery()
 
-  if (items.length === 0) {
-    return <EmptyState />
-  }
-
-  return <RatingList items={items} />
+  return (
+    <RatingList items={data} isLoading={isLoading} error={error?.message} />
+  )
 }

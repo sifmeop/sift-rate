@@ -1,21 +1,34 @@
 import { Button } from '@heroui/button'
+import { useEffect } from 'react'
 import type { ITimeline } from '~/components/features/rating'
+import { useTimeline } from '~/contexts/TimelineProvider'
 import { capitalize } from '~/utils/capitalize'
 
 interface IMonthSelectorProps {
-  timeline: ITimeline
-  selectedYear: number
-  selectedMonth: number
-  setSelectedMonth: React.Dispatch<React.SetStateAction<number>>
+  timeline: ITimeline | null | undefined
 }
 
-export const MonthSelector = ({
-  timeline,
-  selectedYear,
-  selectedMonth,
-  setSelectedMonth
-}: IMonthSelectorProps) => {
-  const months = timeline[selectedYear]?.months ?? {}
+export const MonthSelector = ({ timeline }: IMonthSelectorProps) => {
+  const { selectedYear, selectedMonth, setSelectedMonth } = useTimeline()
+
+  useEffect(() => {
+    if (!timeline) return
+
+    const months = timeline[selectedYear]?.months
+
+    if (!months) return
+
+    const monthsMap = Object.keys(months)
+    const hasMonths = monthsMap.some((month) => months[+month]!.total > 0)
+
+    if (hasMonths) return
+
+    const month = monthsMap.find((month) => months[+month]!.total > 0)
+
+    if (month) setSelectedMonth(+month)
+  }, [timeline, selectedYear, selectedMonth, setSelectedMonth])
+
+  const months = timeline?.[selectedYear]?.months ?? {}
   const monthsMap = Object.keys(months)
 
   return (
@@ -26,7 +39,7 @@ export const MonthSelector = ({
       className='hidden gap-3 md:grid'>
       {monthsMap.map((month) => {
         const { total, best } = months[+month]!
-        const date = new Date(selectedYear, +month - 1, 1)
+        const date = new Date(selectedYear, +month, 1)
         const monthName = new Intl.DateTimeFormat('ru-RU', {
           month: 'long'
         }).format(date)

@@ -330,6 +330,22 @@
     "@react-aria/overlays" "3.31.0"
     "@react-stately/overlays" "3.6.21"
 
+"@heroui/pagination@^2.2.26":
+  version "2.2.26"
+  resolved "https://registry.yarnpkg.com/@heroui/pagination/-/pagination-2.2.26.tgz#b649c0aa4c3a55048f899a6d55c8b616ce0a55aa"
+  integrity sha512-Ta70RAMo223BDFw3fAvYew1PauQ+b38Xa0zWnj5mkkrYrLXk7sjomunNtlUFPKkr0B8Dpuu67tp9a8AlmI1z8A==
+  dependencies:
+    "@heroui/react-utils" "2.1.14"
+    "@heroui/shared-icons" "2.1.10"
+    "@heroui/shared-utils" "2.1.12"
+    "@heroui/use-intersection-observer" "2.2.14"
+    "@heroui/use-pagination" "2.2.19"
+    "@react-aria/focus" "3.21.3"
+    "@react-aria/i18n" "3.12.14"
+    "@react-aria/interactions" "3.26.0"
+    "@react-aria/utils" "3.32.0"
+    scroll-into-view-if-needed "3.0.10"
+
 "@heroui/popover@2.3.29":
   version "2.3.29"
   resolved "https://registry.yarnpkg.com/@heroui/popover/-/popover-2.3.29.tgz#95231128347b5410bafedc97e2b00238973633b8"
@@ -570,6 +586,11 @@
   resolved "https://registry.yarnpkg.com/@heroui/use-form-reset/-/use-form-reset-2.0.1.tgz#d90eb1dde84310f6bb92615d1446b2099b7ae125"
   integrity sha512-6slKWiLtVfgZnVeHVkM9eXgjwI07u0CUaLt2kQpfKPqTSTGfbHgCYJFduijtThhTdKBhdH6HCmzTcnbVlAxBXw==
 
+"@heroui/use-intersection-observer@2.2.14":
+  version "2.2.14"
+  resolved "https://registry.yarnpkg.com/@heroui/use-intersection-observer/-/use-intersection-observer-2.2.14.tgz#ec025cc6408f8fdce5819c1b73e69d5a300046f1"
+  integrity sha512-qYJeMk4cTsF+xIckRctazCgWQ4BVOpJu+bhhkB1NrN+MItx19Lcb7ksOqMdN5AiSf85HzDcAEPIQ9w9RBlt5sg==
+
 "@heroui/use-is-mobile@2.2.12":
   version "2.2.12"
   resolved "https://registry.yarnpkg.com/@heroui/use-is-mobile/-/use-is-mobile-2.2.12.tgz#a00a7c543a90d7e26fdccd7a199806d26f8c32a2"
@@ -586,6 +607,14 @@
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/@heroui/use-measure/-/use-measure-2.1.8.tgz#9f209eb0a3bd54fd2674540ff8198410d0fc8dc4"
   integrity sha512-GjT9tIgluqYMZWfAX6+FFdRQBqyHeuqUMGzAXMTH9kBXHU0U5C5XU2c8WFORkNDoZIg1h13h1QdV+Vy4LE1dEA==
+
+"@heroui/use-pagination@2.2.19":
+  version "2.2.19"
+  resolved "https://registry.yarnpkg.com/@heroui/use-pagination/-/use-pagination-2.2.19.tgz#3d272032eb449e75cde9ecf02da1bbdb27a7bbef"
+  integrity sha512-0VLyxge+rPBexK7xoLgPwCC8ngh9vIgHEtS+sRvulcEy4grG9EvZWUfMpMeiboFc5Ku2l5u+D9jYkaV06EY4Rw==
+  dependencies:
+    "@heroui/shared-utils" "2.1.12"
+    "@react-aria/i18n" "3.12.14"
 
 "@heroui/use-safe-layout-effect@2.1.8":
   version "2.1.8"
@@ -4785,6 +4814,11 @@ valibot@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/valibot/-/valibot-1.2.0.tgz#8fc720d9e4082ba16e30a914064a39619b2f1d6f"
   integrity sha512-mm1rxUsmOxzrwnX5arGS+U4T25RdvpPjPN4yR0u9pUBov9+zGVtO84tif1eY4r6zWxVxu3KzIyknJy3rxfRZZg==
+
+virtua@^0.48.2:
+  version "0.48.2"
+  resolved "https://registry.yarnpkg.com/virtua/-/virtua-0.48.2.tgz#edb5c71a05b6430f8ce0ce14678e390da6775146"
+  integrity sha512-z8zko7BRnSruf3pYMjhfKIdz138quGVRxSNSZJ7rcrhnxd03mRhGIWNZULE1Dz0VMdRVVaBeT6Ow8ynayHW3Jg==
 
 which-boxed-primitive@^1.1.0, which-boxed-primitive@^1.1.1:
   version "1.1.1"

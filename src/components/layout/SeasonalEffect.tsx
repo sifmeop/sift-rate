@@ -52,7 +52,7 @@ export const SeasonalEffect = () => {
 
   return (
     <Snowfall
-      snowflakeCount={150}
+      snowflakeCount={100}
       radius={[5, 20]}
       images={seasonImages}
       style={{

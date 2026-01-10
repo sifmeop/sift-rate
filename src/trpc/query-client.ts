@@ -5,7 +5,7 @@ export const createQueryClient = () =>
   new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnWindowFocus: false
+        staleTime: Infinity
       },
       dehydrate: {
         serializeData: SuperJSON.serialize,

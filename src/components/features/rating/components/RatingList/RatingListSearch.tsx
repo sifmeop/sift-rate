@@ -29,7 +29,7 @@ export const RatingListSearch = () => {
       startContent={<SearchIcon />}
       value={value}
       onValueChange={onValueChange}
-      onClear={onValueChange.bind(null, '')}
+      onClear={() => onValueChange('')}
     />
   )
 }

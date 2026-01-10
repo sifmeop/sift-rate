@@ -1,9 +1,11 @@
 import { Button } from '@heroui/button'
 import { Input } from '@heroui/input'
+import { Pagination } from '@heroui/pagination'
 import type { ContentType } from 'generated/prisma'
 import { ChevronRight, SearchIcon } from 'lucide-react'
 import { LoadingSpinner } from '~/components/ui/loading-spinner'
 import { ReviewCover } from '~/components/ui/review-cover'
+import { Show } from '~/components/ui/show'
 import { useTargetSearch } from '../hooks/useTargetSearch'
 import type { ISelectedTargetItem } from '../types/target.types'
 import { getItemCountText } from '../utils/getItemCountText'
@@ -26,7 +28,11 @@ export const Step2SelectTarget = ({
     result,
     isLoading,
     searchTargets,
-    selectTarget
+    selectTarget,
+    currentPage,
+    onChangePage,
+    totalPages,
+    totalResults
   } = useTargetSearch(selectedType, setSelectedTargetItem)
 
   return (
@@ -48,14 +54,17 @@ export const Step2SelectTarget = ({
           isIconOnly
           size='lg'
           variant='flat'
-          onPress={searchTargets}
+          onPress={() => searchTargets()}
           isDisabled={isLoading || searchTerm.trim().length === 0}>
-          {isLoading ? <LoadingSpinner /> : <SearchIcon />}
+          <SearchIcon />
         </Button>
       </div>
-      {result && result.length > 0 && (
+      <Show when={isLoading}>
+        <LoadingSpinner />
+      </Show>
+      {!isLoading && totalResults > 0 && (
         <p className='text-muted-foreground text-center text-base'>
-          Всего: {result.length} {getItemCountText(result.length, selectedType)}
+          Всего: {totalResults} {getItemCountText(totalResults, selectedType)}
         </p>
       )}
       {!isLoading && result?.length === 0 && (
@@ -63,7 +72,7 @@ export const Step2SelectTarget = ({
           Ничего не найдено
         </p>
       )}
-      <div className='scrollbar-hide z-px relative flex h-137.5 flex-col gap-3 overflow-y-auto'>
+      <div className='z-px relative flex flex-col gap-3 overflow-y-auto'>
         {result?.map((result) => (
           <button
             key={result.id}
@@ -89,6 +98,18 @@ export const Step2SelectTarget = ({
           </button>
         ))}
       </div>
+      {!isLoading && totalPages > 1 && (
+        <Pagination
+          showControls
+          classNames={{
+            base: 'sticky bottom-18 md:bottom-4',
+            wrapper: 'mx-auto'
+          }}
+          page={currentPage}
+          onChange={onChangePage}
+          total={totalPages}
+        />
+      )}
     </div>
   )
 }

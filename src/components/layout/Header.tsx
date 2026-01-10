@@ -26,7 +26,6 @@ export const Header = ({ email }: IHeaderProps) => {
     <header className='border-b-border bg-background-primary/80 sticky top-0 z-50 w-full border-b backdrop-blur-xl'>
       <div className='app-container flex h-15 items-center justify-center gap-4 md:justify-between'>
         <Link
-          prefetch
           href={ROUTES.REVIEWS}
           className='flex shrink-0 items-center gap-2'>
           <div className='bg-secondary-400 flex size-8 items-center justify-center rounded-lg'>
@@ -41,7 +40,6 @@ export const Header = ({ email }: IHeaderProps) => {
             const isActive = pathname === href
             return (
               <Button
-                prefetch
                 key={href}
                 as={Link}
                 href={href}

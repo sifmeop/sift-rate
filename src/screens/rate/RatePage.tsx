@@ -21,11 +21,11 @@ export const RatePage = () => {
   const title = getRateTitle(selectedType, selectedTargetItem)
 
   return (
-    <div className='mx-auto max-w-2xl'>
+    <div className='mx-auto flex max-w-2xl flex-col'>
       {!selectedType ? (
         <Step1SelectCategory setSelectedType={setSelectedType} />
       ) : (
-        <div>
+        <>
           <Button
             variant='light'
             startContent={<FaArrowLeft />}
@@ -45,7 +45,7 @@ export const RatePage = () => {
               reset={reset}
             />
           )}
-        </div>
+        </>
       )}
     </div>
   )

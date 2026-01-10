@@ -16,7 +16,7 @@ export const Step3SubmitRating = ({
   selectedTargetItem,
   reset
 }: IStep3SubmitRatingProps) => {
-  const { register, onSubmit, isSubmitting, watch, setValue } = useRateSubmit(
+  const { register, onSubmit, isCreating, watch, setValue } = useRateSubmit(
     selectedTargetItem,
     reset
   )
@@ -71,8 +71,8 @@ export const Step3SubmitRating = ({
         fullWidth
         color='secondary'
         isDisabled={rating === 0}
-        isLoading={isSubmitting}>
-        {isSubmitting ? 'Сохранение...' : 'Сохранить оценку'}
+        isLoading={isCreating}>
+        {isCreating ? 'Сохранение...' : 'Сохранить оценку'}
       </Button>
     </form>
   )

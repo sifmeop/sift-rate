@@ -2,25 +2,20 @@ import { Button } from '@heroui/button'
 import NumberFlow from '@number-flow/react'
 import { AnimatePresence, m } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import type { ITimeline } from '~/components/features/rating'
+import { useTimeline } from '~/contexts/TimelineProvider'
 
 interface IYearSelectorProps {
-  timeline: ITimeline
-  selectedYear: number
+  timeline: ITimeline | null | undefined
 }
 
-export const YearSelector = ({
-  timeline,
-  selectedYear
-}: IYearSelectorProps) => {
-  const router = useRouter()
-
+export const YearSelector = ({ timeline }: IYearSelectorProps) => {
+  const { selectedYear, setSelectedYear } = useTimeline()
   const [direction, setDirection] = useState<1 | -1>(1)
 
-  const years = Object.keys(timeline).map(Number)
-  const yearData = timeline[selectedYear]
+  const years = timeline ? Object.keys(timeline).map(Number) : []
+  const yearData = timeline?.[selectedYear]
   const total = yearData?.total ?? 0
   const best = yearData?.best ?? 0
 
@@ -37,7 +32,7 @@ export const YearSelector = ({
     prevYear ??= selectedYear - 1
 
     setDirection(-1)
-    router.replace(`?year=${prevYear}`)
+    setSelectedYear(prevYear)
   }
 
   const handleSelectNextYear = () => {
@@ -48,7 +43,7 @@ export const YearSelector = ({
     nextYear ??= selectedYear + 1
 
     setDirection(1)
-    router.replace(`?year=${nextYear}`)
+    setSelectedYear(nextYear)
   }
 
   const variants = {

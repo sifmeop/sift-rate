@@ -11,10 +11,13 @@ export const useTargetSearch = (
 ) => {
   const [searchTerm, setSearchTerm] = useState('')
   const [result, setResult] = useState<ITargetItem[] | null | undefined>(null)
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [totalResults, setTotalResults] = useState(0)
 
   const isLoading = typeof result === 'undefined'
 
-  const searchTargets = async () => {
+  const searchTargets = async (page = 1) => {
     if (isLoading) return
 
     if (searchTerm.trim().length === 0) {
@@ -28,8 +31,15 @@ export const useTargetSearch = (
     setResult(undefined)
 
     try {
-      const response = await searchService.search(selectedType, searchTerm)
-      setResult(response)
+      const response = await searchService.search(
+        selectedType,
+        searchTerm,
+        page
+      )
+
+      setResult(response.items)
+      setTotalPages(response.totalPages)
+      setTotalResults(response.totalResults)
     } catch (error) {
       console.error(
         `Error searching entity with selectedType ${selectedType}: `,
@@ -42,6 +52,9 @@ export const useTargetSearch = (
   const clearSearch = () => {
     setSearchTerm('')
     setResult(null)
+    setCurrentPage(1)
+    setTotalPages(1)
+    setTotalResults(0)
   }
 
   const selectTarget = (result: ITargetItem) => {
@@ -57,6 +70,11 @@ export const useTargetSearch = (
     })
   }
 
+  const onChangePage = (page: number) => {
+    setCurrentPage(page)
+    void searchTargets(page)
+  }
+
   return {
     searchTerm,
     setSearchTerm,
@@ -64,6 +82,10 @@ export const useTargetSearch = (
     isLoading,
     searchTargets,
     clearSearch,
-    selectTarget
+    selectTarget,
+    totalPages,
+    totalResults,
+    currentPage,
+    onChangePage
   }
 }

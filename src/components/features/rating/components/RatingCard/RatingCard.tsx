@@ -2,7 +2,7 @@
 
 import { cn } from '@heroui/theme'
 import dayjs from 'dayjs'
-import { motion, type Variants } from 'framer-motion'
+import { m, type Variants } from 'framer-motion'
 import { Calendar, Quote } from 'lucide-react'
 import { Badge } from '~/components/ui/badge'
 import { ReviewCover } from '~/components/ui/review-cover'
@@ -14,18 +14,15 @@ import { Rating } from './Rating'
 import { UpdateReview } from './UpdateReview'
 
 const cardVariants: Variants = {
-  initial: {
-    opacity: 0,
-    y: 20,
-    scale: 0.95
-  },
+  initial: { opacity: 0, y: -30 },
   animate: {
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.3,
-      ease: [0.34, 1.56, 0.64, 1]
+      type: 'spring',
+      stiffness: 200,
+      damping: 10,
+      mass: 0.8
     }
   }
 }
@@ -49,13 +46,15 @@ export const RatingCard = ({
   const isToday = dayjs(createdAt).isSame(dayjs(), 'day')
 
   return (
-    <motion.div
+    <m.div
       key={id}
+      initial='initial'
+      animate='animate'
       variants={cardVariants}
       className={cn(
-        'group bg-card-background relative flex flex-col gap-4 rounded-xl border p-4 transition-all duration-300 hover:shadow-lg md:flex-row',
+        'group bg-card-background relative mb-3 flex flex-col gap-4 rounded-xl border p-4 hover:shadow-lg md:flex-row',
         isTopRated
-          ? 'from-yellow/10 via-card to-card border-yellow/30 hover:border-yellow/50 hover:shadow-yellow/10 bg-linear-to-r'
+          ? 'from-yellow/10 via-card to-card border-yellow/30 hover:border-yellow/50 bg-linear-to-r'
           : 'hover:bg-card-background-secondary/80 border-border'
       )}>
       <div className='device-touch:opacity-100 absolute top-4 right-4 flex gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
@@ -73,7 +72,6 @@ export const RatingCard = ({
       </Show>
       <ReviewCover title={title} coverUrl={coverUrl} type={type} />
       <div className='flex w-full flex-col gap-2'>
-        {/* <div className='flex items-center justify-between gap-2'> */}
         <div className='flex gap-2'>
           <Badge type={type} />
           <Show when={isTopRated}>
@@ -104,6 +102,6 @@ export const RatingCard = ({
           </div>
         )}
       </div>
-    </motion.div>
+    </m.div>
   )
 }

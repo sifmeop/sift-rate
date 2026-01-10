@@ -6,32 +6,44 @@ import type {
   IBookTargetItem,
   IGameTargetItem,
   IMovieTargetItem,
+  ISearchResult,
   ISongTargetItem,
   ITargetItem,
   ITvTargetItem
 } from '../types/target.types'
 
+const LIMIT_PER_PAGE = 20
+const getPages = (total: number, limit = LIMIT_PER_PAGE) =>
+  Math.ceil(total / limit)
+
 export class SearchService {
-  async search(category: ContentType, query: string): Promise<ITargetItem[]> {
+  async search(
+    category: ContentType,
+    query: string,
+    page: number
+  ): Promise<ISearchResult> {
     switch (category) {
       case 'MOVIE':
-        return this.searchMovies(query)
+        return this.searchMovies(query, page)
       case 'TV':
-        return this.searchTv(query)
+        return this.searchTv(query, page)
       case 'SONG':
-        return this.searchSongs(query)
+        return this.searchSongs(query, page)
       case 'ALBUM':
-        return this.searchAlbums(query)
+        return this.searchAlbums(query, page)
       case 'GAME':
-        return this.searchGames(query)
+        return this.searchGames(query, page)
       case 'BOOK':
-        return this.searchBooks(query)
+        return this.searchBooks(query, page)
     }
   }
 
-  private async searchMovies(query: string): Promise<ITargetItem[]> {
+  private async searchMovies(
+    query: string,
+    page: number
+  ): Promise<ISearchResult> {
     const response = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&language=ru-RU`,
+      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&language=ru-RU&page=${page}&include_adult=true`,
       {
         headers: {
           accept: 'application/json',
@@ -44,6 +56,9 @@ export class SearchService {
 
     const data = (await response.json()) as {
       results: IMovieTargetItem[]
+      page: number
+      total_pages: number
+      total_results: number
     }
 
     const result: ITargetItem[] = data.results.map((item) => {
@@ -75,12 +90,17 @@ export class SearchService {
       }
     })
 
-    return result
+    return {
+      items: result,
+      page: data.page,
+      totalPages: data.total_pages,
+      totalResults: data.total_results
+    }
   }
 
-  private async searchTv(query: string): Promise<ITargetItem[]> {
+  private async searchTv(query: string, page: number): Promise<ISearchResult> {
     const response = await fetch(
-      `https://api.themoviedb.org/3/search/tv?query=${encodeURIComponent(query)}&language=ru-RU`,
+      `https://api.themoviedb.org/3/search/tv?query=${encodeURIComponent(query)}&language=ru-RU&page=${page}&include_adult=true`,
       {
         headers: {
           accept: 'application/json',
@@ -93,6 +113,9 @@ export class SearchService {
 
     const data = (await response.json()) as {
       results: ITvTargetItem[]
+      page: number
+      total_pages: number
+      total_results: number
     }
 
     const result: ITargetItem[] = data.results.map((item) => {
@@ -124,13 +147,21 @@ export class SearchService {
       }
     })
 
-    return result
+    return {
+      items: result,
+      page: data.page,
+      totalPages: data.total_pages,
+      totalResults: data.total_results
+    }
   }
 
-  private async searchSongs(query: string): Promise<ITargetItem[]> {
+  private async searchSongs(
+    query: string,
+    page: number
+  ): Promise<ISearchResult> {
     const songsResponse = await fetch(
       `https://corsproxy.io/?${encodeURIComponent(
-        `https://api.deezer.com/search?q=${encodeURIComponent(query)}&limit=30`
+        `https://api.deezer.com/search?q=${encodeURIComponent(query)}&limit=${LIMIT_PER_PAGE}&index=${(page - 1) * LIMIT_PER_PAGE}`
       )}`
     )
 
@@ -138,6 +169,7 @@ export class SearchService {
 
     const songsData = (await songsResponse.json()) as {
       data: ISongTargetItem[]
+      total: number
     }
 
     const transformedData: ITargetItem[] = songsData.data.map((track) => ({
@@ -153,13 +185,21 @@ export class SearchService {
         this.getRelevanceScoreMusic(a, query)
     )
 
-    return sortedData
+    return {
+      items: sortedData,
+      page: page + 1,
+      totalPages: getPages(songsData.total),
+      totalResults: songsData.total
+    }
   }
 
-  private async searchAlbums(query: string): Promise<ITargetItem[]> {
+  private async searchAlbums(
+    query: string,
+    page: number
+  ): Promise<ISearchResult> {
     const albumsResponse = await fetch(
       `https://corsproxy.io/?${encodeURIComponent(
-        `https://api.deezer.com/search/album?q=${encodeURIComponent(query)}&limit=20`
+        `https://api.deezer.com/search/album?q=${encodeURIComponent(query)}&limit=${LIMIT_PER_PAGE}&index=${(page - 1) * LIMIT_PER_PAGE}`
       )}`
     )
 
@@ -167,6 +207,7 @@ export class SearchService {
 
     const albumsData = (await albumsResponse.json()) as {
       data: IAlbumTargetItem[]
+      total: number
     }
 
     const albums = albumsData.data.filter(
@@ -186,18 +227,27 @@ export class SearchService {
         this.getRelevanceScoreMusic(a, query)
     )
 
-    return sortedData
+    return {
+      items: sortedData,
+      page: page + 1,
+      totalPages: getPages(albumsData.total),
+      totalResults: albumsData.total
+    }
   }
 
-  private async searchGames(query: string): Promise<ITargetItem[]> {
+  private async searchGames(
+    query: string,
+    page: number
+  ): Promise<ISearchResult> {
     const response = await fetch(
-      `https://api.rawg.io/api/games?search=${encodeURIComponent(query)}&key=${env.NEXT_PUBLIC_RAWG_API_KEYL}`
+      `https://api.rawg.io/api/games?search=${encodeURIComponent(query)}&key=${env.NEXT_PUBLIC_RAWG_API_KEYL}&page=${page}`
     )
 
     if (!response.ok) throw new Error('Error searching games')
 
     const data = (await response.json()) as {
       results: IGameTargetItem[]
+      count: number
     }
 
     const transformedData: ITargetItem[] = data.results.map((game) => {
@@ -218,18 +268,27 @@ export class SearchService {
       }
     })
 
-    return transformedData
+    return {
+      items: transformedData,
+      page: page + 1,
+      totalPages: getPages(data.count),
+      totalResults: data.count
+    }
   }
 
-  private async searchBooks(query: string): Promise<ITargetItem[]> {
+  private async searchBooks(
+    query: string,
+    page: number
+  ): Promise<ISearchResult> {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}`
+      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=${LIMIT_PER_PAGE}&startIndex=${(page - 1) * LIMIT_PER_PAGE}`
     )
 
     if (!response.ok) throw new Error('Error searching games')
 
     const data = (await response.json()) as {
       items: IBookTargetItem[]
+      totalItems: number
     }
 
     const transformedData: ITargetItem[] = data.items.map((book) => {
@@ -252,7 +311,12 @@ export class SearchService {
       }
     })
 
-    return transformedData
+    return {
+      items: transformedData,
+      page: page + 1,
+      totalPages: getPages(data.totalItems),
+      totalResults: data.totalItems
+    }
   }
 
   private getRelevanceScoreMusic(item: ITargetItem, query: string) {

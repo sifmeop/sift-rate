@@ -41,23 +41,3 @@ export const validateDates = z
     return true
   })
   .optional()
-
-export const validateYear = z.object({
-  year: z.preprocess((value) => {
-    let year = Number(value)
-
-    if (Number.isNaN(year)) {
-      year = new Date().getFullYear()
-    }
-
-    if (year < 1900 || year > new Date().getFullYear()) {
-      return new Date().getFullYear()
-    }
-
-    return year
-  }, z.number().min(1900).max(new Date().getFullYear()))
-})
-
-export const validateMonth = z.object({
-  month: z.number().min(1).max(12)
-})

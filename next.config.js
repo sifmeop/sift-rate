@@ -4,18 +4,13 @@ import './src/env.js'
 const config = {
   devIndicators: false,
   images: {
+    qualities: [100],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'image.tmdb.org',
         port: '',
         pathname: '/t/p/**'
-      },
-      {
-        protocol: 'https',
-        hostname: 'is1-ssl.mzstatic.com',
-        port: '',
-        pathname: '/image/thumb/**'
       },
       {
         protocol: 'https',

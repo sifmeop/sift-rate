@@ -15,7 +15,7 @@ export const reviewRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       let itemReview = await ctx.db.itemReview.findFirst({
         where: {
-          title: input.title
+          externalId: input.externalId
         }
       })
 
@@ -120,13 +120,14 @@ export const reviewRouter = createTRPCRouter({
 
     const stats = reviews.reduce<ITimeline>((acc, { rating, createdAt }) => {
       const year = createdAt.getFullYear()
-      const month = dayjs(createdAt).get('month') + 1
+      const month = dayjs(createdAt).get('month')
       const isBest = rating === 10
 
       acc[year] ??= {
         total: 0,
         best: 0,
         months: {
+          0: { total: 0, best: 0 },
           1: { total: 0, best: 0 },
           2: { total: 0, best: 0 },
           3: { total: 0, best: 0 },
@@ -137,8 +138,7 @@ export const reviewRouter = createTRPCRouter({
           8: { total: 0, best: 0 },
           9: { total: 0, best: 0 },
           10: { total: 0, best: 0 },
-          11: { total: 0, best: 0 },
-          12: { total: 0, best: 0 }
+          11: { total: 0, best: 0 }
         }
       }
 

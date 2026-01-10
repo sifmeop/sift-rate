@@ -4,7 +4,7 @@ import { applySearch } from './applySearch'
 import { applySort } from './applySort'
 import { applyTab } from './applyTab'
 
-export const selectVisibleRatings = (
+export const selectVisibleItems = (
   items: IRatingCardData[],
   state: IRatingListState
 ) => {

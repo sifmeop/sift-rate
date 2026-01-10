@@ -7,12 +7,10 @@ import {
   ModalHeader,
   useDisclosure
 } from '@heroui/modal'
-import { addToast } from '@heroui/toast'
 import type { ContentType } from 'generated/prisma'
 import { Trash2Icon } from 'lucide-react'
-import { useState } from 'react'
-import { deleteReview } from '~/actions/reviews.actions'
 import { Badge } from '~/components/ui/badge'
+import { useDeleteReview } from '../../hooks/useDeleteReview'
 
 interface IDeleteReviewProps {
   id: string
@@ -22,31 +20,7 @@ interface IDeleteReviewProps {
 
 export const DeleteReview = ({ id, title, type }: IDeleteReviewProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-
-  const [isDeleting, setIsDeleting] = useState(false)
-
-  const handleDelete = async () => {
-    try {
-      setIsDeleting(true)
-
-      await deleteReview({ id })
-
-      addToast({
-        title: 'Успешно',
-        description: 'Ваш отзыв успешно удален!'
-      })
-      onOpenChange()
-    } catch (error) {
-      console.error('Error deleting rating: ', error)
-
-      addToast({
-        title: 'Ошибка',
-        description: 'Произошла ошибка при удалении отзыва'
-      })
-    } finally {
-      setIsDeleting(false)
-    }
-  }
+  const { handleDelete, isDeleting } = useDeleteReview(onOpenChange)
 
   return (
     <>
@@ -84,7 +58,7 @@ export const DeleteReview = ({ id, title, type }: IDeleteReviewProps) => {
                 </Button>
                 <Button
                   color='danger'
-                  onPress={handleDelete}
+                  onPress={() => handleDelete(id)}
                   isLoading={isDeleting}>
                   {isDeleting ? 'Удаление...' : 'Удалить'}
                 </Button>

@@ -8,14 +8,25 @@ import { TRPCReactProvider } from '~/trpc/react'
 import { Providers } from './providers'
 
 import 'dayjs/locale/ru'
+import Head from 'next/head'
 
 dayjs.locale('ru')
 
 export const metadata: Metadata = {
-  title: 'Sift Rate — отзывы пользователя о фильмах, играх, книгах и музыке',
+  title: 'Sift-Rate — отзывы пользователя о фильмах, играх, книгах и музыке',
   description:
     'Все отзывы и оценки пользователя на фильмы, сериалы, игры, книги, песни и альбомы. Личная история впечатлений в одном месте.',
-  icons: [{ rel: 'icon', url: '/favicon.ico' }]
+  icons: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      url: '/favicon-96x96.png',
+      sizes: '96x96'
+    },
+    { rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' },
+    { rel: 'shortcut icon', url: '/favicon.ico' },
+    { rel: 'apple-touch-icon', url: '/apple-touch-icon.png', sizes: '180x180' }
+  ]
 }
 
 const manrope = Manrope({
@@ -34,8 +45,14 @@ export default function RootLayout({
   return (
     <html
       suppressHydrationWarning
-      lang='en'
+      lang='ru'
       className={cn(manrope.variable, robotoSlab.variable)}>
+      <Head>
+        <meta
+          name='viewport'
+          content='width=device-width, initial-scale=1, maximum-scale=1'
+        />
+      </Head>
       <body>
         <TRPCReactProvider>
           <Providers>{children}</Providers>

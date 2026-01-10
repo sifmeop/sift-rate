@@ -1,22 +1,19 @@
 import { Select, SelectItem } from '@heroui/select'
 import type { SharedSelection } from '@heroui/system'
 import type { ITimeline } from '~/components/features/rating'
+import { useTimeline } from '~/contexts/TimelineProvider'
 import { capitalize } from '~/utils/capitalize'
 
 interface IMonthSelectorMobileProps {
-  timeline: ITimeline
-  selectedYear: number
-  selectedMonth: number
-  setSelectedMonth: React.Dispatch<React.SetStateAction<number>>
+  timeline: ITimeline | null | undefined
 }
 
 export const MonthSelectorMobile = ({
-  timeline,
-  selectedYear,
-  selectedMonth,
-  setSelectedMonth
+  timeline
 }: IMonthSelectorMobileProps) => {
-  const months = timeline[selectedYear]?.months ?? {}
+  const { selectedYear, selectedMonth, setSelectedMonth } = useTimeline()
+
+  const months = timeline?.[selectedYear]?.months ?? {}
   const monthsMap = Object.keys(months)
 
   const selectedKeys = new Set([selectedMonth + ''])
@@ -40,7 +37,7 @@ export const MonthSelectorMobile = ({
       className='block md:hidden'>
       {monthsMap.map((month) => {
         const { total, best } = months[+month]!
-        const date = new Date(selectedYear, +month - 1, 1)
+        const date = new Date(selectedYear, +month, 1)
         const monthName = new Intl.DateTimeFormat('ru-RU', {
           month: 'long'
         }).format(date)

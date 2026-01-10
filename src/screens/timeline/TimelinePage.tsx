@@ -1,38 +1,41 @@
-import { redirect } from 'next/navigation'
-import { EmptyState } from '~/components/ui/query'
-import { api } from '~/trpc/server'
-import { validateYear } from '~/utils/validators'
-import { TimelineContent } from './components/TimelineContent'
+'use client'
 
-interface ITimelinePageProps {
-  year: string
-}
+import dayjs from 'dayjs'
+import { RatingList } from '~/components/features/rating'
+import { useTimeline } from '~/contexts/TimelineProvider'
+import { api } from '~/trpc/react'
+import { MonthSelector } from './components/MonthSelector'
+import { MonthSelectorMobile } from './components/MonthSelectorMobile'
+import { YearSelector } from './components/YearSelector'
 
-export const TimelinePage = async ({ year }: ITimelinePageProps) => {
-  const yearValue = validateYear.parse({ year: +year }).year
+export const TimelinePage = () => {
+  const { selectedYear, selectedMonth } = useTimeline()
 
-  const timeline = await api.review.getTimelineStats()
+  const { data: timeline } = api.review.getTimelineStats.useQuery()
 
-  if (!timeline) {
-    return <EmptyState />
-  }
-
-  const years = Object.keys(timeline).map(Number)
-
-  if (!years.includes(yearValue)) {
-    redirect(`/timeline?year=${years[years.length - 1]}`)
-  }
-
-  const items = await api.review.getReviewsByDate({
-    from: new Date(yearValue, 0, 1).toISOString(),
-    to: new Date(yearValue, 11, 31).toISOString()
+  const {
+    data: items,
+    isLoading: itemsLoading,
+    error: itemsError
+  } = api.review.getReviewsByDate.useQuery({
+    from: new Date(selectedYear, 0, 1).toISOString(),
+    to: new Date(selectedYear, 11, 31).toISOString()
   })
 
+  const filteredItems = items?.filter(
+    (item) => dayjs(item.createdAt).get('month') === selectedMonth
+  )
+
   return (
-    <TimelineContent
-      timeline={timeline}
-      items={items}
-      selectedYear={yearValue}
-    />
+    <div className='flex flex-col gap-3'>
+      <YearSelector timeline={timeline} />
+      <MonthSelector timeline={timeline} />
+      <MonthSelectorMobile timeline={timeline} />
+      <RatingList
+        items={filteredItems}
+        isLoading={itemsLoading}
+        error={itemsError?.message}
+      />
+    </div>
   )
 }
