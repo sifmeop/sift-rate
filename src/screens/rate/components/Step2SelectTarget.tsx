@@ -102,7 +102,7 @@ export const Step2SelectTarget = ({
         <Pagination
           showControls
           classNames={{
-            base: 'sticky bottom-18 md:bottom-2',
+            base: 'sticky bottom-23 md:bottom-2',
             wrapper: 'mx-auto'
           }}
           page={currentPage}

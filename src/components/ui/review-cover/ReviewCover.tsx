@@ -1,3 +1,4 @@
+import { cn } from '@heroui/theme'
 import { ContentType } from 'generated/prisma'
 import Image from 'next/image'
 
@@ -7,24 +8,16 @@ interface IProps {
   type: ContentType
 }
 
-const DEFAULT_COVER_WIDTH = 140
-const DEFAULT_COVER_HEIGHT = 210
-
 export const ReviewCover = ({ coverUrl, type, title }: IProps) => {
   const isMusic = type === ContentType.SONG || type === ContentType.ALBUM
   const cover = coverUrl ?? '/images/no-poster-available.webp'
-  const aspectRatio = isMusic ? '1/1' : '2/3'
-  const coverWidth = DEFAULT_COVER_WIDTH
-  const coverHeight = isMusic ? DEFAULT_COVER_WIDTH : DEFAULT_COVER_HEIGHT
 
   return (
     <div
-      style={{
-        width: coverWidth,
-        height: coverHeight,
-        aspectRatio
-      }}
-      className='ring-border/20 relative shrink-0 overflow-hidden rounded-lg ring-1'>
+      className={cn(
+        'ring-border/20 relative shrink-0 overflow-hidden rounded-lg ring-1',
+        isMusic ? 'size-28 md:size-35' : 'h-45.5 w-28 md:h-52.5 md:w-35'
+      )}>
       <Image
         fill
         src={cover}
