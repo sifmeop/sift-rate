@@ -61,6 +61,15 @@ export class SearchService {
       total_results: number
     }
 
+    if (data.total_results === 0) {
+      return {
+        items: [],
+        page,
+        totalPages: 1,
+        totalResults: 0
+      }
+    }
+
     const result: ITargetItem[] = data.results.map((item) => {
       const title = item.title
       const genres = item.genre_ids
@@ -118,6 +127,15 @@ export class SearchService {
       total_results: number
     }
 
+    if (data.total_results === 0) {
+      return {
+        items: [],
+        page,
+        totalPages: 1,
+        totalResults: 0
+      }
+    }
+
     const result: ITargetItem[] = data.results.map((item) => {
       const title = item.name
       const genres = item.genre_ids
@@ -172,6 +190,15 @@ export class SearchService {
       total: number
     }
 
+    if (songsData.total === 0) {
+      return {
+        items: [],
+        page,
+        totalPages: 1,
+        totalResults: 0
+      }
+    }
+
     const transformedData: ITargetItem[] = songsData.data.map((track) => ({
       id: String(track.id),
       title: track.title,
@@ -208,6 +235,15 @@ export class SearchService {
     const albumsData = (await albumsResponse.json()) as {
       data: IAlbumTargetItem[]
       total: number
+    }
+
+    if (albumsData.total === 0) {
+      return {
+        items: [],
+        page,
+        totalPages: 1,
+        totalResults: 0
+      }
     }
 
     const albums = albumsData.data.filter(
@@ -250,6 +286,15 @@ export class SearchService {
       count: number
     }
 
+    if (data.count === 0) {
+      return {
+        items: [],
+        page,
+        totalPages: 1,
+        totalResults: 0
+      }
+    }
+
     const transformedData: ITargetItem[] = data.results.map((game) => {
       let description = ''
 
@@ -287,8 +332,17 @@ export class SearchService {
     if (!response.ok) throw new Error('Error searching games')
 
     const data = (await response.json()) as {
-      items: IBookTargetItem[]
+      items?: IBookTargetItem[]
       totalItems: number
+    }
+
+    if (!data.items || data.totalItems === 0) {
+      return {
+        items: [],
+        page,
+        totalPages: 0,
+        totalResults: 0
+      }
     }
 
     const transformedData: ITargetItem[] = data.items.map((book) => {
