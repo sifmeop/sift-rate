@@ -4,7 +4,8 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Sift-Rate',
     short_name: 'Sift-Rate',
-    description: 'A Progressive Web App built with Next.js',
+    description:
+      'Все отзывы и оценки пользователя на фильмы, сериалы, игры, книги, песни и альбомы. Личная история впечатлений в одном месте.',
     start_url: '/',
     display: 'standalone',
     background_color: '#23152d',

@@ -16,6 +16,22 @@ export const metadata: Metadata = {
   title: 'Sift-Rate — отзывы пользователя о фильмах, играх, книгах и музыке',
   description:
     'Все отзывы и оценки пользователя на фильмы, сериалы, игры, книги, песни и альбомы. Личная история впечатлений в одном месте.',
+  keywords: [
+    'отзывы',
+    'рейтинг',
+    'фильмы',
+    'сериалы',
+    'игры',
+    'книги',
+    'музыка',
+    'альбомы',
+    'оценки',
+    'личные впечатления',
+    'обзоры',
+    'Sift-Rate',
+    'user reviews',
+    'media reviews'
+  ],
   icons: [
     {
       rel: 'icon',
@@ -26,7 +42,12 @@ export const metadata: Metadata = {
     { rel: 'icon', type: 'image/svg+xml', url: '/favicon.svg' },
     { rel: 'shortcut icon', url: '/favicon.ico' },
     { rel: 'apple-touch-icon', url: '/apple-touch-icon.png', sizes: '180x180' }
-  ]
+  ],
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'Sift-Rate'
+  }
 }
 
 const manrope = Manrope({
