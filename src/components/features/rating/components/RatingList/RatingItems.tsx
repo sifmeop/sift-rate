@@ -17,7 +17,13 @@ export const RatingItems = ({ items }: IRatingItemsProps) => {
     <>
       {visibleItems.length > 0 ? (
         <WindowVirtualizer data={visibleItems} itemSize={visibleItems.length}>
-          {(item) => <RatingCard key={item.id} {...item} />}
+          {(item, idx) => (
+            <RatingCard
+              key={item.id}
+              isLast={idx === visibleItems.length - 1}
+              {...item}
+            />
+          )}
         </WindowVirtualizer>
       ) : (
         <EmptyState />

@@ -27,7 +27,9 @@ const cardVariants: Variants = {
   }
 }
 
-type IRatingCardProps = IRatingCardData
+type IRatingCardProps = IRatingCardData & {
+  isLast: boolean
+}
 
 export const RatingCard = ({
   id,
@@ -35,7 +37,8 @@ export const RatingCard = ({
   review,
   type,
   createdAt,
-  itemReview: { title, coverUrl }
+  itemReview: { title, coverUrl },
+  isLast
 }: IRatingCardProps) => {
   const isTopRated = rating === MAX_RATING
   const formattedDate = new Intl.DateTimeFormat('ru-RU', {
@@ -52,10 +55,13 @@ export const RatingCard = ({
       animate='animate'
       variants={cardVariants}
       className={cn(
-        'group bg-card-background relative mb-3 flex flex-col gap-4 rounded-xl border p-4 hover:shadow-lg md:flex-row',
+        'group bg-card-background relative flex flex-col gap-4 rounded-xl border p-4 hover:shadow-lg md:flex-row',
         isTopRated
           ? 'from-yellow/10 via-card to-card border-yellow/30 hover:border-yellow/50 bg-linear-to-r'
-          : 'hover:bg-card-background-secondary/80 border-border'
+          : 'hover:bg-card-background-secondary/80 border-border',
+        {
+          'mb-3': !isLast
+        }
       )}>
       <div className='device-touch:opacity-100 absolute top-4 right-4 flex gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
         <UpdateReview
