@@ -64,7 +64,7 @@ export const RatingListFilter = ({ items }: IRatingListFilterProps) => {
           endContent={
             <span className='text-secondary font-semibold'>{count}</span>
           }>
-          {rating === 'all' ? 'Все рейтинги' : rating}
+          {rating === 'all' ? 'Все' : rating}
         </SelectItem>
       ))}
     </Select>
