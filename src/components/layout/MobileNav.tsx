@@ -19,6 +19,7 @@ export const MobileNav = () => {
           const isActive = pathname === href
           return (
             <Link
+              prefetch
               key={href}
               href={href}
               className={cn(

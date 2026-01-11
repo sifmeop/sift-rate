@@ -32,7 +32,7 @@ export const RatingListContentType = () => {
           <Tab
             key={key}
             title={
-              <div className={cn('flex items-center gap-2', text)}>
+              <div className={cn('flex items-center gap-1', text)}>
                 <Icon size={16} />
                 <span>{title}</span>
               </div>

@@ -8,16 +8,16 @@ export const Layout = async ({ children }: React.PropsWithChildren) => {
   const session = await auth()
   const user = session?.user
 
-  const content = user ? (
+  if (!user) {
+    return <>{children}</>
+  }
+
+  return (
     <>
       <SeasonalEffect />
       <Header email={user.email} />
       <Main>{children}</Main>
       <MobileNav />
     </>
-  ) : (
-    <>{children}</>
   )
-
-  return <div>{content}</div>
 }

@@ -10,8 +10,8 @@ import {
 } from 'lucide-react'
 
 const ALL_META = {
-  title: 'Все',
-  titlePlural: 'Все',
+  title: 'Все категории',
+  titlePlural: 'Все категории',
   icon: LayoutGridIcon,
   bg: 'bg-slate-500/10',
   text: 'text-slate-500'

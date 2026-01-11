@@ -31,7 +31,7 @@ export const RatingListTabs = ({ items }: IRatingListTabsProps) => {
       aria-label='Tabs'
       selectedKey={state.tab}
       onSelectionChange={onSelectionChange}>
-      <Tab key='all' title='Все' />
+      <Tab key='all' title='Все отзывы' />
       <Tab key='best' title='Лучшие' isDisabled={bestItems.length === 0} />
     </Tabs>
   )

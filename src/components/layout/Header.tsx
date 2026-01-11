@@ -40,6 +40,7 @@ export const Header = ({ email }: IHeaderProps) => {
             const isActive = pathname === href
             return (
               <Button
+                prefetch
                 key={href}
                 as={Link}
                 href={href}
