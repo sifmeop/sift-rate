@@ -37,6 +37,14 @@ export const useDeleteReview = (onClose: () => void) => {
         if (!oldData) return
         return oldData.filter((item) => item.id !== variables.id)
       })
+
+      utils.review.getItemReviews.setData(
+        { externalId: data.itemReview.externalId },
+        (oldData) => {
+          if (!oldData) return
+          return oldData.filter((item) => item.id !== variables.id)
+        }
+      )
     }
   })
 

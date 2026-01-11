@@ -9,5 +9,5 @@ export const applyContentType = (
 ) => {
   if (contentType === 'ALL') return items
 
-  return items.filter((item) => item.type === contentType)
+  return items.filter(({ itemReview }) => itemReview.type === contentType)
 }

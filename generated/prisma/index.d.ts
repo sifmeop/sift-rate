@@ -5772,6 +5772,7 @@ export namespace Prisma {
     externalId: string | null
     title: string | null
     coverUrl: string | null
+    type: $Enums.ContentType | null
   }
 
   export type ItemReviewMaxAggregateOutputType = {
@@ -5779,6 +5780,7 @@ export namespace Prisma {
     externalId: string | null
     title: string | null
     coverUrl: string | null
+    type: $Enums.ContentType | null
   }
 
   export type ItemReviewCountAggregateOutputType = {
@@ -5786,6 +5788,7 @@ export namespace Prisma {
     externalId: number
     title: number
     coverUrl: number
+    type: number
     _all: number
   }
 
@@ -5795,6 +5798,7 @@ export namespace Prisma {
     externalId?: true
     title?: true
     coverUrl?: true
+    type?: true
   }
 
   export type ItemReviewMaxAggregateInputType = {
@@ -5802,6 +5806,7 @@ export namespace Prisma {
     externalId?: true
     title?: true
     coverUrl?: true
+    type?: true
   }
 
   export type ItemReviewCountAggregateInputType = {
@@ -5809,6 +5814,7 @@ export namespace Prisma {
     externalId?: true
     title?: true
     coverUrl?: true
+    type?: true
     _all?: true
   }
 
@@ -5889,6 +5895,7 @@ export namespace Prisma {
     externalId: string
     title: string
     coverUrl: string | null
+    type: $Enums.ContentType
     _count: ItemReviewCountAggregateOutputType | null
     _min: ItemReviewMinAggregateOutputType | null
     _max: ItemReviewMaxAggregateOutputType | null
@@ -5913,6 +5920,7 @@ export namespace Prisma {
     externalId?: boolean
     title?: boolean
     coverUrl?: boolean
+    type?: boolean
     reviews?: boolean | ItemReview$reviewsArgs<ExtArgs>
     _count?: boolean | ItemReviewCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["itemReview"]>
@@ -5922,6 +5930,7 @@ export namespace Prisma {
     externalId?: boolean
     title?: boolean
     coverUrl?: boolean
+    type?: boolean
   }, ExtArgs["result"]["itemReview"]>
 
   export type ItemReviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -5929,6 +5938,7 @@ export namespace Prisma {
     externalId?: boolean
     title?: boolean
     coverUrl?: boolean
+    type?: boolean
   }, ExtArgs["result"]["itemReview"]>
 
   export type ItemReviewSelectScalar = {
@@ -5936,9 +5946,10 @@ export namespace Prisma {
     externalId?: boolean
     title?: boolean
     coverUrl?: boolean
+    type?: boolean
   }
 
-  export type ItemReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "externalId" | "title" | "coverUrl", ExtArgs["result"]["itemReview"]>
+  export type ItemReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "externalId" | "title" | "coverUrl" | "type", ExtArgs["result"]["itemReview"]>
   export type ItemReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviews?: boolean | ItemReview$reviewsArgs<ExtArgs>
     _count?: boolean | ItemReviewCountOutputTypeDefaultArgs<ExtArgs>
@@ -5956,6 +5967,7 @@ export namespace Prisma {
       externalId: string
       title: string
       coverUrl: string | null
+      type: $Enums.ContentType
     }, ExtArgs["result"]["itemReview"]>
     composites: {}
   }
@@ -6384,6 +6396,7 @@ export namespace Prisma {
     readonly externalId: FieldRef<"ItemReview", 'String'>
     readonly title: FieldRef<"ItemReview", 'String'>
     readonly coverUrl: FieldRef<"ItemReview", 'String'>
+    readonly type: FieldRef<"ItemReview", 'ContentType'>
   }
     
 
@@ -6838,7 +6851,6 @@ export namespace Prisma {
     id: string | null
     rating: number | null
     review: string | null
-    type: $Enums.ContentType | null
     createdAt: Date | null
     userId: string | null
     itemReviewId: string | null
@@ -6848,7 +6860,6 @@ export namespace Prisma {
     id: string | null
     rating: number | null
     review: string | null
-    type: $Enums.ContentType | null
     createdAt: Date | null
     userId: string | null
     itemReviewId: string | null
@@ -6858,7 +6869,6 @@ export namespace Prisma {
     id: number
     rating: number
     review: number
-    type: number
     createdAt: number
     userId: number
     itemReviewId: number
@@ -6878,7 +6888,6 @@ export namespace Prisma {
     id?: true
     rating?: true
     review?: true
-    type?: true
     createdAt?: true
     userId?: true
     itemReviewId?: true
@@ -6888,7 +6897,6 @@ export namespace Prisma {
     id?: true
     rating?: true
     review?: true
-    type?: true
     createdAt?: true
     userId?: true
     itemReviewId?: true
@@ -6898,7 +6906,6 @@ export namespace Prisma {
     id?: true
     rating?: true
     review?: true
-    type?: true
     createdAt?: true
     userId?: true
     itemReviewId?: true
@@ -6995,7 +7002,6 @@ export namespace Prisma {
     id: string
     rating: number
     review: string | null
-    type: $Enums.ContentType
     createdAt: Date
     userId: string
     itemReviewId: string
@@ -7024,7 +7030,6 @@ export namespace Prisma {
     id?: boolean
     rating?: boolean
     review?: boolean
-    type?: boolean
     createdAt?: boolean
     userId?: boolean
     itemReviewId?: boolean
@@ -7036,7 +7041,6 @@ export namespace Prisma {
     id?: boolean
     rating?: boolean
     review?: boolean
-    type?: boolean
     createdAt?: boolean
     userId?: boolean
     itemReviewId?: boolean
@@ -7048,7 +7052,6 @@ export namespace Prisma {
     id?: boolean
     rating?: boolean
     review?: boolean
-    type?: boolean
     createdAt?: boolean
     userId?: boolean
     itemReviewId?: boolean
@@ -7060,13 +7063,12 @@ export namespace Prisma {
     id?: boolean
     rating?: boolean
     review?: boolean
-    type?: boolean
     createdAt?: boolean
     userId?: boolean
     itemReviewId?: boolean
   }
 
-  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rating" | "review" | "type" | "createdAt" | "userId" | "itemReviewId", ExtArgs["result"]["review"]>
+  export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "rating" | "review" | "createdAt" | "userId" | "itemReviewId", ExtArgs["result"]["review"]>
   export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     itemReview?: boolean | ItemReviewDefaultArgs<ExtArgs>
@@ -7090,7 +7092,6 @@ export namespace Prisma {
       id: string
       rating: number
       review: string | null
-      type: $Enums.ContentType
       createdAt: Date
       userId: string
       itemReviewId: string
@@ -7522,7 +7523,6 @@ export namespace Prisma {
     readonly id: FieldRef<"Review", 'String'>
     readonly rating: FieldRef<"Review", 'Int'>
     readonly review: FieldRef<"Review", 'String'>
-    readonly type: FieldRef<"Review", 'ContentType'>
     readonly createdAt: FieldRef<"Review", 'DateTime'>
     readonly userId: FieldRef<"Review", 'String'>
     readonly itemReviewId: FieldRef<"Review", 'String'>
@@ -8007,7 +8007,8 @@ export namespace Prisma {
     id: 'id',
     externalId: 'externalId',
     title: 'title',
-    coverUrl: 'coverUrl'
+    coverUrl: 'coverUrl',
+    type: 'type'
   };
 
   export type ItemReviewScalarFieldEnum = (typeof ItemReviewScalarFieldEnum)[keyof typeof ItemReviewScalarFieldEnum]
@@ -8017,7 +8018,6 @@ export namespace Prisma {
     id: 'id',
     rating: 'rating',
     review: 'review',
-    type: 'type',
     createdAt: 'createdAt',
     userId: 'userId',
     itemReviewId: 'itemReviewId'
@@ -8388,6 +8388,7 @@ export namespace Prisma {
     externalId?: StringFilter<"ItemReview"> | string
     title?: StringFilter<"ItemReview"> | string
     coverUrl?: StringNullableFilter<"ItemReview"> | string | null
+    type?: EnumContentTypeFilter<"ItemReview"> | $Enums.ContentType
     reviews?: ReviewListRelationFilter
   }
 
@@ -8396,6 +8397,7 @@ export namespace Prisma {
     externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrderInput | SortOrder
+    type?: SortOrder
     reviews?: ReviewOrderByRelationAggregateInput
   }
 
@@ -8407,6 +8409,7 @@ export namespace Prisma {
     NOT?: ItemReviewWhereInput | ItemReviewWhereInput[]
     title?: StringFilter<"ItemReview"> | string
     coverUrl?: StringNullableFilter<"ItemReview"> | string | null
+    type?: EnumContentTypeFilter<"ItemReview"> | $Enums.ContentType
     reviews?: ReviewListRelationFilter
   }, "id" | "externalId">
 
@@ -8415,6 +8418,7 @@ export namespace Prisma {
     externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrderInput | SortOrder
+    type?: SortOrder
     _count?: ItemReviewCountOrderByAggregateInput
     _max?: ItemReviewMaxOrderByAggregateInput
     _min?: ItemReviewMinOrderByAggregateInput
@@ -8428,6 +8432,7 @@ export namespace Prisma {
     externalId?: StringWithAggregatesFilter<"ItemReview"> | string
     title?: StringWithAggregatesFilter<"ItemReview"> | string
     coverUrl?: StringNullableWithAggregatesFilter<"ItemReview"> | string | null
+    type?: EnumContentTypeWithAggregatesFilter<"ItemReview"> | $Enums.ContentType
   }
 
   export type ReviewWhereInput = {
@@ -8437,7 +8442,6 @@ export namespace Prisma {
     id?: StringFilter<"Review"> | string
     rating?: IntFilter<"Review"> | number
     review?: StringNullableFilter<"Review"> | string | null
-    type?: EnumContentTypeFilter<"Review"> | $Enums.ContentType
     createdAt?: DateTimeFilter<"Review"> | Date | string
     userId?: StringFilter<"Review"> | string
     itemReviewId?: StringFilter<"Review"> | string
@@ -8449,7 +8453,6 @@ export namespace Prisma {
     id?: SortOrder
     rating?: SortOrder
     review?: SortOrderInput | SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     itemReviewId?: SortOrder
@@ -8465,7 +8468,6 @@ export namespace Prisma {
     NOT?: ReviewWhereInput | ReviewWhereInput[]
     rating?: IntFilter<"Review"> | number
     review?: StringNullableFilter<"Review"> | string | null
-    type?: EnumContentTypeFilter<"Review"> | $Enums.ContentType
     createdAt?: DateTimeFilter<"Review"> | Date | string
     userId?: StringFilter<"Review"> | string
     itemReviewId?: StringFilter<"Review"> | string
@@ -8477,7 +8479,6 @@ export namespace Prisma {
     id?: SortOrder
     rating?: SortOrder
     review?: SortOrderInput | SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     itemReviewId?: SortOrder
@@ -8495,7 +8496,6 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Review"> | string
     rating?: IntWithAggregatesFilter<"Review"> | number
     review?: StringNullableWithAggregatesFilter<"Review"> | string | null
-    type?: EnumContentTypeWithAggregatesFilter<"Review"> | $Enums.ContentType
     createdAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
     userId?: StringWithAggregatesFilter<"Review"> | string
     itemReviewId?: StringWithAggregatesFilter<"Review"> | string
@@ -8775,6 +8775,7 @@ export namespace Prisma {
     externalId: string
     title: string
     coverUrl?: string | null
+    type: $Enums.ContentType
     reviews?: ReviewCreateNestedManyWithoutItemReviewInput
   }
 
@@ -8783,6 +8784,7 @@ export namespace Prisma {
     externalId: string
     title: string
     coverUrl?: string | null
+    type: $Enums.ContentType
     reviews?: ReviewUncheckedCreateNestedManyWithoutItemReviewInput
   }
 
@@ -8791,6 +8793,7 @@ export namespace Prisma {
     externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     reviews?: ReviewUpdateManyWithoutItemReviewNestedInput
   }
 
@@ -8799,6 +8802,7 @@ export namespace Prisma {
     externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     reviews?: ReviewUncheckedUpdateManyWithoutItemReviewNestedInput
   }
 
@@ -8807,6 +8811,7 @@ export namespace Prisma {
     externalId: string
     title: string
     coverUrl?: string | null
+    type: $Enums.ContentType
   }
 
   export type ItemReviewUpdateManyMutationInput = {
@@ -8814,6 +8819,7 @@ export namespace Prisma {
     externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   }
 
   export type ItemReviewUncheckedUpdateManyInput = {
@@ -8821,13 +8827,13 @@ export namespace Prisma {
     externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   }
 
   export type ReviewCreateInput = {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
     itemReview: ItemReviewCreateNestedOneWithoutReviewsInput
@@ -8837,7 +8843,6 @@ export namespace Prisma {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     userId: string
     itemReviewId: string
@@ -8847,7 +8852,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
     itemReview?: ItemReviewUpdateOneRequiredWithoutReviewsNestedInput
@@ -8857,7 +8861,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     itemReviewId?: StringFieldUpdateOperationsInput | string
@@ -8867,7 +8870,6 @@ export namespace Prisma {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     userId: string
     itemReviewId: string
@@ -8877,7 +8879,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -8885,7 +8886,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
     itemReviewId?: StringFieldUpdateOperationsInput | string
@@ -9205,11 +9205,19 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
+  export type EnumContentTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentTypeFilter<$PrismaModel> | $Enums.ContentType
+  }
+
   export type ItemReviewCountOrderByAggregateInput = {
     id?: SortOrder
     externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrder
+    type?: SortOrder
   }
 
   export type ItemReviewMaxOrderByAggregateInput = {
@@ -9217,6 +9225,7 @@ export namespace Prisma {
     externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrder
+    type?: SortOrder
   }
 
   export type ItemReviewMinOrderByAggregateInput = {
@@ -9224,6 +9233,17 @@ export namespace Prisma {
     externalId?: SortOrder
     title?: SortOrder
     coverUrl?: SortOrder
+    type?: SortOrder
+  }
+
+  export type EnumContentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContentTypeFilter<$PrismaModel>
+    _max?: NestedEnumContentTypeFilter<$PrismaModel>
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -9235,13 +9255,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type EnumContentTypeFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumContentTypeFilter<$PrismaModel> | $Enums.ContentType
   }
 
   export type ItemReviewScalarRelationFilter = {
@@ -9258,7 +9271,6 @@ export namespace Prisma {
     id?: SortOrder
     rating?: SortOrder
     review?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     itemReviewId?: SortOrder
@@ -9272,7 +9284,6 @@ export namespace Prisma {
     id?: SortOrder
     rating?: SortOrder
     review?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     itemReviewId?: SortOrder
@@ -9282,7 +9293,6 @@ export namespace Prisma {
     id?: SortOrder
     rating?: SortOrder
     review?: SortOrder
-    type?: SortOrder
     createdAt?: SortOrder
     userId?: SortOrder
     itemReviewId?: SortOrder
@@ -9306,16 +9316,6 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type EnumContentTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumContentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContentType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumContentTypeFilter<$PrismaModel>
-    _max?: NestedEnumContentTypeFilter<$PrismaModel>
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -9510,6 +9510,10 @@ export namespace Prisma {
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
+  export type EnumContentTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ContentType
+  }
+
   export type ReviewUpdateManyWithoutItemReviewNestedInput = {
     create?: XOR<ReviewCreateWithoutItemReviewInput, ReviewUncheckedCreateWithoutItemReviewInput> | ReviewCreateWithoutItemReviewInput[] | ReviewUncheckedCreateWithoutItemReviewInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutItemReviewInput | ReviewCreateOrConnectWithoutItemReviewInput[]
@@ -9556,10 +9560,6 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type EnumContentTypeFieldUpdateOperationsInput = {
-    set?: $Enums.ContentType
   }
 
   export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
@@ -9746,6 +9746,16 @@ export namespace Prisma {
     not?: NestedEnumContentTypeFilter<$PrismaModel> | $Enums.ContentType
   }
 
+  export type NestedEnumContentTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumContentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContentType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumContentTypeFilter<$PrismaModel>
+    _max?: NestedEnumContentTypeFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -9771,16 +9781,6 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedEnumContentTypeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ContentType | EnumContentTypeFieldRefInput<$PrismaModel>
-    in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
-    not?: NestedEnumContentTypeWithAggregatesFilter<$PrismaModel> | $Enums.ContentType
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumContentTypeFilter<$PrismaModel>
-    _max?: NestedEnumContentTypeFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -9961,7 +9961,6 @@ export namespace Prisma {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     itemReview: ItemReviewCreateNestedOneWithoutReviewsInput
   }
@@ -9970,7 +9969,6 @@ export namespace Prisma {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     itemReviewId: string
   }
@@ -10069,7 +10067,6 @@ export namespace Prisma {
     id?: StringFilter<"Review"> | string
     rating?: IntFilter<"Review"> | number
     review?: StringNullableFilter<"Review"> | string | null
-    type?: EnumContentTypeFilter<"Review"> | $Enums.ContentType
     createdAt?: DateTimeFilter<"Review"> | Date | string
     userId?: StringFilter<"Review"> | string
     itemReviewId?: StringFilter<"Review"> | string
@@ -10079,7 +10076,6 @@ export namespace Prisma {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     user: UserCreateNestedOneWithoutReviewsInput
   }
@@ -10088,7 +10084,6 @@ export namespace Prisma {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     userId: string
   }
@@ -10149,6 +10144,7 @@ export namespace Prisma {
     externalId: string
     title: string
     coverUrl?: string | null
+    type: $Enums.ContentType
   }
 
   export type ItemReviewUncheckedCreateWithoutReviewsInput = {
@@ -10156,6 +10152,7 @@ export namespace Prisma {
     externalId: string
     title: string
     coverUrl?: string | null
+    type: $Enums.ContentType
   }
 
   export type ItemReviewCreateOrConnectWithoutReviewsInput = {
@@ -10210,6 +10207,7 @@ export namespace Prisma {
     externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   }
 
   export type ItemReviewUncheckedUpdateWithoutReviewsInput = {
@@ -10217,6 +10215,7 @@ export namespace Prisma {
     externalId?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
   }
 
   export type AccountCreateManyUserInput = {
@@ -10244,7 +10243,6 @@ export namespace Prisma {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     itemReviewId: string
   }
@@ -10316,7 +10314,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemReview?: ItemReviewUpdateOneRequiredWithoutReviewsNestedInput
   }
@@ -10325,7 +10322,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemReviewId?: StringFieldUpdateOperationsInput | string
   }
@@ -10334,7 +10330,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     itemReviewId?: StringFieldUpdateOperationsInput | string
   }
@@ -10343,7 +10338,6 @@ export namespace Prisma {
     id?: string
     rating: number
     review?: string | null
-    type: $Enums.ContentType
     createdAt?: Date | string
     userId: string
   }
@@ -10352,7 +10346,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutReviewsNestedInput
   }
@@ -10361,7 +10354,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
   }
@@ -10370,7 +10362,6 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     rating?: IntFieldUpdateOperationsInput | number
     review?: NullableStringFieldUpdateOperationsInput | string | null
-    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
   }

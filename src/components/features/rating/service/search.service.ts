@@ -1,16 +1,23 @@
+import axios from 'axios'
 import dayjs from 'dayjs'
-import type { ContentType } from 'generated/prisma'
+import { ContentType } from 'generated/prisma'
 import { env } from '~/env'
 import type {
+  IAlbumDetail,
   IAlbumTargetItem,
+  IBookDetail,
   IBookTargetItem,
+  IDetailedItem,
+  IGameDetail,
   IGameTargetItem,
+  IMovieDetail,
   IMovieTargetItem,
   ISearchResult,
+  ISongDetail,
   ISongTargetItem,
   ITargetItem,
   ITvTargetItem
-} from '../types/target.types'
+} from '../types/search.types'
 
 const LIMIT_PER_PAGE = 20
 const getPages = (total: number, limit = LIMIT_PER_PAGE) =>
@@ -35,6 +42,23 @@ export class SearchService {
         return this.searchGames(query, page)
       case 'BOOK':
         return this.searchBooks(query, page)
+    }
+  }
+
+  async searchById(category: ContentType, id: string): Promise<IDetailedItem> {
+    switch (category) {
+      case 'MOVIE':
+        return this.searchMovieById(id)
+      case 'TV':
+        return this.searchTvById(id)
+      case 'SONG':
+        return this.searchSongById(id)
+      case 'ALBUM':
+        return this.searchAlbumById(id)
+      case 'GAME':
+        return this.searchGameById(id)
+      case 'BOOK':
+        return this.searchBookById(id)
     }
   }
 
@@ -370,6 +394,116 @@ export class SearchService {
       page: page + 1,
       totalPages: getPages(data.totalItems),
       totalResults: data.totalItems
+    }
+  }
+
+  private async searchMovieById(id: string): Promise<IDetailedItem> {
+    const { data } = await axios.get<IMovieDetail>(
+      `https://api.themoviedb.org/3/movie/${id}?language=ru-RU`,
+      {
+        headers: {
+          Authorization: `Bearer ${env.NEXT_PUBLIC_MOVIE_DB_API_KEY}`
+        }
+      }
+    )
+
+    return {
+      badges: data.genres
+        .map((genre) => this.getMovieGenreName(genre.id))
+        .filter(Boolean) as string[],
+      title: data.title,
+      description: data.overview,
+      coverUrl: data.poster_path
+        ? `https://image.tmdb.org/t/p/w342${data.poster_path}`
+        : null,
+      type: ContentType.MOVIE
+    }
+  }
+
+  private async searchTvById(id: string): Promise<IDetailedItem> {
+    const { data } = await axios.get<IMovieDetail>(
+      `https://api.themoviedb.org/3/tv/${id}?language=ru-RU`,
+      {
+        headers: {
+          Authorization: `Bearer ${env.NEXT_PUBLIC_MOVIE_DB_API_KEY}`
+        }
+      }
+    )
+
+    return {
+      badges: data.genres
+        .map((genre) => this.getTvGenreName(genre.id))
+        .filter(Boolean) as string[],
+      title: data.title,
+      description: data.overview,
+      coverUrl: data.poster_path
+        ? `https://image.tmdb.org/t/p/w342${data.poster_path}`
+        : null,
+      type: ContentType.TV
+    }
+  }
+
+  private async searchSongById(id: string): Promise<IDetailedItem> {
+    const { data } = await axios.get<ISongDetail>(
+      `https://corsproxy.io/?${encodeURIComponent(
+        `https://api.deezer.com/track/${id}`
+      )}`
+    )
+
+    return {
+      badges: data.contributors.map((contributor) => contributor.name),
+      coverUrl: data.album.cover_medium,
+      description: null,
+      title: data.title,
+      type: ContentType.SONG
+    }
+  }
+
+  private async searchAlbumById(id: string): Promise<IDetailedItem> {
+    const { data } = await axios.get<IAlbumDetail>(
+      `https://corsproxy.io/?${encodeURIComponent(
+        `https://api.deezer.com/album/${id}`
+      )}`
+    )
+
+    return {
+      badges: data.contributors.map((contributor) => contributor.name),
+      coverUrl: data.cover,
+      description: null,
+      title: data.title,
+      type: ContentType.ALBUM
+    }
+  }
+
+  private async searchGameById(id: string): Promise<IDetailedItem> {
+    const { data } = await axios.get<IGameDetail>(
+      `https://api.rawg.io/api/games/${encodeURIComponent(id)}?key=${env.NEXT_PUBLIC_RAWG_API_KEYL}`
+    )
+
+    console.debug('data', data)
+
+    return {
+      badges: data.genres.map((genre) => genre.name),
+      coverUrl: data.background_image,
+      title: data.name,
+      type: ContentType.GAME,
+      description: data.description_raw
+    }
+  }
+
+  private async searchBookById(id: string): Promise<IDetailedItem> {
+    const { data } = await axios.get<IBookDetail>(
+      `https://www.googleapis.com/books/v1/volumes/${id}`
+    )
+
+    return {
+      badges: data.volumeInfo.categories,
+      description: data.volumeInfo.description,
+      coverUrl: data.volumeInfo.imageLinks?.thumbnail
+        ? `https://corsproxy.io/?${data.volumeInfo.imageLinks?.thumbnail}`
+        : null,
+      title: data.volumeInfo.title,
+      type: ContentType.BOOK
     }
   }
 

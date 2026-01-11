@@ -84,3 +84,58 @@ export interface ISelectedTargetItem {
   releaseDate?: string
   description: string
 }
+
+export interface IDetailedItem {
+  badges: string[]
+  title: string
+  description: string | null
+  coverUrl: string | null
+  type: ContentType
+}
+
+export interface IMovieDetail {
+  genres: { id: number; name: string }[]
+  title: string
+  poster_path?: string
+  overview: string
+}
+
+export interface ITvDetail {
+  genres: { id: number; name: string }[]
+  name: string
+  poster_path?: string
+  overview: string
+}
+
+export interface ISongDetail {
+  title: string
+  contributors: { name: string }[]
+  album: {
+    cover_medium: string
+  }
+}
+
+export interface IAlbumDetail {
+  title: string
+  contributors: { name: string }[]
+  cover: string
+}
+
+export interface IGameDetail {
+  name: string
+  description_raw: string
+  background_image: string
+  genres: { name: string }[]
+}
+
+export interface IBookDetail {
+  id: string
+  volumeInfo: {
+    title: string
+    description: string
+    categories: string[]
+    imageLinks: {
+      thumbnail?: string
+    }
+  }
+}

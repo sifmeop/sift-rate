@@ -5,6 +5,7 @@ import { db } from '~/server/db'
 import {
   createReviewSchema,
   deleteReviewSchema,
+  getItemReviewsSchema,
   updateReviewSchema,
   validateDates
 } from '~/utils/validators'
@@ -23,7 +24,8 @@ export const reviewRouter = createTRPCRouter({
         data: {
           externalId: input.externalId,
           title: input.title,
-          coverUrl: input.coverUrl
+          coverUrl: input.coverUrl,
+          type: input.type
         }
       })
 
@@ -31,9 +33,16 @@ export const reviewRouter = createTRPCRouter({
         data: {
           rating: input.rating,
           review: input.review.length === 0 ? null : input.review,
-          type: input.type,
           userId: ctx.session.user.id,
           itemReviewId: itemReview.id
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+              image: true
+            }
+          }
         }
       })
     }),
@@ -48,6 +57,13 @@ export const reviewRouter = createTRPCRouter({
           rating: input.rating,
           review: input.review.length === 0 ? null : input.review,
           userId: ctx.session.user.id
+        },
+        include: {
+          itemReview: {
+            select: {
+              externalId: true
+            }
+          }
         }
       })
     }),
@@ -58,6 +74,13 @@ export const reviewRouter = createTRPCRouter({
         where: {
           id: input.id,
           userId: ctx.session.user.id
+        },
+        include: {
+          itemReview: {
+            select: {
+              externalId: true
+            }
+          }
         }
       })
     }),
@@ -70,7 +93,9 @@ export const reviewRouter = createTRPCRouter({
         itemReview: {
           select: {
             title: true,
-            coverUrl: true
+            coverUrl: true,
+            type: true,
+            externalId: true
           }
         }
       },
@@ -79,7 +104,7 @@ export const reviewRouter = createTRPCRouter({
       }
     })
 
-    return reviews as IRatingCardData[]
+    return reviews
   }),
   getReviewsByDate: protectedProcedure
     .input(validateDates)
@@ -96,7 +121,9 @@ export const reviewRouter = createTRPCRouter({
           itemReview: {
             select: {
               title: true,
-              coverUrl: true
+              coverUrl: true,
+              type: true,
+              externalId: true
             }
           }
         },
@@ -154,5 +181,27 @@ export const reviewRouter = createTRPCRouter({
     }, {})
 
     return Object.keys(stats).length > 0 ? stats : null
-  })
+  }),
+  getItemReviews: protectedProcedure
+    .input(getItemReviewsSchema)
+    .query(async ({ ctx, input }) => {
+      return await ctx.db.review.findMany({
+        where: {
+          itemReview: {
+            externalId: input.externalId
+          }
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+              image: true
+            }
+          }
+        },
+        orderBy: {
+          createdAt: 'desc'
+        }
+      })
+    })
 })

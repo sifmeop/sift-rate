@@ -1,11 +1,11 @@
 import { Button } from '@heroui/button'
 import { Textarea } from '@heroui/input'
+import type { ISelectedTargetItem } from '~/components/features/rating'
 import { Badge } from '~/components/ui/badge'
 import { ReviewCover } from '~/components/ui/review-cover'
 import { StarRating } from '~/components/ui/star-rating'
 import { MAX_REVIEW_LENGTH } from '~/constants/review'
 import { useRateSubmit } from '../hooks/useRateSubmit'
-import type { ISelectedTargetItem } from '../types/target.types'
 
 interface IStep3SubmitRatingProps {
   selectedTargetItem: ISelectedTargetItem

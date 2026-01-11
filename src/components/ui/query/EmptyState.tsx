@@ -3,7 +3,7 @@ interface IEmptyStateProps {
 }
 
 export const EmptyState = ({
-  message = 'Пока нет оценок'
+  message = 'Пока нет отзывов'
 }: IEmptyStateProps) => {
   return (
     <div>

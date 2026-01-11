@@ -1,7 +1,10 @@
 import type { ContentType } from 'generated/prisma'
 import { useState } from 'react'
-import { SearchService } from '../service/target.service'
-import type { ISelectedTargetItem, ITargetItem } from '../types/target.types'
+import {
+  SearchService,
+  type ISelectedTargetItem,
+  type ITargetItem
+} from '~/components/features/rating'
 
 export const useTargetSearch = (
   selectedType: ContentType,

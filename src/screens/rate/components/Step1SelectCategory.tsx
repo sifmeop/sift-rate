@@ -58,7 +58,7 @@ export const Step1SelectCategory = ({
 }: IStep1SelectCategoryProps) => {
   return (
     <>
-      <PageTitle>Добавить оценку</PageTitle>
+      <PageTitle className='text-left'>Добавить оценку</PageTitle>
       <p className='text-muted-foreground mb-4'>Выберите категорию</p>
       <div className='grid grid-cols-2 gap-3'>
         {CATEGORIES.map(({ category, title, icon: Icon }) => (

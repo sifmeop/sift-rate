@@ -68,6 +68,23 @@ export const useUpdateReview = (
           return review
         })
       })
+
+      utils.review.getItemReviews.setData(
+        { externalId: data.itemReview.externalId },
+        (oldData) => {
+          if (!oldData) return
+          return oldData.map((review) => {
+            if (review.id === data.id) {
+              return {
+                ...review,
+                rating: data.rating,
+                review: data.review
+              }
+            }
+            return review
+          })
+        }
+      )
     }
   })
 

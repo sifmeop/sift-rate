@@ -64,19 +64,19 @@ enum ContentType {
 }
 
 model ItemReview {
-  id         String   @id @default(cuid())
-  externalId String   @unique
+  id         String      @id @default(cuid())
+  externalId String      @unique
   title      String
   coverUrl   String?
+  type       ContentType
   reviews    Review[]
 }
 
 model Review {
-  id        String      @id @default(cuid())
+  id        String   @id @default(cuid())
   rating    Int // 1-10
   review    String?
-  type      ContentType
-  createdAt DateTime    @default(now())
+  createdAt DateTime @default(now())
 
   user   User   @relation(fields: [userId], references: [id])
   userId String

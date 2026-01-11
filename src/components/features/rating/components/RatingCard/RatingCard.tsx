@@ -4,6 +4,7 @@ import { cn } from '@heroui/theme'
 import dayjs from 'dayjs'
 import { m, type Variants } from 'framer-motion'
 import { Calendar, Quote } from 'lucide-react'
+import Link from 'next/link'
 import { Badge } from '~/components/ui/badge'
 import { ReviewCover } from '~/components/ui/review-cover'
 import { Show } from '~/components/ui/show'
@@ -35,9 +36,8 @@ export const RatingCard = ({
   id,
   rating,
   review,
-  type,
   createdAt,
-  itemReview: { title, coverUrl },
+  itemReview: { title, coverUrl, type, externalId },
   isLast
 }: IRatingCardProps) => {
   const isTopRated = rating === MAX_RATING
@@ -47,6 +47,7 @@ export const RatingCard = ({
     year: 'numeric'
   }).format(createdAt)
   const isToday = dayjs(createdAt).isSame(dayjs(), 'day')
+  const itemReviewHref = `/reviews/${type.toLowerCase()}/${externalId}`
 
   return (
     <m.div
@@ -76,7 +77,9 @@ export const RatingCard = ({
       <Show when={isTopRated}>
         <div className='from-yellow/10 pointer-events-none absolute -inset-px rounded-xl bg-linear-to-r to-transparent opacity-0 blur-xl transition-opacity group-hover:opacity-100' />
       </Show>
-      <ReviewCover title={title} coverUrl={coverUrl} type={type} />
+      <Link href={itemReviewHref} className='h-fit'>
+        <ReviewCover title={title} coverUrl={coverUrl} type={type} />
+      </Link>
       <div className='flex w-full flex-col gap-2'>
         <div className='flex gap-2'>
           <Badge type={type} />
@@ -84,9 +87,11 @@ export const RatingCard = ({
             <Badge type='BEST' />
           </Show>
         </div>
-        <h3 className='font-roboto-slab line-clamp-2 text-xl font-bold'>
+        <Link
+          href={itemReviewHref}
+          className='font-roboto-slab line-clamp-2 w-fit text-xl font-bold hover:underline'>
           {title}
-        </h3>
+        </Link>
         <div className='flex items-center gap-3'>
           <Rating rating={rating} />
           <div className='text-muted-foreground flex items-center gap-1.5'>

@@ -1,5 +1,5 @@
 import type { ContentType } from 'generated/prisma'
-import type { ISelectedTargetItem } from '../types/target.types'
+import type { ISelectedTargetItem } from '~/components/features/rating'
 
 const TITLE_MAP: Record<ContentType, string> = {
   MOVIE: 'Выберите фильм',

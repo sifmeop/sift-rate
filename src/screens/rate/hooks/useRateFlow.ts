@@ -1,6 +1,6 @@
 import type { ContentType } from 'generated/prisma'
 import { useState } from 'react'
-import type { ISelectedTargetItem } from '../types/target.types'
+import type { ISelectedTargetItem } from '~/components/features/rating'
 
 export const useRateFlow = () => {
   const [selectedType, setSelectedType] = useState<ContentType | null>(null)

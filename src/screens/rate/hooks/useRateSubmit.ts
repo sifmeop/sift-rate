@@ -1,14 +1,16 @@
 import { addToast } from '@heroui/toast'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import type { IRatingCardData } from '~/components/features/rating'
+import type {
+  IRatingCardData,
+  ISelectedTargetItem
+} from '~/components/features/rating'
 import { MAX_RATING } from '~/constants/review'
 import { api } from '~/trpc/react'
 import {
   createReviewSchema,
   type CreateReviewSchemaType
 } from '~/utils/validators'
-import type { ISelectedTargetItem } from '../types/target.types'
 
 export const useRateSubmit = (
   selectedTargetItem: ISelectedTargetItem,
@@ -22,12 +24,13 @@ export const useRateSubmit = (
         id: data.id,
         itemReview: {
           title: variables.title,
-          coverUrl: variables.coverUrl ?? null
+          coverUrl: variables.coverUrl ?? null,
+          type: variables.type,
+          externalId: variables.externalId
         },
         itemReviewId: data.itemReviewId,
         rating: data.rating,
         review: data.review,
-        type: data.type,
         userId: data.userId
       }
 
@@ -62,6 +65,19 @@ export const useRateSubmit = (
         if (!oldData) return
         return [transformedData, ...oldData]
       })
+
+      const itemReviewTransformedData = {
+        ...transformedData,
+        user: data.user
+      }
+
+      utils.review.getItemReviews.setData(
+        { externalId: variables.externalId },
+        (oldData) => {
+          if (!oldData) return
+          return [itemReviewTransformedData, ...oldData]
+        }
+      )
     }
   })
 

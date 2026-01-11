@@ -31,7 +31,7 @@ export const Header = ({ email }: IHeaderProps) => {
           <div className='bg-secondary-400 flex size-8 items-center justify-center rounded-lg'>
             <span className='text-primary-foreground text-lg font-bold'>S</span>
           </div>
-          <span className='font-display text-foreground font-roboto-slab text-xl font-bold'>
+          <span className='text-foreground font-roboto-slab text-xl font-bold'>
             Sift-Rate
           </span>
         </Link>

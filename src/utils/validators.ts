@@ -41,3 +41,15 @@ export const validateDates = z
     return true
   })
   .optional()
+
+export const validateCategory = z.object({
+  category: z
+    .string()
+    .transform((val) => val.toUpperCase())
+    .pipe(z.nativeEnum(ContentType)),
+  id: z.string()
+})
+
+export const getItemReviewsSchema = z.object({
+  externalId: z.string()
+})

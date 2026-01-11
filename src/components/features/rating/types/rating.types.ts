@@ -1,8 +1,8 @@
-import type { ContentType, ItemReview, Review } from 'generated/prisma'
+import type { ContentType, ItemReview, Review, User } from 'generated/prisma'
 import z from 'zod'
 
 export interface IRatingCardData extends Review {
-  itemReview: Pick<ItemReview, 'title' | 'coverUrl'>
+  itemReview: Pick<ItemReview, 'title' | 'coverUrl' | 'type' | 'externalId'>
 }
 
 export type IRatingListTab = 'all' | 'best'
@@ -44,3 +44,7 @@ export type ITimeline = Record<
     months: Record<number, { total: number; best: number }>
   }
 >
+
+export interface IReviewDetail extends Review {
+  user: Pick<User, 'name' | 'image'>
+}

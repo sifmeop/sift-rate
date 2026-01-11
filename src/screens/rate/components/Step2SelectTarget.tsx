@@ -3,11 +3,11 @@ import { Input } from '@heroui/input'
 import { Pagination } from '@heroui/pagination'
 import type { ContentType } from 'generated/prisma'
 import { ChevronRight, SearchIcon } from 'lucide-react'
+import type { ISelectedTargetItem } from '~/components/features/rating'
 import { LoadingSpinner } from '~/components/ui/loading-spinner'
 import { ReviewCover } from '~/components/ui/review-cover'
 import { Show } from '~/components/ui/show'
 import { useTargetSearch } from '../hooks/useTargetSearch'
-import type { ISelectedTargetItem } from '../types/target.types'
 import { getItemCountText } from '../utils/getItemCountText'
 
 interface IStep2SelectTargetProps {
