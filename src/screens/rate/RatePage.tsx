@@ -2,6 +2,7 @@
 
 import { Button } from '@heroui/button'
 import { FaArrowLeft } from 'react-icons/fa'
+import { PageTitle } from '~/components/ui/page-title'
 import { Step1SelectCategory } from './components/Step1SelectCategory'
 import { Step2SelectTarget } from './components/Step2SelectTarget'
 import { Step3SubmitRating } from './components/Step3SubmitRating'
@@ -33,7 +34,7 @@ export const RatePage = () => {
             className='mb-4 w-fit'>
             Назад
           </Button>
-          <h1 className='mb-8 text-3xl font-bold'>{title}</h1>
+          <PageTitle>{title}</PageTitle>
           {!selectedTargetItem ? (
             <Step2SelectTarget
               selectedType={selectedType}

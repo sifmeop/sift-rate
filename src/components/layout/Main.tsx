@@ -1,6 +1,6 @@
 export const Main = ({ children }: React.PropsWithChildren) => {
   return (
-    <main className='app-container z-px relative pt-[calc(65px+20px+env(safe-area-inset-top))] pb-[calc(77px+20px+env(safe-area-inset-bottom))] md:pb-4'>
+    <main className='app-container z-px pt-safe-or-22 pb-safe-or-24 md:pb-safe-or-4 relative'>
       {children}
     </main>
   )

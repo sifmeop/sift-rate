@@ -1,4 +1,5 @@
 import type { IRatingCardData, IRatingListState } from '../types/rating.types'
+import { applyContentType } from './applyContentType'
 import { applyFilters } from './applyFilters'
 import { applySearch } from './applySearch'
 import { applySort } from './applySort'
@@ -10,7 +11,7 @@ export const selectVisibleItems = (
 ) => {
   if (items.length === 0) return items
 
-  const { tab, search, sort, filter } = state
+  const { tab, search, sort, filter, contentType } = state
 
   let result = items
 
@@ -21,6 +22,8 @@ export const selectVisibleItems = (
   if (tab === 'all') {
     result = applyFilters(result, filter)
   }
+
+  result = applyContentType(result, contentType)
 
   return result
 }

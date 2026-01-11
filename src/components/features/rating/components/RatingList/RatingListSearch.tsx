@@ -24,6 +24,7 @@ export const RatingListSearch = () => {
 
   return (
     <Input
+      type='search'
       isClearable
       placeholder='Поиск'
       startContent={<SearchIcon />}

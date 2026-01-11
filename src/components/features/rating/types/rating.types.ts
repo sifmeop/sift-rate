@@ -1,4 +1,4 @@
-import type { ItemReview, Review } from 'generated/prisma'
+import type { ContentType, ItemReview, Review } from 'generated/prisma'
 import z from 'zod'
 
 export interface IRatingCardData extends Review {
@@ -26,11 +26,14 @@ export const RatingListStateSchema = z.object({
 
 export type TRatingListState = z.infer<typeof RatingListStateSchema>
 
+export type TRatingListContentType = 'ALL' | ContentType
+
 export interface IRatingListState {
   tab: IRatingListTab
   search: string
   sort: IRatingListSort
   filter: IRatingListFilter
+  contentType: TRatingListContentType
 }
 
 export type ITimeline = Record<

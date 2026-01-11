@@ -16,6 +16,7 @@ interface IRatingListContext {
   setSearch: (search: IRatingListState['search']) => void
   setSort: (sort: IRatingListState['sort']) => void
   setFilter: (filter: IRatingListState['filter']) => void
+  setContentType: (contentType: IRatingListState['contentType']) => void
 }
 
 const RatingListContext = createContext<IRatingListContext | null>(null)
@@ -25,7 +26,8 @@ export const RatingListProvider = ({ children }: React.PropsWithChildren) => {
     tab: 'all',
     search: '',
     sort: 'review_desc',
-    filter: 'all'
+    filter: 'all',
+    contentType: 'ALL'
   })
 
   const setTab = useCallback(
@@ -50,15 +52,22 @@ export const RatingListProvider = ({ children }: React.PropsWithChildren) => {
     []
   )
 
+  const setContentType = useCallback(
+    (contentType: IRatingListState['contentType']) =>
+      setState((prev) => ({ ...prev, contentType })),
+    []
+  )
+
   const value = useMemo(
     () => ({
       state,
       setTab,
       setSearch,
       setSort,
-      setFilter
+      setFilter,
+      setContentType
     }),
-    [setFilter, setSearch, setSort, setTab, state]
+    [setFilter, setSearch, setSort, setTab, state, setContentType]
   )
 
   return <RatingListContext value={value}>{children}</RatingListContext>

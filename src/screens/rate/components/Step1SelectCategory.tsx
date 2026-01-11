@@ -8,6 +8,7 @@ import {
   TvIcon,
   type LucideIcon
 } from 'lucide-react'
+import { PageTitle } from '~/components/ui/page-title'
 
 interface ICategoryItem {
   category: ContentType
@@ -57,7 +58,7 @@ export const Step1SelectCategory = ({
 }: IStep1SelectCategoryProps) => {
   return (
     <>
-      <h1 className='mb-8 text-3xl font-bold'>Добавить оценку</h1>
+      <PageTitle>Добавить оценку</PageTitle>
       <p className='text-muted-foreground mb-4'>Выберите категорию</p>
       <div className='grid grid-cols-2 gap-3'>
         {CATEGORIES.map(({ category, title, icon: Icon }) => (

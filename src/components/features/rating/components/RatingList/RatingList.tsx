@@ -3,6 +3,8 @@ import { EmptyState, ErrorMessage } from '~/components/ui/query'
 import { RatingListProvider } from '~/contexts/RatingListProvider'
 import type { IRatingCardData } from '../../types/rating.types'
 import { RatingItems } from './RatingItems'
+import { RatingListContentType } from './RatingListContentType'
+import { RatingListContentTypeMobile } from './RatingListContentTypeMobile'
 import { RatingListFilter } from './RatingListFilter'
 import { RatingListSearch } from './RatingListSearch'
 import { RatingListSort } from './RatingListSort'
@@ -38,6 +40,8 @@ export const RatingList = ({ items, isLoading, error }: IRatingListProps) => {
           <RatingListSort />
           <RatingListFilter items={items} />
         </div>
+        <RatingListContentType />
+        <RatingListContentTypeMobile />
         <RatingItems items={items} />
       </div>
     </RatingListProvider>
