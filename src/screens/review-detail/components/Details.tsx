@@ -26,6 +26,10 @@ export const Details = ({ searchData, reviewsData }: IDetailsProps) => {
     reviewsData.length
   const totalRatings = reviewsData.length
   const cover = searchData.coverUrl ?? '/images/no-poster-available.webp'
+  const formattedRatingCount = new Intl.NumberFormat('en-US', {
+    notation: 'compact',
+    compactDisplay: 'short'
+  }).format(totalRatings)
 
   return (
     <div className='flex gap-4 max-md:flex-col'>
@@ -55,7 +59,7 @@ export const Details = ({ searchData, reviewsData }: IDetailsProps) => {
           })}>
           <StarRating rating={averageRating} />
           <span className='text-muted-foreground text-base font-medium'>
-            {totalRatings} {getPluralRating(totalRatings)}
+            {formattedRatingCount} {getPluralRating(totalRatings)}
           </span>
         </div>
         <Show when={!!searchData.description}>

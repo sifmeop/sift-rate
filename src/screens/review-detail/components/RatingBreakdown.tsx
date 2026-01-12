@@ -28,16 +28,20 @@ export const RatingBreakdown = ({ reviewsData }: IReviewsProps) => {
           return (
             <div
               key={rating}
-              className='text-muted-foreground flex items-center gap-3 text-sm'>
-              <span className='w-3 font-semibold'>{rating}</span>
-              <StarRating rating={+rating} />
-              <div className='bg-muted/40 h-2 flex-1 overflow-hidden rounded-full'>
-                <div
-                  className='bg-secondary h-full rounded-full transition-all duration-500'
-                  style={{ width: `${percentage}%` }}
-                />
+              className='text-muted-foreground flex items-center gap-3 text-sm max-sm:flex-col max-sm:items-start max-sm:gap-0'>
+              <div className='flex items-center gap-3'>
+                <span className='w-3 font-semibold'>{rating}</span>
+                <StarRating rating={+rating} />
               </div>
-              <span className='w-7 text-right'>{formattedCount}</span>
+              <div className='flex w-full items-center gap-3'>
+                <div className='bg-muted/40 h-2 flex-1 overflow-hidden rounded-full'>
+                  <div
+                    className='bg-secondary h-full rounded-full transition-all duration-500'
+                    style={{ width: `${percentage}%` }}
+                  />
+                </div>
+                <span className='w-7 text-right'>{formattedCount}</span>
+              </div>
             </div>
           )
         })}
