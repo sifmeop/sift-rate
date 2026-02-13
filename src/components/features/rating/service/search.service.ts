@@ -364,9 +364,7 @@ export class SearchService {
         id: book.id,
         title: book.volumeInfo.title,
         description,
-        cover: book.volumeInfo.imageLinks?.thumbnail
-          ? `${book.volumeInfo.imageLinks?.thumbnail}`
-          : undefined
+        cover: book.volumeInfo.imageLinks?.thumbnail ?? undefined
       }
     })
 
@@ -496,9 +494,7 @@ export class SearchService {
     return {
       badges: data.volumeInfo.categories,
       description: data.volumeInfo.description,
-      coverUrl: data.volumeInfo.imageLinks?.thumbnail
-        ? `https://corsproxy.io/?${data.volumeInfo.imageLinks?.thumbnail}`
-        : null,
+      coverUrl: data.volumeInfo.imageLinks?.thumbnail ?? null,
       title: data.volumeInfo.title,
       type: ContentType.BOOK
     }
