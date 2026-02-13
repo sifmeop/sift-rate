@@ -200,7 +200,7 @@ export class SearchService {
     const { data } = await axios.get<{
       data: ISongTargetItem[]
       total: number
-    }>('/api/deezer/search-songs', {
+    }>('/api/deezer/search/song', {
       params: {
         q: query,
         limit: LIMIT_PER_PAGE,
@@ -241,7 +241,7 @@ export class SearchService {
     const { data } = await axios.get<{
       data: IAlbumTargetItem[]
       total: number
-    }>('/api/deezer/search-albums', {
+    }>('/api/deezer/search/album', {
       params: {
         q: query,
         limit: LIMIT_PER_PAGE,
@@ -365,7 +365,7 @@ export class SearchService {
         title: book.volumeInfo.title,
         description,
         cover: book.volumeInfo.imageLinks?.thumbnail
-          ? `https://corsproxy.io/?${book.volumeInfo.imageLinks?.thumbnail}`
+          ? `${book.volumeInfo.imageLinks?.thumbnail}`
           : undefined
       }
     })
@@ -431,11 +431,14 @@ export class SearchService {
   }
 
   private async searchSongById(id: string): Promise<IDetailedItem> {
-    const { data } = await axios.get<ISongDetail>('/api/deezer/search-by-id', {
-      params: {
-        id
+    const { data } = await axios.get<ISongDetail>(
+      '/api/deezer/search/song/id',
+      {
+        params: {
+          id
+        }
       }
-    })
+    )
 
     return {
       badges: data.contributors.map((contributor) => contributor.name),
@@ -448,9 +451,12 @@ export class SearchService {
 
   private async searchAlbumById(id: string): Promise<IDetailedItem> {
     const { data } = await axios.get<IAlbumDetail>(
-      `https://corsproxy.io/?${encodeURIComponent(
-        `https://api.deezer.com/album/${id}`
-      )}`
+      '/api/deezer/search/album/id',
+      {
+        params: {
+          id
+        }
+      }
     )
 
     return {

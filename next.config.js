@@ -33,6 +33,16 @@ const config = {
       {
         protocol: 'https',
         hostname: 'is1-ssl.mzstatic.com'
+      },
+      {
+        protocol: 'http',
+        hostname: 'books.google.com',
+        pathname: '/books/content**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'books.google.com',
+        pathname: '/books/content**'
       }
     ]
   }
