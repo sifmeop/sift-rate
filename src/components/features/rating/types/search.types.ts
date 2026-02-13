@@ -41,7 +41,7 @@ export interface ISongTargetItem {
   album: {
     cover_medium: string
   }
-  record_type: string
+  type: string
 }
 
 export interface IAlbumTargetItem {

@@ -1,3 +1,4 @@
+import { type AxiosError } from 'axios'
 import type { ContentType } from 'generated/prisma'
 import { useState } from 'react'
 import {
@@ -17,7 +18,7 @@ export const useTargetSearch = (
   const [currentPage, setCurrentPage] = useState(1)
   const [totalPages, setTotalPages] = useState(1)
   const [totalResults, setTotalResults] = useState(0)
-
+  const [error, setError] = useState<string | null>(null)
   const isLoading = typeof result === 'undefined'
 
   const searchTargets = async (page = 1) => {
@@ -30,6 +31,7 @@ export const useTargetSearch = (
 
     const searchService = new SearchService()
 
+    setError(null)
     setResult([])
     setResult(undefined)
 
@@ -48,6 +50,9 @@ export const useTargetSearch = (
         `Error searching entity with selectedType ${selectedType}: `,
         error
       )
+
+      setError((error as AxiosError)?.message ?? 'Произошла ошибка')
+
       setResult(null)
     }
   }
@@ -89,6 +94,7 @@ export const useTargetSearch = (
     totalPages,
     totalResults,
     currentPage,
-    onChangePage
+    onChangePage,
+    error
   }
 }

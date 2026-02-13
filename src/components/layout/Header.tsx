@@ -26,6 +26,7 @@ export const Header = ({ email }: IHeaderProps) => {
     <header className='border-b-border bg-background-primary/60 pt-safe-or-4 fixed top-0 z-50 w-full border-b pb-4 backdrop-blur-xl'>
       <div className='app-container flex h-full items-center justify-center gap-4 md:justify-between'>
         <Link
+          prefetch
           href={ROUTES.REVIEWS}
           className='flex shrink-0 items-center gap-2'>
           <div className='bg-secondary-400 flex size-8 items-center justify-center rounded-lg'>

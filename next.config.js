@@ -8,39 +8,31 @@ const config = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'image.tmdb.org',
-        port: '',
-        pathname: '/t/p/**'
+        hostname: 'image.tmdb.org'
       },
       {
         protocol: 'https',
-        hostname: 'cdn-images.dzcdn.net',
-        port: '',
-        pathname: '/images/cover/**'
+        hostname: 'cdn-images.dzcdn.net'
       },
       {
         protocol: 'https',
-        hostname: 'api.deezer.com',
-        port: '',
-        pathname: '/album/**'
+        hostname: 'api.deezer.com'
       },
       {
         protocol: 'https',
-        hostname: 'media.rawg.io',
-        port: '',
-        pathname: '/media/**'
+        hostname: 'media.rawg.io'
       },
       {
         protocol: 'https',
-        hostname: 'corsproxy.io',
-        port: '',
-        pathname: '/**'
+        hostname: 'corsproxy.io'
       },
       {
         protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-        port: '',
-        pathname: '/**'
+        hostname: 'lh3.googleusercontent.com'
+      },
+      {
+        protocol: 'https',
+        hostname: 'is1-ssl.mzstatic.com'
       }
     ]
   }

@@ -66,24 +66,22 @@ export class SearchService {
     query: string,
     page: number
   ): Promise<ISearchResult> {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}&language=ru-RU&page=${page}&include_adult=true`,
-      {
-        headers: {
-          accept: 'application/json',
-          Authorization: `Bearer ${env.NEXT_PUBLIC_MOVIE_DB_API_KEY}`
-        }
-      }
-    )
-
-    if (!response.ok) throw new Error('Error searching movies')
-
-    const data = (await response.json()) as {
+    const { data } = await axios.get<{
       results: IMovieTargetItem[]
       page: number
       total_pages: number
       total_results: number
-    }
+    }>(`https://api.themoviedb.org/3/search/movie`, {
+      headers: {
+        Authorization: `Bearer ${env.NEXT_PUBLIC_MOVIE_DB_API_KEY}`
+      },
+      params: {
+        query: encodeURIComponent(query),
+        language: 'ru-RU',
+        page,
+        include_adult: true
+      }
+    })
 
     if (data.total_results === 0) {
       return {
@@ -132,24 +130,22 @@ export class SearchService {
   }
 
   private async searchTv(query: string, page: number): Promise<ISearchResult> {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/search/tv?query=${encodeURIComponent(query)}&language=ru-RU&page=${page}&include_adult=true`,
-      {
-        headers: {
-          accept: 'application/json',
-          Authorization: `Bearer ${env.NEXT_PUBLIC_MOVIE_DB_API_KEY}`
-        }
-      }
-    )
-
-    if (!response.ok) throw new Error('Error searching movies')
-
-    const data = (await response.json()) as {
+    const { data } = await axios.get<{
       results: ITvTargetItem[]
       page: number
       total_pages: number
       total_results: number
-    }
+    }>(`https://api.themoviedb.org/3/search/tv`, {
+      headers: {
+        Authorization: `Bearer ${env.NEXT_PUBLIC_MOVIE_DB_API_KEY}`
+      },
+      params: {
+        query: encodeURIComponent(query),
+        language: 'ru-RU',
+        page,
+        include_adult: true
+      }
+    })
 
     if (data.total_results === 0) {
       return {
@@ -201,20 +197,18 @@ export class SearchService {
     query: string,
     page: number
   ): Promise<ISearchResult> {
-    const songsResponse = await fetch(
-      `https://corsproxy.io/?${encodeURIComponent(
-        `https://api.deezer.com/search?q=${encodeURIComponent(query)}&limit=${LIMIT_PER_PAGE}&index=${(page - 1) * LIMIT_PER_PAGE}`
-      )}`
-    )
-
-    if (!songsResponse.ok) throw new Error('Error searching songs')
-
-    const songsData = (await songsResponse.json()) as {
+    const { data } = await axios.get<{
       data: ISongTargetItem[]
       total: number
-    }
+    }>('/api/deezer/search-songs', {
+      params: {
+        q: query,
+        limit: LIMIT_PER_PAGE,
+        index: (page - 1) * LIMIT_PER_PAGE
+      }
+    })
 
-    if (songsData.total === 0) {
+    if (data.total === 0) {
       return {
         items: [],
         page,
@@ -223,24 +217,20 @@ export class SearchService {
       }
     }
 
-    const transformedData: ITargetItem[] = songsData.data.map((track) => ({
+    const songs = data.data.filter((album) => album.type === 'track')
+
+    const transformedData: ITargetItem[] = songs.map((track) => ({
       id: String(track.id),
       title: track.title,
       description: track.artist.name,
       cover: track.album.cover_medium
     }))
 
-    const sortedData = [...transformedData].sort(
-      (a, b) =>
-        this.getRelevanceScoreMusic(b, query) -
-        this.getRelevanceScoreMusic(a, query)
-    )
-
     return {
-      items: sortedData,
+      items: transformedData,
       page: page + 1,
-      totalPages: getPages(songsData.total),
-      totalResults: songsData.total
+      totalPages: getPages(data.total),
+      totalResults: data.total
     }
   }
 
@@ -248,20 +238,18 @@ export class SearchService {
     query: string,
     page: number
   ): Promise<ISearchResult> {
-    const albumsResponse = await fetch(
-      `https://corsproxy.io/?${encodeURIComponent(
-        `https://api.deezer.com/search/album?q=${encodeURIComponent(query)}&limit=${LIMIT_PER_PAGE}&index=${(page - 1) * LIMIT_PER_PAGE}`
-      )}`
-    )
-
-    if (!albumsResponse.ok) throw new Error('Error searching albums')
-
-    const albumsData = (await albumsResponse.json()) as {
+    const { data } = await axios.get<{
       data: IAlbumTargetItem[]
       total: number
-    }
+    }>('/api/deezer/search-albums', {
+      params: {
+        q: query,
+        limit: LIMIT_PER_PAGE,
+        index: (page - 1) * LIMIT_PER_PAGE
+      }
+    })
 
-    if (albumsData.total === 0) {
+    if (data.total === 0) {
       return {
         items: [],
         page,
@@ -270,9 +258,7 @@ export class SearchService {
       }
     }
 
-    const albums = albumsData.data.filter(
-      (album) => album.record_type === 'album'
-    )
+    const albums = data.data.filter((album) => album.record_type === 'album')
 
     const transformedData: ITargetItem[] = albums.map((album) => ({
       id: String(album.id),
@@ -281,17 +267,11 @@ export class SearchService {
       cover: album.cover
     }))
 
-    const sortedData = [...transformedData].sort(
-      (a, b) =>
-        this.getRelevanceScoreMusic(b, query) -
-        this.getRelevanceScoreMusic(a, query)
-    )
-
     return {
-      items: sortedData,
+      items: transformedData,
       page: page + 1,
-      totalPages: getPages(albumsData.total),
-      totalResults: albumsData.total
+      totalPages: getPages(data.total),
+      totalResults: data.total
     }
   }
 
@@ -299,16 +279,17 @@ export class SearchService {
     query: string,
     page: number
   ): Promise<ISearchResult> {
-    const response = await fetch(
-      `https://api.rawg.io/api/games?search=${encodeURIComponent(query)}&key=${env.NEXT_PUBLIC_RAWG_API_KEYL}&page=${page}`
-    )
-
-    if (!response.ok) throw new Error('Error searching games')
-
-    const data = (await response.json()) as {
+    const { data } = await axios.get<{
       results: IGameTargetItem[]
       count: number
-    }
+    }>('https://api.rawg.io/api/games?search', {
+      params: {
+        search: encodeURIComponent(query),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        key: env.NEXT_PUBLIC_RAWG_API_KEY,
+        page
+      }
+    })
 
     if (data.count === 0) {
       return {
@@ -349,16 +330,16 @@ export class SearchService {
     query: string,
     page: number
   ): Promise<ISearchResult> {
-    const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(query)}&maxResults=${LIMIT_PER_PAGE}&startIndex=${(page - 1) * LIMIT_PER_PAGE}`
-    )
-
-    if (!response.ok) throw new Error('Error searching games')
-
-    const data = (await response.json()) as {
+    const { data } = await axios.get<{
       items?: IBookTargetItem[]
       totalItems: number
-    }
+    }>('https://www.googleapis.com/books/v1/volumes', {
+      params: {
+        q: encodeURIComponent(query),
+        maxResults: LIMIT_PER_PAGE,
+        startIndex: (page - 1) * LIMIT_PER_PAGE
+      }
+    })
 
     if (!data.items || data.totalItems === 0) {
       return {
@@ -399,10 +380,13 @@ export class SearchService {
 
   private async searchMovieById(id: string): Promise<IDetailedItem> {
     const { data } = await axios.get<IMovieDetail>(
-      `https://api.themoviedb.org/3/movie/${id}?language=ru-RU`,
+      `https://api.themoviedb.org/3/movie/${id}`,
       {
         headers: {
           Authorization: `Bearer ${env.NEXT_PUBLIC_MOVIE_DB_API_KEY}`
+        },
+        params: {
+          language: 'ru-RU'
         }
       }
     )
@@ -422,10 +406,13 @@ export class SearchService {
 
   private async searchTvById(id: string): Promise<IDetailedItem> {
     const { data } = await axios.get<IMovieDetail>(
-      `https://api.themoviedb.org/3/tv/${id}?language=ru-RU`,
+      `https://api.themoviedb.org/3/tv/${id}`,
       {
         headers: {
           Authorization: `Bearer ${env.NEXT_PUBLIC_MOVIE_DB_API_KEY}`
+        },
+        params: {
+          language: 'ru-RU'
         }
       }
     )
@@ -444,11 +431,11 @@ export class SearchService {
   }
 
   private async searchSongById(id: string): Promise<IDetailedItem> {
-    const { data } = await axios.get<ISongDetail>(
-      `https://corsproxy.io/?${encodeURIComponent(
-        `https://api.deezer.com/track/${id}`
-      )}`
-    )
+    const { data } = await axios.get<ISongDetail>('/api/deezer/search-by-id', {
+      params: {
+        id
+      }
+    })
 
     return {
       badges: data.contributors.map((contributor) => contributor.name),
@@ -477,10 +464,14 @@ export class SearchService {
 
   private async searchGameById(id: string): Promise<IDetailedItem> {
     const { data } = await axios.get<IGameDetail>(
-      `https://api.rawg.io/api/games/${encodeURIComponent(id)}?key=${env.NEXT_PUBLIC_RAWG_API_KEYL}`
+      `https://api.rawg.io/api/games/${id}`,
+      {
+        params: {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          key: env.NEXT_PUBLIC_RAWG_API_KEY
+        }
+      }
     )
-
-    console.debug('data', data)
 
     return {
       badges: data.genres.map((genre) => genre.name),
@@ -505,37 +496,6 @@ export class SearchService {
       title: data.volumeInfo.title,
       type: ContentType.BOOK
     }
-  }
-
-  private getRelevanceScoreMusic(item: ITargetItem, query: string) {
-    const queryLower = query.toLowerCase()
-    const titleLower = item.title.toLowerCase()
-    const authorLower = item.description.toLowerCase()
-
-    let score = 0
-
-    if (titleLower === queryLower) score += 1000
-
-    if (authorLower === queryLower) score += 800
-
-    if (titleLower.startsWith(queryLower)) score += 500
-
-    if (authorLower.startsWith(queryLower)) score += 400
-
-    if (titleLower.includes(queryLower)) score += 300
-
-    if (authorLower.includes(queryLower)) score += 200
-
-    const queryWords = queryLower.split(/\s+/)
-    const titleWords = titleLower.split(/\s+/)
-    const authorWords = authorLower.split(/\s+/)
-
-    for (const qWord of queryWords) {
-      if (titleWords.includes(qWord)) score += 50
-      if (authorWords.includes(qWord)) score += 30
-    }
-
-    return score
   }
 
   private getMovieGenreName(id: number) {

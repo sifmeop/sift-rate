@@ -32,7 +32,8 @@ export const Step2SelectTarget = ({
     currentPage,
     onChangePage,
     totalPages,
-    totalResults
+    totalResults,
+    error
   } = useTargetSearch(selectedType, setSelectedTargetItem)
 
   return (
@@ -62,6 +63,9 @@ export const Step2SelectTarget = ({
       <Show when={isLoading}>
         <LoadingSpinner />
       </Show>
+      {error && (
+        <p className='text-muted-foreground text-center text-base'>{error}</p>
+      )}
       {!isLoading && totalResults > 0 && (
         <p className='text-muted-foreground text-center text-base'>
           Всего: {totalResults} {getItemCountText(totalResults, selectedType)}
