@@ -16,6 +16,7 @@ import type {
   ISongDetail,
   ISongTargetItem,
   ITargetItem,
+  ITvDetail,
   ITvTargetItem
 } from '../types/search.types'
 
@@ -403,7 +404,7 @@ export class SearchService {
   }
 
   private async searchTvById(id: string): Promise<IDetailedItem> {
-    const { data } = await axios.get<IMovieDetail>(
+    const { data } = await axios.get<ITvDetail>(
       `https://api.themoviedb.org/3/tv/${id}`,
       {
         headers: {
@@ -419,7 +420,7 @@ export class SearchService {
       badges: data.genres
         .map((genre) => this.getTvGenreName(genre.id))
         .filter(Boolean) as string[],
-      title: data.title,
+      title: data.name,
       description: data.overview,
       coverUrl: data.poster_path
         ? `https://image.tmdb.org/t/p/w342${data.poster_path}`
