@@ -30,6 +30,7 @@ Sift-Rate is a full-stack web application designed for tracking personal ratings
 ## Tech Stack
 
 ### Frontend
+
 - **Framework:** Next.js 15 (App Router)
 - **UI Library:** React 19 with Server Components
 - **Component Library:** HeroUI (buttons, modals, tabs, inputs, pagination)
@@ -39,18 +40,21 @@ Sift-Rate is a full-stack web application designed for tracking personal ratings
 - **Icons:** Lucide React, React Icons
 
 ### Backend
+
 - **API Layer:** tRPC 11 with SuperJSON
 - **Authentication:** NextAuth.js 5 (Auth.js)
 - **Database:** PostgreSQL
 - **ORM:** Prisma 7
 
 ### External APIs
+
 - **TMDB** — Movies and TV series metadata
 - **RAWG** — Video games database
 - **Deezer** — Music tracks and albums
 - **Google Books** — Book information
 
 ### Development Tools
+
 - **Language:** TypeScript 5.8 (strict mode)
 - **Linting:** ESLint 9 with Next.js config
 - **Formatting:** Prettier with Tailwind plugin
@@ -77,7 +81,6 @@ src/
 │   ├── home/              # Landing/auth page
 │   ├── rate/              # Multi-step rating flow
 │   ├── reviews/           # Reviews list page
-│   ├── review-detail/     # Individual review page
 │   └── timeline/          # Timeline visualization
 ├── server/
 │   ├── api/               # tRPC router and procedures
@@ -108,28 +111,34 @@ src/
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/your-username/sift-rate.git
    cd sift-rate
    ```
 
 2. **Install dependencies**
+
    ```bash
    yarn install
    ```
 
 3. **Configure environment variables**
+
    ```bash
    cp .env.example .env
    ```
+
    Edit `.env` with your credentials (see [Environment Variables](#environment-variables))
 
 4. **Initialize the database**
+
    ```bash
    yarn db:push
    ```
 
 5. **Start the development server**
+
    ```bash
    yarn dev
    ```
@@ -160,42 +169,43 @@ NEXT_PUBLIC_MOVIE_DB_API_KEY="your-tmdb-api-key"
 NEXT_PUBLIC_RAWG_API_KEY="your-rawg-api-key"
 ```
 
-| Variable | Description |
-|----------|-------------|
-| `DATABASE_URL` | PostgreSQL connection string |
-| `AUTH_SECRET` | Random string for encrypting session tokens |
-| `AUTH_GOOGLE_ID` | Google OAuth 2.0 Client ID |
-| `AUTH_GOOGLE_SECRET` | Google OAuth 2.0 Client Secret |
-| `AUTH_GITHUB_ID` | GitHub OAuth App Client ID |
-| `AUTH_GITHUB_SECRET` | GitHub OAuth App Client Secret |
+| Variable                       | Description                                                      |
+| ------------------------------ | ---------------------------------------------------------------- |
+| `DATABASE_URL`                 | PostgreSQL connection string                                     |
+| `AUTH_SECRET`                  | Random string for encrypting session tokens                      |
+| `AUTH_GOOGLE_ID`               | Google OAuth 2.0 Client ID                                       |
+| `AUTH_GOOGLE_SECRET`           | Google OAuth 2.0 Client Secret                                   |
+| `AUTH_GITHUB_ID`               | GitHub OAuth App Client ID                                       |
+| `AUTH_GITHUB_SECRET`           | GitHub OAuth App Client Secret                                   |
 | `NEXT_PUBLIC_MOVIE_DB_API_KEY` | [TMDB API](https://www.themoviedb.org/settings/api) Bearer token |
-| `NEXT_PUBLIC_RAWG_API_KEY` | [RAWG API](https://rawg.io/apidocs) key |
+| `NEXT_PUBLIC_RAWG_API_KEY`     | [RAWG API](https://rawg.io/apidocs) key                          |
 
 ## Available Scripts
 
-| Script | Description |
-|--------|-------------|
-| `yarn dev` | Start development server |
-| `yarn build` | Build for production |
-| `yarn start` | Start production server |
-| `yarn preview` | Build and start production preview |
-| `yarn check` | Run linting and type checking |
-| `yarn lint` | Run ESLint |
-| `yarn lint:fix` | Fix ESLint issues |
-| `yarn typecheck` | Run TypeScript type checking |
-| `yarn format:check` | Check code formatting |
-| `yarn format:write` | Format code with Prettier |
-| `yarn db:generate` | Generate Prisma client |
-| `yarn db:push` | Push schema to database |
-| `yarn db:migrate` | Deploy database migrations |
-| `yarn db:reset` | Reset database (destructive) |
-| `yarn db:studio` | Open Prisma Studio GUI |
+| Script              | Description                        |
+| ------------------- | ---------------------------------- |
+| `yarn dev`          | Start development server           |
+| `yarn build`        | Build for production               |
+| `yarn start`        | Start production server            |
+| `yarn preview`      | Build and start production preview |
+| `yarn check`        | Run linting and type checking      |
+| `yarn lint`         | Run ESLint                         |
+| `yarn lint:fix`     | Fix ESLint issues                  |
+| `yarn typecheck`    | Run TypeScript type checking       |
+| `yarn format:check` | Check code formatting              |
+| `yarn format:write` | Format code with Prettier          |
+| `yarn db:generate`  | Generate Prisma client             |
+| `yarn db:push`      | Push schema to database            |
+| `yarn db:migrate`   | Deploy database migrations         |
+| `yarn db:reset`     | Reset database (destructive)       |
+| `yarn db:studio`    | Open Prisma Studio GUI             |
 
 ## Features in Detail
 
 ### Multi-Content Rating System
 
 Rate six different content types with a unified interface:
+
 - **Movies** — Search TMDB for films with genres, posters, and release dates
 - **TV Series** — Browse TV shows from TMDB with episode information
 - **Games** — Discover video games via RAWG with platform details
@@ -219,7 +229,6 @@ Rate six different content types with a unified interface:
 
 - View all reviews for a specific item across users
 - See rating breakdown and average scores
-- Dynamic routes: `/reviews/[category]/[id]`
 
 ### PWA Capabilities
 
@@ -230,12 +239,12 @@ Rate six different content types with a unified interface:
 
 ## API Integrations
 
-| API | Purpose | Endpoints Used |
-|-----|---------|----------------|
-| [TMDB](https://www.themoviedb.org/) | Movies & TV metadata | `/search/movie`, `/search/tv`, `/movie/{id}`, `/tv/{id}` |
-| [RAWG](https://rawg.io/) | Video games database | `/games`, `/games/{id}` |
-| [Deezer](https://developers.deezer.com/) | Music tracks & albums | `/search/track`, `/search/album`, `/track/{id}`, `/album/{id}` |
-| [Google Books](https://developers.google.com/books) | Book information | `/volumes` |
+| API                                                 | Purpose               | Endpoints Used                                                 |
+| --------------------------------------------------- | --------------------- | -------------------------------------------------------------- |
+| [TMDB](https://www.themoviedb.org/)                 | Movies & TV metadata  | `/search/movie`, `/search/tv`, `/movie/{id}`, `/tv/{id}`       |
+| [RAWG](https://rawg.io/)                            | Video games database  | `/games`, `/games/{id}`                                        |
+| [Deezer](https://developers.deezer.com/)            | Music tracks & albums | `/search/track`, `/search/album`, `/track/{id}`, `/album/{id}` |
+| [Google Books](https://developers.google.com/books) | Book information      | `/volumes`                                                     |
 
 ## Development Guidelines
 
@@ -272,6 +281,7 @@ Rate six different content types with a unified interface:
 ### Environment Setup
 
 Ensure all environment variables are set in your deployment platform. For production:
+
 - Set `NODE_ENV=production`
 - Use a secure `AUTH_SECRET` (generate with `openssl rand -base64 32`)
 - Configure OAuth callback URLs for your production domain
@@ -279,6 +289,7 @@ Ensure all environment variables are set in your deployment platform. For produc
 ### Database
 
 Use any PostgreSQL provider:
+
 - [Neon](https://neon.tech/) — Serverless PostgreSQL
 - [Supabase](https://supabase.com/) — PostgreSQL with extras
 - [Railway](https://railway.app/) — Simple deployment
