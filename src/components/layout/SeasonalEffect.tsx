@@ -13,10 +13,10 @@ export const SeasonalEffect = () => {
   useEffect(() => {
     const month = dayjs().get('month')
 
-    if (month >= 0 && month <= 2) setSeason('winter')
-    if (month >= 3 && month <= 5) setSeason('spring')
-    if (month >= 6 && month <= 8) setSeason('summer')
-    if (month >= 9 && month <= 11) setSeason('autumn')
+    if (month === 11 || month <= 1) setSeason('winter')
+    else if (month >= 2 && month <= 4) setSeason('spring')
+    else if (month >= 5 && month <= 7) setSeason('summer')
+    else if (month >= 8 && month <= 10) setSeason('autumn')
   }, [])
 
   useEffect(() => {

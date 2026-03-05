@@ -74,7 +74,7 @@ model ItemReview {
 
 model Review {
   id        String   @id @default(cuid())
-  rating    Int // 1-10
+  rating    Int
   review    String?
   createdAt DateTime @default(now())
 
