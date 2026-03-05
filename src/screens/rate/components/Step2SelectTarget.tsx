@@ -82,11 +82,7 @@ export const Step2SelectTarget = ({
             key={result.id}
             className='bg-card-background border-border hover:border-secondary group flex w-full cursor-pointer items-center gap-4 rounded-xl border p-4 transition-all'
             onClick={() => selectTarget(result)}>
-            <ReviewCover
-              title={result.title}
-              coverUrl={result.cover}
-              type={selectedType}
-            />
+            <ReviewCover title={result.title} coverUrl={result.cover} />
             <div className='flex-1 overflow-hidden text-left'>
               <h3 className='group-hover:text-secondary line-clamp-2 text-base font-semibold transition-colors'>
                 {result.title}

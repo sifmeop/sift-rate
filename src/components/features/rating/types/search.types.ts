@@ -39,7 +39,7 @@ export interface ISongTargetItem {
     name: string
   }
   album: {
-    cover_medium: string
+    cover_big: string
   }
   type: string
 }
@@ -48,11 +48,11 @@ export interface IAlbumTargetItem {
   id: number
   title: string
   genre_id: number
-  cover: string
+  cover_big: string
   artist: {
     name: string
   }
-  record_type: string
+  type: string
 }
 
 export interface IGameTargetItem {

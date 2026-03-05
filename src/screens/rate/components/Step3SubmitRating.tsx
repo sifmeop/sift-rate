@@ -35,7 +35,6 @@ export const Step3SubmitRating = ({
           <ReviewCover
             title={selectedTargetItem.title}
             coverUrl={selectedTargetItem.coverUrl}
-            type={selectedTargetItem.type}
           />
           <div className='overflow-hidden'>
             <h2 className='line-clamp-2 font-semibold'>

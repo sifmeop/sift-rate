@@ -43,7 +43,10 @@ const config = {
         protocol: 'https',
         hostname: 'books.google.com',
         pathname: '/books/content**'
-      }
+      },
+      { protocol: 'https', hostname: 'cdn-images.deezer.com' },
+      { protocol: 'https', hostname: 'e-cdns-images.dzcdn.net' },
+      { protocol: 'https', hostname: '*.dzcdn.net' }
     ]
   }
 }
