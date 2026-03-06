@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'Sift-Rate',
     short_name: 'Sift-Rate',
     description:
-      'Все отзывы и оценки пользователя на фильмы, сериалы, игры, книги, песни и альбомы. Личная история впечатлений в одном месте.',
+      'Все отзывы и оценки пользователя о фильмах, сериалах, играх, книгах, песнях и альбомах. Личная история впечатлений в одном месте.',
     start_url: '/',
     display: 'standalone',
     background_color: '#23152d',

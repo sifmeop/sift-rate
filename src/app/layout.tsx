@@ -4,6 +4,7 @@ import { cn } from '@heroui/theme'
 import dayjs from 'dayjs'
 import { type Metadata, type Viewport } from 'next'
 import { Manrope, Roboto_Slab } from 'next/font/google'
+import { getDefaultRobots, getSiteUrl } from '~/lib/seo'
 import { TRPCReactProvider } from '~/trpc/react'
 import { Providers } from './providers'
 
@@ -12,25 +13,54 @@ import 'dayjs/locale/ru'
 dayjs.locale('ru')
 
 export const metadata: Metadata = {
-  title: 'Sift-Rate — отзывы пользователя о фильмах, играх, книгах и музыке',
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: 'Sift-Rate - личные оценки и отзывы',
+    template: '%s | Sift-Rate'
+  },
   description:
-    'Все отзывы и оценки пользователя на фильмы, сериалы, игры, книги, песни и альбомы. Личная история впечатлений в одном месте.',
+    'Личная коллекция оценок и отзывов о фильмах, сериалах, играх, книгах, песнях и альбомах.',
   keywords: [
-    'отзывы',
-    'рейтинг',
-    'фильмы',
-    'сериалы',
-    'игры',
-    'книги',
-    'музыка',
-    'альбомы',
-    'оценки',
-    'личные впечатления',
-    'обзоры',
-    'Sift-Rate',
-    'user reviews',
-    'media reviews'
+    'личные отзывы',
+    'личные оценки',
+    'оценки фильмов',
+    'отзывы о сериалах',
+    'оценки игр',
+    'отзывы о книгах',
+    'оценки музыки',
+    'отзывы о медиа',
+    'трекер оценок',
+    'дневник впечатлений'
   ],
+  alternates: {
+    canonical: '/',
+    languages: {
+      'ru-RU': '/'
+    }
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'ru_RU',
+    title: 'Sift-Rate - личные оценки и отзывы',
+    description:
+      'Личная коллекция оценок и отзывов о фильмах, сериалах, играх, книгах, песнях и альбомах.',
+    url: '/',
+    siteName: 'Sift-Rate',
+    images: [
+      {
+        url: '/images/screenshots/desktop.png',
+        alt: 'Превью Sift-Rate'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Sift-Rate - личные оценки и отзывы',
+    description:
+      'Личная коллекция оценок и отзывов о фильмах, сериалах, играх, книгах, песнях и альбомах.',
+    images: ['/images/screenshots/desktop.png']
+  },
+  robots: getDefaultRobots(),
   icons: [
     {
       rel: 'icon',
