@@ -40,8 +40,8 @@ export const RatingList = ({ items, isLoading, error }: IRatingListProps) => {
           <RatingListSort />
           <RatingListFilter items={items} />
         </div>
-        <RatingListContentType />
-        <RatingListContentTypeMobile />
+        <RatingListContentType items={items} />
+        <RatingListContentTypeMobile items={items} />
         <RatingItems items={items} />
       </div>
     </RatingListProvider>

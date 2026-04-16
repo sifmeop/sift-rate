@@ -3,9 +3,18 @@ import { cn } from '@heroui/theme'
 import type { Key } from 'react'
 import { BADGE_TAB_META } from '~/constants/badge'
 import { useRatingList } from '~/contexts/RatingListProvider'
-import type { TRatingListContentType } from '../../types/rating.types'
+import type {
+  IRatingCardData,
+  TRatingListContentType
+} from '../../types/rating.types'
 
-export const RatingListContentType = () => {
+interface IRatingListContentTypeProps {
+  items: IRatingCardData[]
+}
+
+export const RatingListContentType = ({
+  items
+}: IRatingListContentTypeProps) => {
   const { state, setContentType } = useRatingList()
 
   const onSelectionChange = (key: Key) => {
@@ -27,19 +36,25 @@ export const RatingListContentType = () => {
         base: 'hidden md:inline-flex',
         cursor: selectedContentTypeBg
       }}>
-      {Object.entries(BADGE_TAB_META).map(
-        ([key, { title, icon: Icon, text }]) => (
+      {Object.entries(BADGE_TAB_META).map(([key, { icon: Icon, text }]) => {
+        const tabItems =
+          key === 'ALL'
+            ? items.length
+            : items.filter((item) => item.itemReview.type === key).length
+        const formattedCount = new Intl.NumberFormat('ru-RU').format(tabItems)
+
+        return (
           <Tab
             key={key}
             title={
-              <div className={cn('flex items-center gap-1', text)}>
+              <div className={cn('flex items-center gap-2', text)}>
                 <Icon size={16} />
-                <span>{title}</span>
+                <span>{formattedCount}</span>
               </div>
             }
           />
         )
-      )}
+      })}
     </Tabs>
   )
 }
