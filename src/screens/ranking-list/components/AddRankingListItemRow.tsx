@@ -40,9 +40,6 @@ export const AddRankingListItemRow = ({
           </span>
         </div>
         <p className='font-semibold'>{review.itemReview.title}</p>
-        {review.review && (
-          <p className='text-muted-foreground text-sm'>{review.review}</p>
-        )}
       </div>
       <Button
         color='primary'

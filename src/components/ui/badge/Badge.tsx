@@ -7,9 +7,10 @@ type ContentTypeModified = ContentType | 'BEST'
 interface IBadgeProps {
   type: ContentTypeModified
   className?: string
+  size?: 'sm' | 'md'
 }
 
-export const Badge = ({ type, className }: IBadgeProps) => {
+export const Badge = ({ type, className, size = 'md' }: IBadgeProps) => {
   const { title, icon: Icon, bg, text } = BADGE_META[type]
 
   return (
@@ -18,9 +19,12 @@ export const Badge = ({ type, className }: IBadgeProps) => {
         'border-border/50 flex w-fit items-center gap-1 rounded-full border px-2.5 py-1.75',
         bg,
         text,
-        className
+        className,
+        {
+          'px-1.5 py-1': size === 'sm'
+        }
       )}>
-      <Icon className='size-4' />
+      <Icon className={size === 'sm' ? 'size-3' : 'size-4'} />
       <span className='text-xs font-semibold'>{title}</span>
     </div>
   )
