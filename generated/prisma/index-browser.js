@@ -174,6 +174,20 @@ exports.Prisma.ReviewScalarFieldEnum = {
   itemReviewId: 'itemReviewId'
 };
 
+exports.Prisma.RankingListScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  createdAt: 'createdAt',
+  userId: 'userId'
+};
+
+exports.Prisma.RankingListItemScalarFieldEnum = {
+  id: 'id',
+  position: 'position',
+  rankingListId: 'rankingListId',
+  itemReviewId: 'itemReviewId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -203,7 +217,9 @@ exports.Prisma.ModelName = {
   User: 'User',
   VerificationToken: 'VerificationToken',
   ItemReview: 'ItemReview',
-  Review: 'Review'
+  Review: 'Review',
+  RankingList: 'RankingList',
+  RankingListItem: 'RankingListItem'
 };
 
 /**

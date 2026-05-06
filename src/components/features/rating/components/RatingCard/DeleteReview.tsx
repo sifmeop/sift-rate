@@ -53,7 +53,7 @@ export const DeleteReview = ({ id, title, type }: IDeleteReviewProps) => {
                   color='default'
                   variant='light'
                   onPress={onClose}
-                  disabled={isDeleting}>
+                  isDisabled={isDeleting}>
                   Отмена
                 </Button>
                 <Button

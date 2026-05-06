@@ -43,6 +43,16 @@ export type ItemReview = $Result.DefaultSelection<Prisma.$ItemReviewPayload>
  * 
  */
 export type Review = $Result.DefaultSelection<Prisma.$ReviewPayload>
+/**
+ * Model RankingList
+ * 
+ */
+export type RankingList = $Result.DefaultSelection<Prisma.$RankingListPayload>
+/**
+ * Model RankingListItem
+ * 
+ */
+export type RankingListItem = $Result.DefaultSelection<Prisma.$RankingListItemPayload>
 
 /**
  * Enums
@@ -241,6 +251,26 @@ export class PrismaClient<
     * ```
     */
   get review(): Prisma.ReviewDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.rankingList`: Exposes CRUD operations for the **RankingList** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RankingLists
+    * const rankingLists = await prisma.rankingList.findMany()
+    * ```
+    */
+  get rankingList(): Prisma.RankingListDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.rankingListItem`: Exposes CRUD operations for the **RankingListItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more RankingListItems
+    * const rankingListItems = await prisma.rankingListItem.findMany()
+    * ```
+    */
+  get rankingListItem(): Prisma.RankingListItemDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -680,7 +710,9 @@ export namespace Prisma {
     User: 'User',
     VerificationToken: 'VerificationToken',
     ItemReview: 'ItemReview',
-    Review: 'Review'
+    Review: 'Review',
+    RankingList: 'RankingList',
+    RankingListItem: 'RankingListItem'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -696,7 +728,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "session" | "user" | "verificationToken" | "itemReview" | "review"
+      modelProps: "account" | "session" | "user" | "verificationToken" | "itemReview" | "review" | "rankingList" | "rankingListItem"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1144,6 +1176,154 @@ export namespace Prisma {
           }
         }
       }
+      RankingList: {
+        payload: Prisma.$RankingListPayload<ExtArgs>
+        fields: Prisma.RankingListFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RankingListFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RankingListFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>
+          }
+          findFirst: {
+            args: Prisma.RankingListFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RankingListFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>
+          }
+          findMany: {
+            args: Prisma.RankingListFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>[]
+          }
+          create: {
+            args: Prisma.RankingListCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>
+          }
+          createMany: {
+            args: Prisma.RankingListCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RankingListCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>[]
+          }
+          delete: {
+            args: Prisma.RankingListDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>
+          }
+          update: {
+            args: Prisma.RankingListUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>
+          }
+          deleteMany: {
+            args: Prisma.RankingListDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RankingListUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RankingListUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>[]
+          }
+          upsert: {
+            args: Prisma.RankingListUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListPayload>
+          }
+          aggregate: {
+            args: Prisma.RankingListAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRankingList>
+          }
+          groupBy: {
+            args: Prisma.RankingListGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RankingListGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RankingListCountArgs<ExtArgs>
+            result: $Utils.Optional<RankingListCountAggregateOutputType> | number
+          }
+        }
+      }
+      RankingListItem: {
+        payload: Prisma.$RankingListItemPayload<ExtArgs>
+        fields: Prisma.RankingListItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.RankingListItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.RankingListItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>
+          }
+          findFirst: {
+            args: Prisma.RankingListItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.RankingListItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>
+          }
+          findMany: {
+            args: Prisma.RankingListItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>[]
+          }
+          create: {
+            args: Prisma.RankingListItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>
+          }
+          createMany: {
+            args: Prisma.RankingListItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.RankingListItemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>[]
+          }
+          delete: {
+            args: Prisma.RankingListItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>
+          }
+          update: {
+            args: Prisma.RankingListItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.RankingListItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.RankingListItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.RankingListItemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>[]
+          }
+          upsert: {
+            args: Prisma.RankingListItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$RankingListItemPayload>
+          }
+          aggregate: {
+            args: Prisma.RankingListItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateRankingListItem>
+          }
+          groupBy: {
+            args: Prisma.RankingListItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<RankingListItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.RankingListItemCountArgs<ExtArgs>
+            result: $Utils.Optional<RankingListItemCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1258,6 +1438,8 @@ export namespace Prisma {
     verificationToken?: VerificationTokenOmit
     itemReview?: ItemReviewOmit
     review?: ReviewOmit
+    rankingList?: RankingListOmit
+    rankingListItem?: RankingListItemOmit
   }
 
   /* Types for Logging */
@@ -1341,12 +1523,14 @@ export namespace Prisma {
     accounts: number
     sessions: number
     reviews: number
+    rankingLists: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     reviews?: boolean | UserCountOutputTypeCountReviewsArgs
+    rankingLists?: boolean | UserCountOutputTypeCountRankingListsArgs
   }
 
   // Custom InputTypes
@@ -1381,6 +1565,13 @@ export namespace Prisma {
     where?: ReviewWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountRankingListsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RankingListWhereInput
+  }
+
 
   /**
    * Count Type ItemReviewCountOutputType
@@ -1388,10 +1579,12 @@ export namespace Prisma {
 
   export type ItemReviewCountOutputType = {
     reviews: number
+    rankingListItems: number
   }
 
   export type ItemReviewCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviews?: boolean | ItemReviewCountOutputTypeCountReviewsArgs
+    rankingListItems?: boolean | ItemReviewCountOutputTypeCountRankingListItemsArgs
   }
 
   // Custom InputTypes
@@ -1410,6 +1603,44 @@ export namespace Prisma {
    */
   export type ItemReviewCountOutputTypeCountReviewsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ReviewWhereInput
+  }
+
+  /**
+   * ItemReviewCountOutputType without action
+   */
+  export type ItemReviewCountOutputTypeCountRankingListItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RankingListItemWhereInput
+  }
+
+
+  /**
+   * Count Type RankingListCountOutputType
+   */
+
+  export type RankingListCountOutputType = {
+    items: number
+  }
+
+  export type RankingListCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | RankingListCountOutputTypeCountItemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * RankingListCountOutputType without action
+   */
+  export type RankingListCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListCountOutputType
+     */
+    select?: RankingListCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * RankingListCountOutputType without action
+   */
+  export type RankingListCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RankingListItemWhereInput
   }
 
 
@@ -3829,6 +4060,7 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
+    rankingLists?: boolean | User$rankingListsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -3861,6 +4093,7 @@ export namespace Prisma {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     reviews?: boolean | User$reviewsArgs<ExtArgs>
+    rankingLists?: boolean | User$rankingListsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -3872,6 +4105,7 @@ export namespace Prisma {
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
+      rankingLists: Prisma.$RankingListPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -4276,6 +4510,7 @@ export namespace Prisma {
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reviews<T extends User$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rankingLists<T extends User$rankingListsArgs<ExtArgs> = {}>(args?: Subset<T, User$rankingListsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4767,6 +5002,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * User.rankingLists
+   */
+  export type User$rankingListsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    where?: RankingListWhereInput
+    orderBy?: RankingListOrderByWithRelationInput | RankingListOrderByWithRelationInput[]
+    cursor?: RankingListWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RankingListScalarFieldEnum | RankingListScalarFieldEnum[]
   }
 
   /**
@@ -5922,6 +6181,7 @@ export namespace Prisma {
     coverUrl?: boolean
     type?: boolean
     reviews?: boolean | ItemReview$reviewsArgs<ExtArgs>
+    rankingListItems?: boolean | ItemReview$rankingListItemsArgs<ExtArgs>
     _count?: boolean | ItemReviewCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["itemReview"]>
 
@@ -5952,6 +6212,7 @@ export namespace Prisma {
   export type ItemReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "externalId" | "title" | "coverUrl" | "type", ExtArgs["result"]["itemReview"]>
   export type ItemReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     reviews?: boolean | ItemReview$reviewsArgs<ExtArgs>
+    rankingListItems?: boolean | ItemReview$rankingListItemsArgs<ExtArgs>
     _count?: boolean | ItemReviewCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ItemReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5961,6 +6222,7 @@ export namespace Prisma {
     name: "ItemReview"
     objects: {
       reviews: Prisma.$ReviewPayload<ExtArgs>[]
+      rankingListItems: Prisma.$RankingListItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -6363,6 +6625,7 @@ export namespace Prisma {
   export interface Prisma__ItemReviewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     reviews<T extends ItemReview$reviewsArgs<ExtArgs> = {}>(args?: Subset<T, ItemReview$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    rankingListItems<T extends ItemReview$rankingListItemsArgs<ExtArgs> = {}>(args?: Subset<T, ItemReview$rankingListItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6806,6 +7069,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ReviewScalarFieldEnum | ReviewScalarFieldEnum[]
+  }
+
+  /**
+   * ItemReview.rankingListItems
+   */
+  export type ItemReview$rankingListItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    where?: RankingListItemWhereInput
+    orderBy?: RankingListItemOrderByWithRelationInput | RankingListItemOrderByWithRelationInput[]
+    cursor?: RankingListItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RankingListItemScalarFieldEnum | RankingListItemScalarFieldEnum[]
   }
 
   /**
@@ -7941,6 +8228,2168 @@ export namespace Prisma {
 
 
   /**
+   * Model RankingList
+   */
+
+  export type AggregateRankingList = {
+    _count: RankingListCountAggregateOutputType | null
+    _min: RankingListMinAggregateOutputType | null
+    _max: RankingListMaxAggregateOutputType | null
+  }
+
+  export type RankingListMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    createdAt: Date | null
+    userId: string | null
+  }
+
+  export type RankingListMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    createdAt: Date | null
+    userId: string | null
+  }
+
+  export type RankingListCountAggregateOutputType = {
+    id: number
+    title: number
+    createdAt: number
+    userId: number
+    _all: number
+  }
+
+
+  export type RankingListMinAggregateInputType = {
+    id?: true
+    title?: true
+    createdAt?: true
+    userId?: true
+  }
+
+  export type RankingListMaxAggregateInputType = {
+    id?: true
+    title?: true
+    createdAt?: true
+    userId?: true
+  }
+
+  export type RankingListCountAggregateInputType = {
+    id?: true
+    title?: true
+    createdAt?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type RankingListAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RankingList to aggregate.
+     */
+    where?: RankingListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RankingLists to fetch.
+     */
+    orderBy?: RankingListOrderByWithRelationInput | RankingListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RankingListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RankingLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RankingLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RankingLists
+    **/
+    _count?: true | RankingListCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RankingListMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RankingListMaxAggregateInputType
+  }
+
+  export type GetRankingListAggregateType<T extends RankingListAggregateArgs> = {
+        [P in keyof T & keyof AggregateRankingList]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRankingList[P]>
+      : GetScalarType<T[P], AggregateRankingList[P]>
+  }
+
+
+
+
+  export type RankingListGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RankingListWhereInput
+    orderBy?: RankingListOrderByWithAggregationInput | RankingListOrderByWithAggregationInput[]
+    by: RankingListScalarFieldEnum[] | RankingListScalarFieldEnum
+    having?: RankingListScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RankingListCountAggregateInputType | true
+    _min?: RankingListMinAggregateInputType
+    _max?: RankingListMaxAggregateInputType
+  }
+
+  export type RankingListGroupByOutputType = {
+    id: string
+    title: string
+    createdAt: Date
+    userId: string
+    _count: RankingListCountAggregateOutputType | null
+    _min: RankingListMinAggregateOutputType | null
+    _max: RankingListMaxAggregateOutputType | null
+  }
+
+  type GetRankingListGroupByPayload<T extends RankingListGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RankingListGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RankingListGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RankingListGroupByOutputType[P]>
+            : GetScalarType<T[P], RankingListGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RankingListSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    items?: boolean | RankingList$itemsArgs<ExtArgs>
+    _count?: boolean | RankingListCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rankingList"]>
+
+  export type RankingListSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rankingList"]>
+
+  export type RankingListSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    createdAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rankingList"]>
+
+  export type RankingListSelectScalar = {
+    id?: boolean
+    title?: boolean
+    createdAt?: boolean
+    userId?: boolean
+  }
+
+  export type RankingListOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "createdAt" | "userId", ExtArgs["result"]["rankingList"]>
+  export type RankingListInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    items?: boolean | RankingList$itemsArgs<ExtArgs>
+    _count?: boolean | RankingListCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type RankingListIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type RankingListIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $RankingListPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RankingList"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      items: Prisma.$RankingListItemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      createdAt: Date
+      userId: string
+    }, ExtArgs["result"]["rankingList"]>
+    composites: {}
+  }
+
+  type RankingListGetPayload<S extends boolean | null | undefined | RankingListDefaultArgs> = $Result.GetResult<Prisma.$RankingListPayload, S>
+
+  type RankingListCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RankingListFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RankingListCountAggregateInputType | true
+    }
+
+  export interface RankingListDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RankingList'], meta: { name: 'RankingList' } }
+    /**
+     * Find zero or one RankingList that matches the filter.
+     * @param {RankingListFindUniqueArgs} args - Arguments to find a RankingList
+     * @example
+     * // Get one RankingList
+     * const rankingList = await prisma.rankingList.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RankingListFindUniqueArgs>(args: SelectSubset<T, RankingListFindUniqueArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RankingList that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RankingListFindUniqueOrThrowArgs} args - Arguments to find a RankingList
+     * @example
+     * // Get one RankingList
+     * const rankingList = await prisma.rankingList.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RankingListFindUniqueOrThrowArgs>(args: SelectSubset<T, RankingListFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RankingList that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListFindFirstArgs} args - Arguments to find a RankingList
+     * @example
+     * // Get one RankingList
+     * const rankingList = await prisma.rankingList.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RankingListFindFirstArgs>(args?: SelectSubset<T, RankingListFindFirstArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RankingList that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListFindFirstOrThrowArgs} args - Arguments to find a RankingList
+     * @example
+     * // Get one RankingList
+     * const rankingList = await prisma.rankingList.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RankingListFindFirstOrThrowArgs>(args?: SelectSubset<T, RankingListFindFirstOrThrowArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RankingLists that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RankingLists
+     * const rankingLists = await prisma.rankingList.findMany()
+     * 
+     * // Get first 10 RankingLists
+     * const rankingLists = await prisma.rankingList.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const rankingListWithIdOnly = await prisma.rankingList.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RankingListFindManyArgs>(args?: SelectSubset<T, RankingListFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RankingList.
+     * @param {RankingListCreateArgs} args - Arguments to create a RankingList.
+     * @example
+     * // Create one RankingList
+     * const RankingList = await prisma.rankingList.create({
+     *   data: {
+     *     // ... data to create a RankingList
+     *   }
+     * })
+     * 
+     */
+    create<T extends RankingListCreateArgs>(args: SelectSubset<T, RankingListCreateArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RankingLists.
+     * @param {RankingListCreateManyArgs} args - Arguments to create many RankingLists.
+     * @example
+     * // Create many RankingLists
+     * const rankingList = await prisma.rankingList.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RankingListCreateManyArgs>(args?: SelectSubset<T, RankingListCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RankingLists and returns the data saved in the database.
+     * @param {RankingListCreateManyAndReturnArgs} args - Arguments to create many RankingLists.
+     * @example
+     * // Create many RankingLists
+     * const rankingList = await prisma.rankingList.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RankingLists and only return the `id`
+     * const rankingListWithIdOnly = await prisma.rankingList.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RankingListCreateManyAndReturnArgs>(args?: SelectSubset<T, RankingListCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RankingList.
+     * @param {RankingListDeleteArgs} args - Arguments to delete one RankingList.
+     * @example
+     * // Delete one RankingList
+     * const RankingList = await prisma.rankingList.delete({
+     *   where: {
+     *     // ... filter to delete one RankingList
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RankingListDeleteArgs>(args: SelectSubset<T, RankingListDeleteArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RankingList.
+     * @param {RankingListUpdateArgs} args - Arguments to update one RankingList.
+     * @example
+     * // Update one RankingList
+     * const rankingList = await prisma.rankingList.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RankingListUpdateArgs>(args: SelectSubset<T, RankingListUpdateArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RankingLists.
+     * @param {RankingListDeleteManyArgs} args - Arguments to filter RankingLists to delete.
+     * @example
+     * // Delete a few RankingLists
+     * const { count } = await prisma.rankingList.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RankingListDeleteManyArgs>(args?: SelectSubset<T, RankingListDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RankingLists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RankingLists
+     * const rankingList = await prisma.rankingList.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RankingListUpdateManyArgs>(args: SelectSubset<T, RankingListUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RankingLists and returns the data updated in the database.
+     * @param {RankingListUpdateManyAndReturnArgs} args - Arguments to update many RankingLists.
+     * @example
+     * // Update many RankingLists
+     * const rankingList = await prisma.rankingList.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RankingLists and only return the `id`
+     * const rankingListWithIdOnly = await prisma.rankingList.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RankingListUpdateManyAndReturnArgs>(args: SelectSubset<T, RankingListUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RankingList.
+     * @param {RankingListUpsertArgs} args - Arguments to update or create a RankingList.
+     * @example
+     * // Update or create a RankingList
+     * const rankingList = await prisma.rankingList.upsert({
+     *   create: {
+     *     // ... data to create a RankingList
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RankingList we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RankingListUpsertArgs>(args: SelectSubset<T, RankingListUpsertArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RankingLists.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListCountArgs} args - Arguments to filter RankingLists to count.
+     * @example
+     * // Count the number of RankingLists
+     * const count = await prisma.rankingList.count({
+     *   where: {
+     *     // ... the filter for the RankingLists we want to count
+     *   }
+     * })
+    **/
+    count<T extends RankingListCountArgs>(
+      args?: Subset<T, RankingListCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RankingListCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RankingList.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RankingListAggregateArgs>(args: Subset<T, RankingListAggregateArgs>): Prisma.PrismaPromise<GetRankingListAggregateType<T>>
+
+    /**
+     * Group by RankingList.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RankingListGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RankingListGroupByArgs['orderBy'] }
+        : { orderBy?: RankingListGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RankingListGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRankingListGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RankingList model
+   */
+  readonly fields: RankingListFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RankingList.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RankingListClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    items<T extends RankingList$itemsArgs<ExtArgs> = {}>(args?: Subset<T, RankingList$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RankingList model
+   */
+  interface RankingListFieldRefs {
+    readonly id: FieldRef<"RankingList", 'String'>
+    readonly title: FieldRef<"RankingList", 'String'>
+    readonly createdAt: FieldRef<"RankingList", 'DateTime'>
+    readonly userId: FieldRef<"RankingList", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RankingList findUnique
+   */
+  export type RankingListFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingList to fetch.
+     */
+    where: RankingListWhereUniqueInput
+  }
+
+  /**
+   * RankingList findUniqueOrThrow
+   */
+  export type RankingListFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingList to fetch.
+     */
+    where: RankingListWhereUniqueInput
+  }
+
+  /**
+   * RankingList findFirst
+   */
+  export type RankingListFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingList to fetch.
+     */
+    where?: RankingListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RankingLists to fetch.
+     */
+    orderBy?: RankingListOrderByWithRelationInput | RankingListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RankingLists.
+     */
+    cursor?: RankingListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RankingLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RankingLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RankingLists.
+     */
+    distinct?: RankingListScalarFieldEnum | RankingListScalarFieldEnum[]
+  }
+
+  /**
+   * RankingList findFirstOrThrow
+   */
+  export type RankingListFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingList to fetch.
+     */
+    where?: RankingListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RankingLists to fetch.
+     */
+    orderBy?: RankingListOrderByWithRelationInput | RankingListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RankingLists.
+     */
+    cursor?: RankingListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RankingLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RankingLists.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RankingLists.
+     */
+    distinct?: RankingListScalarFieldEnum | RankingListScalarFieldEnum[]
+  }
+
+  /**
+   * RankingList findMany
+   */
+  export type RankingListFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingLists to fetch.
+     */
+    where?: RankingListWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RankingLists to fetch.
+     */
+    orderBy?: RankingListOrderByWithRelationInput | RankingListOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RankingLists.
+     */
+    cursor?: RankingListWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RankingLists from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RankingLists.
+     */
+    skip?: number
+    distinct?: RankingListScalarFieldEnum | RankingListScalarFieldEnum[]
+  }
+
+  /**
+   * RankingList create
+   */
+  export type RankingListCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RankingList.
+     */
+    data: XOR<RankingListCreateInput, RankingListUncheckedCreateInput>
+  }
+
+  /**
+   * RankingList createMany
+   */
+  export type RankingListCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RankingLists.
+     */
+    data: RankingListCreateManyInput | RankingListCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RankingList createManyAndReturn
+   */
+  export type RankingListCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * The data used to create many RankingLists.
+     */
+    data: RankingListCreateManyInput | RankingListCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RankingList update
+   */
+  export type RankingListUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RankingList.
+     */
+    data: XOR<RankingListUpdateInput, RankingListUncheckedUpdateInput>
+    /**
+     * Choose, which RankingList to update.
+     */
+    where: RankingListWhereUniqueInput
+  }
+
+  /**
+   * RankingList updateMany
+   */
+  export type RankingListUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RankingLists.
+     */
+    data: XOR<RankingListUpdateManyMutationInput, RankingListUncheckedUpdateManyInput>
+    /**
+     * Filter which RankingLists to update
+     */
+    where?: RankingListWhereInput
+    /**
+     * Limit how many RankingLists to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RankingList updateManyAndReturn
+   */
+  export type RankingListUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * The data used to update RankingLists.
+     */
+    data: XOR<RankingListUpdateManyMutationInput, RankingListUncheckedUpdateManyInput>
+    /**
+     * Filter which RankingLists to update
+     */
+    where?: RankingListWhereInput
+    /**
+     * Limit how many RankingLists to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RankingList upsert
+   */
+  export type RankingListUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RankingList to update in case it exists.
+     */
+    where: RankingListWhereUniqueInput
+    /**
+     * In case the RankingList found by the `where` argument doesn't exist, create a new RankingList with this data.
+     */
+    create: XOR<RankingListCreateInput, RankingListUncheckedCreateInput>
+    /**
+     * In case the RankingList was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RankingListUpdateInput, RankingListUncheckedUpdateInput>
+  }
+
+  /**
+   * RankingList delete
+   */
+  export type RankingListDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+    /**
+     * Filter which RankingList to delete.
+     */
+    where: RankingListWhereUniqueInput
+  }
+
+  /**
+   * RankingList deleteMany
+   */
+  export type RankingListDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RankingLists to delete
+     */
+    where?: RankingListWhereInput
+    /**
+     * Limit how many RankingLists to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RankingList.items
+   */
+  export type RankingList$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    where?: RankingListItemWhereInput
+    orderBy?: RankingListItemOrderByWithRelationInput | RankingListItemOrderByWithRelationInput[]
+    cursor?: RankingListItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: RankingListItemScalarFieldEnum | RankingListItemScalarFieldEnum[]
+  }
+
+  /**
+   * RankingList without action
+   */
+  export type RankingListDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingList
+     */
+    select?: RankingListSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingList
+     */
+    omit?: RankingListOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model RankingListItem
+   */
+
+  export type AggregateRankingListItem = {
+    _count: RankingListItemCountAggregateOutputType | null
+    _avg: RankingListItemAvgAggregateOutputType | null
+    _sum: RankingListItemSumAggregateOutputType | null
+    _min: RankingListItemMinAggregateOutputType | null
+    _max: RankingListItemMaxAggregateOutputType | null
+  }
+
+  export type RankingListItemAvgAggregateOutputType = {
+    position: number | null
+  }
+
+  export type RankingListItemSumAggregateOutputType = {
+    position: number | null
+  }
+
+  export type RankingListItemMinAggregateOutputType = {
+    id: string | null
+    position: number | null
+    rankingListId: string | null
+    itemReviewId: string | null
+  }
+
+  export type RankingListItemMaxAggregateOutputType = {
+    id: string | null
+    position: number | null
+    rankingListId: string | null
+    itemReviewId: string | null
+  }
+
+  export type RankingListItemCountAggregateOutputType = {
+    id: number
+    position: number
+    rankingListId: number
+    itemReviewId: number
+    _all: number
+  }
+
+
+  export type RankingListItemAvgAggregateInputType = {
+    position?: true
+  }
+
+  export type RankingListItemSumAggregateInputType = {
+    position?: true
+  }
+
+  export type RankingListItemMinAggregateInputType = {
+    id?: true
+    position?: true
+    rankingListId?: true
+    itemReviewId?: true
+  }
+
+  export type RankingListItemMaxAggregateInputType = {
+    id?: true
+    position?: true
+    rankingListId?: true
+    itemReviewId?: true
+  }
+
+  export type RankingListItemCountAggregateInputType = {
+    id?: true
+    position?: true
+    rankingListId?: true
+    itemReviewId?: true
+    _all?: true
+  }
+
+  export type RankingListItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RankingListItem to aggregate.
+     */
+    where?: RankingListItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RankingListItems to fetch.
+     */
+    orderBy?: RankingListItemOrderByWithRelationInput | RankingListItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: RankingListItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RankingListItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RankingListItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned RankingListItems
+    **/
+    _count?: true | RankingListItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: RankingListItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: RankingListItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: RankingListItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: RankingListItemMaxAggregateInputType
+  }
+
+  export type GetRankingListItemAggregateType<T extends RankingListItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateRankingListItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateRankingListItem[P]>
+      : GetScalarType<T[P], AggregateRankingListItem[P]>
+  }
+
+
+
+
+  export type RankingListItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: RankingListItemWhereInput
+    orderBy?: RankingListItemOrderByWithAggregationInput | RankingListItemOrderByWithAggregationInput[]
+    by: RankingListItemScalarFieldEnum[] | RankingListItemScalarFieldEnum
+    having?: RankingListItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: RankingListItemCountAggregateInputType | true
+    _avg?: RankingListItemAvgAggregateInputType
+    _sum?: RankingListItemSumAggregateInputType
+    _min?: RankingListItemMinAggregateInputType
+    _max?: RankingListItemMaxAggregateInputType
+  }
+
+  export type RankingListItemGroupByOutputType = {
+    id: string
+    position: number
+    rankingListId: string
+    itemReviewId: string
+    _count: RankingListItemCountAggregateOutputType | null
+    _avg: RankingListItemAvgAggregateOutputType | null
+    _sum: RankingListItemSumAggregateOutputType | null
+    _min: RankingListItemMinAggregateOutputType | null
+    _max: RankingListItemMaxAggregateOutputType | null
+  }
+
+  type GetRankingListItemGroupByPayload<T extends RankingListItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<RankingListItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof RankingListItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], RankingListItemGroupByOutputType[P]>
+            : GetScalarType<T[P], RankingListItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type RankingListItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    position?: boolean
+    rankingListId?: boolean
+    itemReviewId?: boolean
+    rankingList?: boolean | RankingListDefaultArgs<ExtArgs>
+    itemReview?: boolean | ItemReviewDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rankingListItem"]>
+
+  export type RankingListItemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    position?: boolean
+    rankingListId?: boolean
+    itemReviewId?: boolean
+    rankingList?: boolean | RankingListDefaultArgs<ExtArgs>
+    itemReview?: boolean | ItemReviewDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rankingListItem"]>
+
+  export type RankingListItemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    position?: boolean
+    rankingListId?: boolean
+    itemReviewId?: boolean
+    rankingList?: boolean | RankingListDefaultArgs<ExtArgs>
+    itemReview?: boolean | ItemReviewDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["rankingListItem"]>
+
+  export type RankingListItemSelectScalar = {
+    id?: boolean
+    position?: boolean
+    rankingListId?: boolean
+    itemReviewId?: boolean
+  }
+
+  export type RankingListItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "position" | "rankingListId" | "itemReviewId", ExtArgs["result"]["rankingListItem"]>
+  export type RankingListItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rankingList?: boolean | RankingListDefaultArgs<ExtArgs>
+    itemReview?: boolean | ItemReviewDefaultArgs<ExtArgs>
+  }
+  export type RankingListItemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rankingList?: boolean | RankingListDefaultArgs<ExtArgs>
+    itemReview?: boolean | ItemReviewDefaultArgs<ExtArgs>
+  }
+  export type RankingListItemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    rankingList?: boolean | RankingListDefaultArgs<ExtArgs>
+    itemReview?: boolean | ItemReviewDefaultArgs<ExtArgs>
+  }
+
+  export type $RankingListItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "RankingListItem"
+    objects: {
+      rankingList: Prisma.$RankingListPayload<ExtArgs>
+      itemReview: Prisma.$ItemReviewPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      position: number
+      rankingListId: string
+      itemReviewId: string
+    }, ExtArgs["result"]["rankingListItem"]>
+    composites: {}
+  }
+
+  type RankingListItemGetPayload<S extends boolean | null | undefined | RankingListItemDefaultArgs> = $Result.GetResult<Prisma.$RankingListItemPayload, S>
+
+  type RankingListItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<RankingListItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: RankingListItemCountAggregateInputType | true
+    }
+
+  export interface RankingListItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['RankingListItem'], meta: { name: 'RankingListItem' } }
+    /**
+     * Find zero or one RankingListItem that matches the filter.
+     * @param {RankingListItemFindUniqueArgs} args - Arguments to find a RankingListItem
+     * @example
+     * // Get one RankingListItem
+     * const rankingListItem = await prisma.rankingListItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends RankingListItemFindUniqueArgs>(args: SelectSubset<T, RankingListItemFindUniqueArgs<ExtArgs>>): Prisma__RankingListItemClient<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one RankingListItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {RankingListItemFindUniqueOrThrowArgs} args - Arguments to find a RankingListItem
+     * @example
+     * // Get one RankingListItem
+     * const rankingListItem = await prisma.rankingListItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends RankingListItemFindUniqueOrThrowArgs>(args: SelectSubset<T, RankingListItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__RankingListItemClient<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RankingListItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListItemFindFirstArgs} args - Arguments to find a RankingListItem
+     * @example
+     * // Get one RankingListItem
+     * const rankingListItem = await prisma.rankingListItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends RankingListItemFindFirstArgs>(args?: SelectSubset<T, RankingListItemFindFirstArgs<ExtArgs>>): Prisma__RankingListItemClient<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first RankingListItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListItemFindFirstOrThrowArgs} args - Arguments to find a RankingListItem
+     * @example
+     * // Get one RankingListItem
+     * const rankingListItem = await prisma.rankingListItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends RankingListItemFindFirstOrThrowArgs>(args?: SelectSubset<T, RankingListItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__RankingListItemClient<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more RankingListItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all RankingListItems
+     * const rankingListItems = await prisma.rankingListItem.findMany()
+     * 
+     * // Get first 10 RankingListItems
+     * const rankingListItems = await prisma.rankingListItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const rankingListItemWithIdOnly = await prisma.rankingListItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends RankingListItemFindManyArgs>(args?: SelectSubset<T, RankingListItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a RankingListItem.
+     * @param {RankingListItemCreateArgs} args - Arguments to create a RankingListItem.
+     * @example
+     * // Create one RankingListItem
+     * const RankingListItem = await prisma.rankingListItem.create({
+     *   data: {
+     *     // ... data to create a RankingListItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends RankingListItemCreateArgs>(args: SelectSubset<T, RankingListItemCreateArgs<ExtArgs>>): Prisma__RankingListItemClient<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many RankingListItems.
+     * @param {RankingListItemCreateManyArgs} args - Arguments to create many RankingListItems.
+     * @example
+     * // Create many RankingListItems
+     * const rankingListItem = await prisma.rankingListItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends RankingListItemCreateManyArgs>(args?: SelectSubset<T, RankingListItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many RankingListItems and returns the data saved in the database.
+     * @param {RankingListItemCreateManyAndReturnArgs} args - Arguments to create many RankingListItems.
+     * @example
+     * // Create many RankingListItems
+     * const rankingListItem = await prisma.rankingListItem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many RankingListItems and only return the `id`
+     * const rankingListItemWithIdOnly = await prisma.rankingListItem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends RankingListItemCreateManyAndReturnArgs>(args?: SelectSubset<T, RankingListItemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a RankingListItem.
+     * @param {RankingListItemDeleteArgs} args - Arguments to delete one RankingListItem.
+     * @example
+     * // Delete one RankingListItem
+     * const RankingListItem = await prisma.rankingListItem.delete({
+     *   where: {
+     *     // ... filter to delete one RankingListItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends RankingListItemDeleteArgs>(args: SelectSubset<T, RankingListItemDeleteArgs<ExtArgs>>): Prisma__RankingListItemClient<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one RankingListItem.
+     * @param {RankingListItemUpdateArgs} args - Arguments to update one RankingListItem.
+     * @example
+     * // Update one RankingListItem
+     * const rankingListItem = await prisma.rankingListItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends RankingListItemUpdateArgs>(args: SelectSubset<T, RankingListItemUpdateArgs<ExtArgs>>): Prisma__RankingListItemClient<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more RankingListItems.
+     * @param {RankingListItemDeleteManyArgs} args - Arguments to filter RankingListItems to delete.
+     * @example
+     * // Delete a few RankingListItems
+     * const { count } = await prisma.rankingListItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends RankingListItemDeleteManyArgs>(args?: SelectSubset<T, RankingListItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RankingListItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many RankingListItems
+     * const rankingListItem = await prisma.rankingListItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends RankingListItemUpdateManyArgs>(args: SelectSubset<T, RankingListItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more RankingListItems and returns the data updated in the database.
+     * @param {RankingListItemUpdateManyAndReturnArgs} args - Arguments to update many RankingListItems.
+     * @example
+     * // Update many RankingListItems
+     * const rankingListItem = await prisma.rankingListItem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more RankingListItems and only return the `id`
+     * const rankingListItemWithIdOnly = await prisma.rankingListItem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends RankingListItemUpdateManyAndReturnArgs>(args: SelectSubset<T, RankingListItemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one RankingListItem.
+     * @param {RankingListItemUpsertArgs} args - Arguments to update or create a RankingListItem.
+     * @example
+     * // Update or create a RankingListItem
+     * const rankingListItem = await prisma.rankingListItem.upsert({
+     *   create: {
+     *     // ... data to create a RankingListItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the RankingListItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends RankingListItemUpsertArgs>(args: SelectSubset<T, RankingListItemUpsertArgs<ExtArgs>>): Prisma__RankingListItemClient<$Result.GetResult<Prisma.$RankingListItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of RankingListItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListItemCountArgs} args - Arguments to filter RankingListItems to count.
+     * @example
+     * // Count the number of RankingListItems
+     * const count = await prisma.rankingListItem.count({
+     *   where: {
+     *     // ... the filter for the RankingListItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends RankingListItemCountArgs>(
+      args?: Subset<T, RankingListItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], RankingListItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a RankingListItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends RankingListItemAggregateArgs>(args: Subset<T, RankingListItemAggregateArgs>): Prisma.PrismaPromise<GetRankingListItemAggregateType<T>>
+
+    /**
+     * Group by RankingListItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {RankingListItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends RankingListItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: RankingListItemGroupByArgs['orderBy'] }
+        : { orderBy?: RankingListItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, RankingListItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetRankingListItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the RankingListItem model
+   */
+  readonly fields: RankingListItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for RankingListItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__RankingListItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    rankingList<T extends RankingListDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RankingListDefaultArgs<ExtArgs>>): Prisma__RankingListClient<$Result.GetResult<Prisma.$RankingListPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    itemReview<T extends ItemReviewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ItemReviewDefaultArgs<ExtArgs>>): Prisma__ItemReviewClient<$Result.GetResult<Prisma.$ItemReviewPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the RankingListItem model
+   */
+  interface RankingListItemFieldRefs {
+    readonly id: FieldRef<"RankingListItem", 'String'>
+    readonly position: FieldRef<"RankingListItem", 'Int'>
+    readonly rankingListId: FieldRef<"RankingListItem", 'String'>
+    readonly itemReviewId: FieldRef<"RankingListItem", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * RankingListItem findUnique
+   */
+  export type RankingListItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingListItem to fetch.
+     */
+    where: RankingListItemWhereUniqueInput
+  }
+
+  /**
+   * RankingListItem findUniqueOrThrow
+   */
+  export type RankingListItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingListItem to fetch.
+     */
+    where: RankingListItemWhereUniqueInput
+  }
+
+  /**
+   * RankingListItem findFirst
+   */
+  export type RankingListItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingListItem to fetch.
+     */
+    where?: RankingListItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RankingListItems to fetch.
+     */
+    orderBy?: RankingListItemOrderByWithRelationInput | RankingListItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RankingListItems.
+     */
+    cursor?: RankingListItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RankingListItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RankingListItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RankingListItems.
+     */
+    distinct?: RankingListItemScalarFieldEnum | RankingListItemScalarFieldEnum[]
+  }
+
+  /**
+   * RankingListItem findFirstOrThrow
+   */
+  export type RankingListItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingListItem to fetch.
+     */
+    where?: RankingListItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RankingListItems to fetch.
+     */
+    orderBy?: RankingListItemOrderByWithRelationInput | RankingListItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for RankingListItems.
+     */
+    cursor?: RankingListItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RankingListItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RankingListItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of RankingListItems.
+     */
+    distinct?: RankingListItemScalarFieldEnum | RankingListItemScalarFieldEnum[]
+  }
+
+  /**
+   * RankingListItem findMany
+   */
+  export type RankingListItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * Filter, which RankingListItems to fetch.
+     */
+    where?: RankingListItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of RankingListItems to fetch.
+     */
+    orderBy?: RankingListItemOrderByWithRelationInput | RankingListItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing RankingListItems.
+     */
+    cursor?: RankingListItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` RankingListItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` RankingListItems.
+     */
+    skip?: number
+    distinct?: RankingListItemScalarFieldEnum | RankingListItemScalarFieldEnum[]
+  }
+
+  /**
+   * RankingListItem create
+   */
+  export type RankingListItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a RankingListItem.
+     */
+    data: XOR<RankingListItemCreateInput, RankingListItemUncheckedCreateInput>
+  }
+
+  /**
+   * RankingListItem createMany
+   */
+  export type RankingListItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many RankingListItems.
+     */
+    data: RankingListItemCreateManyInput | RankingListItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * RankingListItem createManyAndReturn
+   */
+  export type RankingListItemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * The data used to create many RankingListItems.
+     */
+    data: RankingListItemCreateManyInput | RankingListItemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RankingListItem update
+   */
+  export type RankingListItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a RankingListItem.
+     */
+    data: XOR<RankingListItemUpdateInput, RankingListItemUncheckedUpdateInput>
+    /**
+     * Choose, which RankingListItem to update.
+     */
+    where: RankingListItemWhereUniqueInput
+  }
+
+  /**
+   * RankingListItem updateMany
+   */
+  export type RankingListItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update RankingListItems.
+     */
+    data: XOR<RankingListItemUpdateManyMutationInput, RankingListItemUncheckedUpdateManyInput>
+    /**
+     * Filter which RankingListItems to update
+     */
+    where?: RankingListItemWhereInput
+    /**
+     * Limit how many RankingListItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * RankingListItem updateManyAndReturn
+   */
+  export type RankingListItemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * The data used to update RankingListItems.
+     */
+    data: XOR<RankingListItemUpdateManyMutationInput, RankingListItemUncheckedUpdateManyInput>
+    /**
+     * Filter which RankingListItems to update
+     */
+    where?: RankingListItemWhereInput
+    /**
+     * Limit how many RankingListItems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * RankingListItem upsert
+   */
+  export type RankingListItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the RankingListItem to update in case it exists.
+     */
+    where: RankingListItemWhereUniqueInput
+    /**
+     * In case the RankingListItem found by the `where` argument doesn't exist, create a new RankingListItem with this data.
+     */
+    create: XOR<RankingListItemCreateInput, RankingListItemUncheckedCreateInput>
+    /**
+     * In case the RankingListItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<RankingListItemUpdateInput, RankingListItemUncheckedUpdateInput>
+  }
+
+  /**
+   * RankingListItem delete
+   */
+  export type RankingListItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+    /**
+     * Filter which RankingListItem to delete.
+     */
+    where: RankingListItemWhereUniqueInput
+  }
+
+  /**
+   * RankingListItem deleteMany
+   */
+  export type RankingListItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which RankingListItems to delete
+     */
+    where?: RankingListItemWhereInput
+    /**
+     * Limit how many RankingListItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * RankingListItem without action
+   */
+  export type RankingListItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the RankingListItem
+     */
+    select?: RankingListItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the RankingListItem
+     */
+    omit?: RankingListItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RankingListItemInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8024,6 +10473,26 @@ export namespace Prisma {
   };
 
   export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+  export const RankingListScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    createdAt: 'createdAt',
+    userId: 'userId'
+  };
+
+  export type RankingListScalarFieldEnum = (typeof RankingListScalarFieldEnum)[keyof typeof RankingListScalarFieldEnum]
+
+
+  export const RankingListItemScalarFieldEnum: {
+    id: 'id',
+    position: 'position',
+    rankingListId: 'rankingListId',
+    itemReviewId: 'itemReviewId'
+  };
+
+  export type RankingListItemScalarFieldEnum = (typeof RankingListItemScalarFieldEnum)[keyof typeof RankingListItemScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8288,6 +10757,7 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     reviews?: ReviewListRelationFilter
+    rankingLists?: RankingListListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -8299,6 +10769,7 @@ export namespace Prisma {
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
+    rankingLists?: RankingListOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -8313,6 +10784,7 @@ export namespace Prisma {
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     reviews?: ReviewListRelationFilter
+    rankingLists?: RankingListListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -8390,6 +10862,7 @@ export namespace Prisma {
     coverUrl?: StringNullableFilter<"ItemReview"> | string | null
     type?: EnumContentTypeFilter<"ItemReview"> | $Enums.ContentType
     reviews?: ReviewListRelationFilter
+    rankingListItems?: RankingListItemListRelationFilter
   }
 
   export type ItemReviewOrderByWithRelationInput = {
@@ -8399,6 +10872,7 @@ export namespace Prisma {
     coverUrl?: SortOrderInput | SortOrder
     type?: SortOrder
     reviews?: ReviewOrderByRelationAggregateInput
+    rankingListItems?: RankingListItemOrderByRelationAggregateInput
   }
 
   export type ItemReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -8411,6 +10885,7 @@ export namespace Prisma {
     coverUrl?: StringNullableFilter<"ItemReview"> | string | null
     type?: EnumContentTypeFilter<"ItemReview"> | $Enums.ContentType
     reviews?: ReviewListRelationFilter
+    rankingListItems?: RankingListItemListRelationFilter
   }, "id" | "externalId">
 
   export type ItemReviewOrderByWithAggregationInput = {
@@ -8499,6 +10974,116 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Review"> | Date | string
     userId?: StringWithAggregatesFilter<"Review"> | string
     itemReviewId?: StringWithAggregatesFilter<"Review"> | string
+  }
+
+  export type RankingListWhereInput = {
+    AND?: RankingListWhereInput | RankingListWhereInput[]
+    OR?: RankingListWhereInput[]
+    NOT?: RankingListWhereInput | RankingListWhereInput[]
+    id?: StringFilter<"RankingList"> | string
+    title?: StringFilter<"RankingList"> | string
+    createdAt?: DateTimeFilter<"RankingList"> | Date | string
+    userId?: StringFilter<"RankingList"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    items?: RankingListItemListRelationFilter
+  }
+
+  export type RankingListOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+    items?: RankingListItemOrderByRelationAggregateInput
+  }
+
+  export type RankingListWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: RankingListWhereInput | RankingListWhereInput[]
+    OR?: RankingListWhereInput[]
+    NOT?: RankingListWhereInput | RankingListWhereInput[]
+    title?: StringFilter<"RankingList"> | string
+    createdAt?: DateTimeFilter<"RankingList"> | Date | string
+    userId?: StringFilter<"RankingList"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    items?: RankingListItemListRelationFilter
+  }, "id">
+
+  export type RankingListOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+    _count?: RankingListCountOrderByAggregateInput
+    _max?: RankingListMaxOrderByAggregateInput
+    _min?: RankingListMinOrderByAggregateInput
+  }
+
+  export type RankingListScalarWhereWithAggregatesInput = {
+    AND?: RankingListScalarWhereWithAggregatesInput | RankingListScalarWhereWithAggregatesInput[]
+    OR?: RankingListScalarWhereWithAggregatesInput[]
+    NOT?: RankingListScalarWhereWithAggregatesInput | RankingListScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RankingList"> | string
+    title?: StringWithAggregatesFilter<"RankingList"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"RankingList"> | Date | string
+    userId?: StringWithAggregatesFilter<"RankingList"> | string
+  }
+
+  export type RankingListItemWhereInput = {
+    AND?: RankingListItemWhereInput | RankingListItemWhereInput[]
+    OR?: RankingListItemWhereInput[]
+    NOT?: RankingListItemWhereInput | RankingListItemWhereInput[]
+    id?: StringFilter<"RankingListItem"> | string
+    position?: IntFilter<"RankingListItem"> | number
+    rankingListId?: StringFilter<"RankingListItem"> | string
+    itemReviewId?: StringFilter<"RankingListItem"> | string
+    rankingList?: XOR<RankingListScalarRelationFilter, RankingListWhereInput>
+    itemReview?: XOR<ItemReviewScalarRelationFilter, ItemReviewWhereInput>
+  }
+
+  export type RankingListItemOrderByWithRelationInput = {
+    id?: SortOrder
+    position?: SortOrder
+    rankingListId?: SortOrder
+    itemReviewId?: SortOrder
+    rankingList?: RankingListOrderByWithRelationInput
+    itemReview?: ItemReviewOrderByWithRelationInput
+  }
+
+  export type RankingListItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    rankingListId_position?: RankingListItemRankingListIdPositionCompoundUniqueInput
+    rankingListId_itemReviewId?: RankingListItemRankingListIdItemReviewIdCompoundUniqueInput
+    AND?: RankingListItemWhereInput | RankingListItemWhereInput[]
+    OR?: RankingListItemWhereInput[]
+    NOT?: RankingListItemWhereInput | RankingListItemWhereInput[]
+    position?: IntFilter<"RankingListItem"> | number
+    rankingListId?: StringFilter<"RankingListItem"> | string
+    itemReviewId?: StringFilter<"RankingListItem"> | string
+    rankingList?: XOR<RankingListScalarRelationFilter, RankingListWhereInput>
+    itemReview?: XOR<ItemReviewScalarRelationFilter, ItemReviewWhereInput>
+  }, "id" | "rankingListId_position" | "rankingListId_itemReviewId">
+
+  export type RankingListItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    position?: SortOrder
+    rankingListId?: SortOrder
+    itemReviewId?: SortOrder
+    _count?: RankingListItemCountOrderByAggregateInput
+    _avg?: RankingListItemAvgOrderByAggregateInput
+    _max?: RankingListItemMaxOrderByAggregateInput
+    _min?: RankingListItemMinOrderByAggregateInput
+    _sum?: RankingListItemSumOrderByAggregateInput
+  }
+
+  export type RankingListItemScalarWhereWithAggregatesInput = {
+    AND?: RankingListItemScalarWhereWithAggregatesInput | RankingListItemScalarWhereWithAggregatesInput[]
+    OR?: RankingListItemScalarWhereWithAggregatesInput[]
+    NOT?: RankingListItemScalarWhereWithAggregatesInput | RankingListItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"RankingListItem"> | string
+    position?: IntWithAggregatesFilter<"RankingListItem"> | number
+    rankingListId?: StringWithAggregatesFilter<"RankingListItem"> | string
+    itemReviewId?: StringWithAggregatesFilter<"RankingListItem"> | string
   }
 
   export type AccountCreateInput = {
@@ -8669,6 +11254,7 @@ export namespace Prisma {
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    rankingLists?: RankingListCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -8680,6 +11266,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    rankingLists?: RankingListUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -8691,6 +11278,7 @@ export namespace Prisma {
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    rankingLists?: RankingListUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -8702,6 +11290,7 @@ export namespace Prisma {
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    rankingLists?: RankingListUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -8777,6 +11366,7 @@ export namespace Prisma {
     coverUrl?: string | null
     type: $Enums.ContentType
     reviews?: ReviewCreateNestedManyWithoutItemReviewInput
+    rankingListItems?: RankingListItemCreateNestedManyWithoutItemReviewInput
   }
 
   export type ItemReviewUncheckedCreateInput = {
@@ -8786,6 +11376,7 @@ export namespace Prisma {
     coverUrl?: string | null
     type: $Enums.ContentType
     reviews?: ReviewUncheckedCreateNestedManyWithoutItemReviewInput
+    rankingListItems?: RankingListItemUncheckedCreateNestedManyWithoutItemReviewInput
   }
 
   export type ItemReviewUpdateInput = {
@@ -8795,6 +11386,7 @@ export namespace Prisma {
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     reviews?: ReviewUpdateManyWithoutItemReviewNestedInput
+    rankingListItems?: RankingListItemUpdateManyWithoutItemReviewNestedInput
   }
 
   export type ItemReviewUncheckedUpdateInput = {
@@ -8804,6 +11396,7 @@ export namespace Prisma {
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
     reviews?: ReviewUncheckedUpdateManyWithoutItemReviewNestedInput
+    rankingListItems?: RankingListItemUncheckedUpdateManyWithoutItemReviewNestedInput
   }
 
   export type ItemReviewCreateManyInput = {
@@ -8888,6 +11481,105 @@ export namespace Prisma {
     review?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+    itemReviewId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RankingListCreateInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutRankingListsInput
+    items?: RankingListItemCreateNestedManyWithoutRankingListInput
+  }
+
+  export type RankingListUncheckedCreateInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    userId: string
+    items?: RankingListItemUncheckedCreateNestedManyWithoutRankingListInput
+  }
+
+  export type RankingListUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRankingListsNestedInput
+    items?: RankingListItemUpdateManyWithoutRankingListNestedInput
+  }
+
+  export type RankingListUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+    items?: RankingListItemUncheckedUpdateManyWithoutRankingListNestedInput
+  }
+
+  export type RankingListCreateManyInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    userId: string
+  }
+
+  export type RankingListUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type RankingListUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RankingListItemCreateInput = {
+    id?: string
+    position: number
+    rankingList: RankingListCreateNestedOneWithoutItemsInput
+    itemReview: ItemReviewCreateNestedOneWithoutRankingListItemsInput
+  }
+
+  export type RankingListItemUncheckedCreateInput = {
+    id?: string
+    position: number
+    rankingListId: string
+    itemReviewId: string
+  }
+
+  export type RankingListItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    rankingList?: RankingListUpdateOneRequiredWithoutItemsNestedInput
+    itemReview?: ItemReviewUpdateOneRequiredWithoutRankingListItemsNestedInput
+  }
+
+  export type RankingListItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    rankingListId?: StringFieldUpdateOperationsInput | string
+    itemReviewId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RankingListItemCreateManyInput = {
+    id?: string
+    position: number
+    rankingListId: string
+    itemReviewId: string
+  }
+
+  export type RankingListItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type RankingListItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    rankingListId?: StringFieldUpdateOperationsInput | string
     itemReviewId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -9132,6 +11824,12 @@ export namespace Prisma {
     none?: ReviewWhereInput
   }
 
+  export type RankingListListRelationFilter = {
+    every?: RankingListWhereInput
+    some?: RankingListWhereInput
+    none?: RankingListWhereInput
+  }
+
   export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -9141,6 +11839,10 @@ export namespace Prisma {
   }
 
   export type ReviewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type RankingListOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -9210,6 +11912,16 @@ export namespace Prisma {
     in?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
     notIn?: $Enums.ContentType[] | ListEnumContentTypeFieldRefInput<$PrismaModel>
     not?: NestedEnumContentTypeFilter<$PrismaModel> | $Enums.ContentType
+  }
+
+  export type RankingListItemListRelationFilter = {
+    every?: RankingListItemWhereInput
+    some?: RankingListItemWhereInput
+    none?: RankingListItemWhereInput
+  }
+
+  export type RankingListItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ItemReviewCountOrderByAggregateInput = {
@@ -9318,6 +12030,71 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type RankingListCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type RankingListMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type RankingListMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    createdAt?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type RankingListScalarRelationFilter = {
+    is?: RankingListWhereInput
+    isNot?: RankingListWhereInput
+  }
+
+  export type RankingListItemRankingListIdPositionCompoundUniqueInput = {
+    rankingListId: string
+    position: number
+  }
+
+  export type RankingListItemRankingListIdItemReviewIdCompoundUniqueInput = {
+    rankingListId: string
+    itemReviewId: string
+  }
+
+  export type RankingListItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    position?: SortOrder
+    rankingListId?: SortOrder
+    itemReviewId?: SortOrder
+  }
+
+  export type RankingListItemAvgOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
+  export type RankingListItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    position?: SortOrder
+    rankingListId?: SortOrder
+    itemReviewId?: SortOrder
+  }
+
+  export type RankingListItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    position?: SortOrder
+    rankingListId?: SortOrder
+    itemReviewId?: SortOrder
+  }
+
+  export type RankingListItemSumOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -9387,6 +12164,13 @@ export namespace Prisma {
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
+  export type RankingListCreateNestedManyWithoutUserInput = {
+    create?: XOR<RankingListCreateWithoutUserInput, RankingListUncheckedCreateWithoutUserInput> | RankingListCreateWithoutUserInput[] | RankingListUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RankingListCreateOrConnectWithoutUserInput | RankingListCreateOrConnectWithoutUserInput[]
+    createMany?: RankingListCreateManyUserInputEnvelope
+    connect?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -9406,6 +12190,13 @@ export namespace Prisma {
     connectOrCreate?: ReviewCreateOrConnectWithoutUserInput | ReviewCreateOrConnectWithoutUserInput[]
     createMany?: ReviewCreateManyUserInputEnvelope
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
+  export type RankingListUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<RankingListCreateWithoutUserInput, RankingListUncheckedCreateWithoutUserInput> | RankingListCreateWithoutUserInput[] | RankingListUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RankingListCreateOrConnectWithoutUserInput | RankingListCreateOrConnectWithoutUserInput[]
+    createMany?: RankingListCreateManyUserInputEnvelope
+    connect?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -9454,6 +12245,20 @@ export namespace Prisma {
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
+  export type RankingListUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RankingListCreateWithoutUserInput, RankingListUncheckedCreateWithoutUserInput> | RankingListCreateWithoutUserInput[] | RankingListUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RankingListCreateOrConnectWithoutUserInput | RankingListCreateOrConnectWithoutUserInput[]
+    upsert?: RankingListUpsertWithWhereUniqueWithoutUserInput | RankingListUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RankingListCreateManyUserInputEnvelope
+    set?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+    disconnect?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+    delete?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+    connect?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+    update?: RankingListUpdateWithWhereUniqueWithoutUserInput | RankingListUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RankingListUpdateManyWithWhereWithoutUserInput | RankingListUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RankingListScalarWhereInput | RankingListScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -9496,6 +12301,20 @@ export namespace Prisma {
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
+  export type RankingListUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<RankingListCreateWithoutUserInput, RankingListUncheckedCreateWithoutUserInput> | RankingListCreateWithoutUserInput[] | RankingListUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: RankingListCreateOrConnectWithoutUserInput | RankingListCreateOrConnectWithoutUserInput[]
+    upsert?: RankingListUpsertWithWhereUniqueWithoutUserInput | RankingListUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: RankingListCreateManyUserInputEnvelope
+    set?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+    disconnect?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+    delete?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+    connect?: RankingListWhereUniqueInput | RankingListWhereUniqueInput[]
+    update?: RankingListUpdateWithWhereUniqueWithoutUserInput | RankingListUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: RankingListUpdateManyWithWhereWithoutUserInput | RankingListUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: RankingListScalarWhereInput | RankingListScalarWhereInput[]
+  }
+
   export type ReviewCreateNestedManyWithoutItemReviewInput = {
     create?: XOR<ReviewCreateWithoutItemReviewInput, ReviewUncheckedCreateWithoutItemReviewInput> | ReviewCreateWithoutItemReviewInput[] | ReviewUncheckedCreateWithoutItemReviewInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutItemReviewInput | ReviewCreateOrConnectWithoutItemReviewInput[]
@@ -9503,11 +12322,25 @@ export namespace Prisma {
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
   }
 
+  export type RankingListItemCreateNestedManyWithoutItemReviewInput = {
+    create?: XOR<RankingListItemCreateWithoutItemReviewInput, RankingListItemUncheckedCreateWithoutItemReviewInput> | RankingListItemCreateWithoutItemReviewInput[] | RankingListItemUncheckedCreateWithoutItemReviewInput[]
+    connectOrCreate?: RankingListItemCreateOrConnectWithoutItemReviewInput | RankingListItemCreateOrConnectWithoutItemReviewInput[]
+    createMany?: RankingListItemCreateManyItemReviewInputEnvelope
+    connect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+  }
+
   export type ReviewUncheckedCreateNestedManyWithoutItemReviewInput = {
     create?: XOR<ReviewCreateWithoutItemReviewInput, ReviewUncheckedCreateWithoutItemReviewInput> | ReviewCreateWithoutItemReviewInput[] | ReviewUncheckedCreateWithoutItemReviewInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutItemReviewInput | ReviewCreateOrConnectWithoutItemReviewInput[]
     createMany?: ReviewCreateManyItemReviewInputEnvelope
     connect?: ReviewWhereUniqueInput | ReviewWhereUniqueInput[]
+  }
+
+  export type RankingListItemUncheckedCreateNestedManyWithoutItemReviewInput = {
+    create?: XOR<RankingListItemCreateWithoutItemReviewInput, RankingListItemUncheckedCreateWithoutItemReviewInput> | RankingListItemCreateWithoutItemReviewInput[] | RankingListItemUncheckedCreateWithoutItemReviewInput[]
+    connectOrCreate?: RankingListItemCreateOrConnectWithoutItemReviewInput | RankingListItemCreateOrConnectWithoutItemReviewInput[]
+    createMany?: RankingListItemCreateManyItemReviewInputEnvelope
+    connect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
   }
 
   export type EnumContentTypeFieldUpdateOperationsInput = {
@@ -9528,6 +12361,20 @@ export namespace Prisma {
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
   }
 
+  export type RankingListItemUpdateManyWithoutItemReviewNestedInput = {
+    create?: XOR<RankingListItemCreateWithoutItemReviewInput, RankingListItemUncheckedCreateWithoutItemReviewInput> | RankingListItemCreateWithoutItemReviewInput[] | RankingListItemUncheckedCreateWithoutItemReviewInput[]
+    connectOrCreate?: RankingListItemCreateOrConnectWithoutItemReviewInput | RankingListItemCreateOrConnectWithoutItemReviewInput[]
+    upsert?: RankingListItemUpsertWithWhereUniqueWithoutItemReviewInput | RankingListItemUpsertWithWhereUniqueWithoutItemReviewInput[]
+    createMany?: RankingListItemCreateManyItemReviewInputEnvelope
+    set?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    disconnect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    delete?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    connect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    update?: RankingListItemUpdateWithWhereUniqueWithoutItemReviewInput | RankingListItemUpdateWithWhereUniqueWithoutItemReviewInput[]
+    updateMany?: RankingListItemUpdateManyWithWhereWithoutItemReviewInput | RankingListItemUpdateManyWithWhereWithoutItemReviewInput[]
+    deleteMany?: RankingListItemScalarWhereInput | RankingListItemScalarWhereInput[]
+  }
+
   export type ReviewUncheckedUpdateManyWithoutItemReviewNestedInput = {
     create?: XOR<ReviewCreateWithoutItemReviewInput, ReviewUncheckedCreateWithoutItemReviewInput> | ReviewCreateWithoutItemReviewInput[] | ReviewUncheckedCreateWithoutItemReviewInput[]
     connectOrCreate?: ReviewCreateOrConnectWithoutItemReviewInput | ReviewCreateOrConnectWithoutItemReviewInput[]
@@ -9540,6 +12387,20 @@ export namespace Prisma {
     update?: ReviewUpdateWithWhereUniqueWithoutItemReviewInput | ReviewUpdateWithWhereUniqueWithoutItemReviewInput[]
     updateMany?: ReviewUpdateManyWithWhereWithoutItemReviewInput | ReviewUpdateManyWithWhereWithoutItemReviewInput[]
     deleteMany?: ReviewScalarWhereInput | ReviewScalarWhereInput[]
+  }
+
+  export type RankingListItemUncheckedUpdateManyWithoutItemReviewNestedInput = {
+    create?: XOR<RankingListItemCreateWithoutItemReviewInput, RankingListItemUncheckedCreateWithoutItemReviewInput> | RankingListItemCreateWithoutItemReviewInput[] | RankingListItemUncheckedCreateWithoutItemReviewInput[]
+    connectOrCreate?: RankingListItemCreateOrConnectWithoutItemReviewInput | RankingListItemCreateOrConnectWithoutItemReviewInput[]
+    upsert?: RankingListItemUpsertWithWhereUniqueWithoutItemReviewInput | RankingListItemUpsertWithWhereUniqueWithoutItemReviewInput[]
+    createMany?: RankingListItemCreateManyItemReviewInputEnvelope
+    set?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    disconnect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    delete?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    connect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    update?: RankingListItemUpdateWithWhereUniqueWithoutItemReviewInput | RankingListItemUpdateWithWhereUniqueWithoutItemReviewInput[]
+    updateMany?: RankingListItemUpdateManyWithWhereWithoutItemReviewInput | RankingListItemUpdateManyWithWhereWithoutItemReviewInput[]
+    deleteMany?: RankingListItemScalarWhereInput | RankingListItemScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutReviewsInput = {
@@ -9576,6 +12437,90 @@ export namespace Prisma {
     upsert?: ItemReviewUpsertWithoutReviewsInput
     connect?: ItemReviewWhereUniqueInput
     update?: XOR<XOR<ItemReviewUpdateToOneWithWhereWithoutReviewsInput, ItemReviewUpdateWithoutReviewsInput>, ItemReviewUncheckedUpdateWithoutReviewsInput>
+  }
+
+  export type UserCreateNestedOneWithoutRankingListsInput = {
+    create?: XOR<UserCreateWithoutRankingListsInput, UserUncheckedCreateWithoutRankingListsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRankingListsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type RankingListItemCreateNestedManyWithoutRankingListInput = {
+    create?: XOR<RankingListItemCreateWithoutRankingListInput, RankingListItemUncheckedCreateWithoutRankingListInput> | RankingListItemCreateWithoutRankingListInput[] | RankingListItemUncheckedCreateWithoutRankingListInput[]
+    connectOrCreate?: RankingListItemCreateOrConnectWithoutRankingListInput | RankingListItemCreateOrConnectWithoutRankingListInput[]
+    createMany?: RankingListItemCreateManyRankingListInputEnvelope
+    connect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+  }
+
+  export type RankingListItemUncheckedCreateNestedManyWithoutRankingListInput = {
+    create?: XOR<RankingListItemCreateWithoutRankingListInput, RankingListItemUncheckedCreateWithoutRankingListInput> | RankingListItemCreateWithoutRankingListInput[] | RankingListItemUncheckedCreateWithoutRankingListInput[]
+    connectOrCreate?: RankingListItemCreateOrConnectWithoutRankingListInput | RankingListItemCreateOrConnectWithoutRankingListInput[]
+    createMany?: RankingListItemCreateManyRankingListInputEnvelope
+    connect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutRankingListsNestedInput = {
+    create?: XOR<UserCreateWithoutRankingListsInput, UserUncheckedCreateWithoutRankingListsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutRankingListsInput
+    upsert?: UserUpsertWithoutRankingListsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutRankingListsInput, UserUpdateWithoutRankingListsInput>, UserUncheckedUpdateWithoutRankingListsInput>
+  }
+
+  export type RankingListItemUpdateManyWithoutRankingListNestedInput = {
+    create?: XOR<RankingListItemCreateWithoutRankingListInput, RankingListItemUncheckedCreateWithoutRankingListInput> | RankingListItemCreateWithoutRankingListInput[] | RankingListItemUncheckedCreateWithoutRankingListInput[]
+    connectOrCreate?: RankingListItemCreateOrConnectWithoutRankingListInput | RankingListItemCreateOrConnectWithoutRankingListInput[]
+    upsert?: RankingListItemUpsertWithWhereUniqueWithoutRankingListInput | RankingListItemUpsertWithWhereUniqueWithoutRankingListInput[]
+    createMany?: RankingListItemCreateManyRankingListInputEnvelope
+    set?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    disconnect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    delete?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    connect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    update?: RankingListItemUpdateWithWhereUniqueWithoutRankingListInput | RankingListItemUpdateWithWhereUniqueWithoutRankingListInput[]
+    updateMany?: RankingListItemUpdateManyWithWhereWithoutRankingListInput | RankingListItemUpdateManyWithWhereWithoutRankingListInput[]
+    deleteMany?: RankingListItemScalarWhereInput | RankingListItemScalarWhereInput[]
+  }
+
+  export type RankingListItemUncheckedUpdateManyWithoutRankingListNestedInput = {
+    create?: XOR<RankingListItemCreateWithoutRankingListInput, RankingListItemUncheckedCreateWithoutRankingListInput> | RankingListItemCreateWithoutRankingListInput[] | RankingListItemUncheckedCreateWithoutRankingListInput[]
+    connectOrCreate?: RankingListItemCreateOrConnectWithoutRankingListInput | RankingListItemCreateOrConnectWithoutRankingListInput[]
+    upsert?: RankingListItemUpsertWithWhereUniqueWithoutRankingListInput | RankingListItemUpsertWithWhereUniqueWithoutRankingListInput[]
+    createMany?: RankingListItemCreateManyRankingListInputEnvelope
+    set?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    disconnect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    delete?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    connect?: RankingListItemWhereUniqueInput | RankingListItemWhereUniqueInput[]
+    update?: RankingListItemUpdateWithWhereUniqueWithoutRankingListInput | RankingListItemUpdateWithWhereUniqueWithoutRankingListInput[]
+    updateMany?: RankingListItemUpdateManyWithWhereWithoutRankingListInput | RankingListItemUpdateManyWithWhereWithoutRankingListInput[]
+    deleteMany?: RankingListItemScalarWhereInput | RankingListItemScalarWhereInput[]
+  }
+
+  export type RankingListCreateNestedOneWithoutItemsInput = {
+    create?: XOR<RankingListCreateWithoutItemsInput, RankingListUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: RankingListCreateOrConnectWithoutItemsInput
+    connect?: RankingListWhereUniqueInput
+  }
+
+  export type ItemReviewCreateNestedOneWithoutRankingListItemsInput = {
+    create?: XOR<ItemReviewCreateWithoutRankingListItemsInput, ItemReviewUncheckedCreateWithoutRankingListItemsInput>
+    connectOrCreate?: ItemReviewCreateOrConnectWithoutRankingListItemsInput
+    connect?: ItemReviewWhereUniqueInput
+  }
+
+  export type RankingListUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<RankingListCreateWithoutItemsInput, RankingListUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: RankingListCreateOrConnectWithoutItemsInput
+    upsert?: RankingListUpsertWithoutItemsInput
+    connect?: RankingListWhereUniqueInput
+    update?: XOR<XOR<RankingListUpdateToOneWithWhereWithoutItemsInput, RankingListUpdateWithoutItemsInput>, RankingListUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ItemReviewUpdateOneRequiredWithoutRankingListItemsNestedInput = {
+    create?: XOR<ItemReviewCreateWithoutRankingListItemsInput, ItemReviewUncheckedCreateWithoutRankingListItemsInput>
+    connectOrCreate?: ItemReviewCreateOrConnectWithoutRankingListItemsInput
+    upsert?: ItemReviewUpsertWithoutRankingListItemsInput
+    connect?: ItemReviewWhereUniqueInput
+    update?: XOR<XOR<ItemReviewUpdateToOneWithWhereWithoutRankingListItemsInput, ItemReviewUpdateWithoutRankingListItemsInput>, ItemReviewUncheckedUpdateWithoutRankingListItemsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -9791,6 +12736,7 @@ export namespace Prisma {
     image?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    rankingLists?: RankingListCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -9801,6 +12747,7 @@ export namespace Prisma {
     image?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    rankingLists?: RankingListUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -9827,6 +12774,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    rankingLists?: RankingListUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -9837,6 +12785,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    rankingLists?: RankingListUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -9847,6 +12796,7 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     reviews?: ReviewCreateNestedManyWithoutUserInput
+    rankingLists?: RankingListCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -9857,6 +12807,7 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+    rankingLists?: RankingListUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -9883,6 +12834,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     reviews?: ReviewUpdateManyWithoutUserNestedInput
+    rankingLists?: RankingListUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -9893,6 +12845,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+    rankingLists?: RankingListUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -9980,6 +12933,30 @@ export namespace Prisma {
 
   export type ReviewCreateManyUserInputEnvelope = {
     data: ReviewCreateManyUserInput | ReviewCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type RankingListCreateWithoutUserInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    items?: RankingListItemCreateNestedManyWithoutRankingListInput
+  }
+
+  export type RankingListUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    items?: RankingListItemUncheckedCreateNestedManyWithoutRankingListInput
+  }
+
+  export type RankingListCreateOrConnectWithoutUserInput = {
+    where: RankingListWhereUniqueInput
+    create: XOR<RankingListCreateWithoutUserInput, RankingListUncheckedCreateWithoutUserInput>
+  }
+
+  export type RankingListCreateManyUserInputEnvelope = {
+    data: RankingListCreateManyUserInput | RankingListCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
@@ -10072,6 +13049,32 @@ export namespace Prisma {
     itemReviewId?: StringFilter<"Review"> | string
   }
 
+  export type RankingListUpsertWithWhereUniqueWithoutUserInput = {
+    where: RankingListWhereUniqueInput
+    update: XOR<RankingListUpdateWithoutUserInput, RankingListUncheckedUpdateWithoutUserInput>
+    create: XOR<RankingListCreateWithoutUserInput, RankingListUncheckedCreateWithoutUserInput>
+  }
+
+  export type RankingListUpdateWithWhereUniqueWithoutUserInput = {
+    where: RankingListWhereUniqueInput
+    data: XOR<RankingListUpdateWithoutUserInput, RankingListUncheckedUpdateWithoutUserInput>
+  }
+
+  export type RankingListUpdateManyWithWhereWithoutUserInput = {
+    where: RankingListScalarWhereInput
+    data: XOR<RankingListUpdateManyMutationInput, RankingListUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type RankingListScalarWhereInput = {
+    AND?: RankingListScalarWhereInput | RankingListScalarWhereInput[]
+    OR?: RankingListScalarWhereInput[]
+    NOT?: RankingListScalarWhereInput | RankingListScalarWhereInput[]
+    id?: StringFilter<"RankingList"> | string
+    title?: StringFilter<"RankingList"> | string
+    createdAt?: DateTimeFilter<"RankingList"> | Date | string
+    userId?: StringFilter<"RankingList"> | string
+  }
+
   export type ReviewCreateWithoutItemReviewInput = {
     id?: string
     rating: number
@@ -10098,6 +13101,28 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type RankingListItemCreateWithoutItemReviewInput = {
+    id?: string
+    position: number
+    rankingList: RankingListCreateNestedOneWithoutItemsInput
+  }
+
+  export type RankingListItemUncheckedCreateWithoutItemReviewInput = {
+    id?: string
+    position: number
+    rankingListId: string
+  }
+
+  export type RankingListItemCreateOrConnectWithoutItemReviewInput = {
+    where: RankingListItemWhereUniqueInput
+    create: XOR<RankingListItemCreateWithoutItemReviewInput, RankingListItemUncheckedCreateWithoutItemReviewInput>
+  }
+
+  export type RankingListItemCreateManyItemReviewInputEnvelope = {
+    data: RankingListItemCreateManyItemReviewInput | RankingListItemCreateManyItemReviewInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ReviewUpsertWithWhereUniqueWithoutItemReviewInput = {
     where: ReviewWhereUniqueInput
     update: XOR<ReviewUpdateWithoutItemReviewInput, ReviewUncheckedUpdateWithoutItemReviewInput>
@@ -10114,6 +13139,32 @@ export namespace Prisma {
     data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyWithoutItemReviewInput>
   }
 
+  export type RankingListItemUpsertWithWhereUniqueWithoutItemReviewInput = {
+    where: RankingListItemWhereUniqueInput
+    update: XOR<RankingListItemUpdateWithoutItemReviewInput, RankingListItemUncheckedUpdateWithoutItemReviewInput>
+    create: XOR<RankingListItemCreateWithoutItemReviewInput, RankingListItemUncheckedCreateWithoutItemReviewInput>
+  }
+
+  export type RankingListItemUpdateWithWhereUniqueWithoutItemReviewInput = {
+    where: RankingListItemWhereUniqueInput
+    data: XOR<RankingListItemUpdateWithoutItemReviewInput, RankingListItemUncheckedUpdateWithoutItemReviewInput>
+  }
+
+  export type RankingListItemUpdateManyWithWhereWithoutItemReviewInput = {
+    where: RankingListItemScalarWhereInput
+    data: XOR<RankingListItemUpdateManyMutationInput, RankingListItemUncheckedUpdateManyWithoutItemReviewInput>
+  }
+
+  export type RankingListItemScalarWhereInput = {
+    AND?: RankingListItemScalarWhereInput | RankingListItemScalarWhereInput[]
+    OR?: RankingListItemScalarWhereInput[]
+    NOT?: RankingListItemScalarWhereInput | RankingListItemScalarWhereInput[]
+    id?: StringFilter<"RankingListItem"> | string
+    position?: IntFilter<"RankingListItem"> | number
+    rankingListId?: StringFilter<"RankingListItem"> | string
+    itemReviewId?: StringFilter<"RankingListItem"> | string
+  }
+
   export type UserCreateWithoutReviewsInput = {
     id?: string
     name?: string | null
@@ -10122,6 +13173,7 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
+    rankingLists?: RankingListCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReviewsInput = {
@@ -10132,6 +13184,7 @@ export namespace Prisma {
     image?: string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    rankingLists?: RankingListUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReviewsInput = {
@@ -10145,6 +13198,7 @@ export namespace Prisma {
     title: string
     coverUrl?: string | null
     type: $Enums.ContentType
+    rankingListItems?: RankingListItemCreateNestedManyWithoutItemReviewInput
   }
 
   export type ItemReviewUncheckedCreateWithoutReviewsInput = {
@@ -10153,6 +13207,7 @@ export namespace Prisma {
     title: string
     coverUrl?: string | null
     type: $Enums.ContentType
+    rankingListItems?: RankingListItemUncheckedCreateNestedManyWithoutItemReviewInput
   }
 
   export type ItemReviewCreateOrConnectWithoutReviewsInput = {
@@ -10179,6 +13234,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
+    rankingLists?: RankingListUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -10189,6 +13245,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    rankingLists?: RankingListUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type ItemReviewUpsertWithoutReviewsInput = {
@@ -10208,6 +13265,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    rankingListItems?: RankingListItemUpdateManyWithoutItemReviewNestedInput
   }
 
   export type ItemReviewUncheckedUpdateWithoutReviewsInput = {
@@ -10216,6 +13274,201 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
     type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    rankingListItems?: RankingListItemUncheckedUpdateManyWithoutItemReviewNestedInput
+  }
+
+  export type UserCreateWithoutRankingListsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    reviews?: ReviewCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutRankingListsInput = {
+    id?: string
+    name?: string | null
+    email?: string | null
+    emailVerified?: Date | string | null
+    image?: string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    reviews?: ReviewUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutRankingListsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutRankingListsInput, UserUncheckedCreateWithoutRankingListsInput>
+  }
+
+  export type RankingListItemCreateWithoutRankingListInput = {
+    id?: string
+    position: number
+    itemReview: ItemReviewCreateNestedOneWithoutRankingListItemsInput
+  }
+
+  export type RankingListItemUncheckedCreateWithoutRankingListInput = {
+    id?: string
+    position: number
+    itemReviewId: string
+  }
+
+  export type RankingListItemCreateOrConnectWithoutRankingListInput = {
+    where: RankingListItemWhereUniqueInput
+    create: XOR<RankingListItemCreateWithoutRankingListInput, RankingListItemUncheckedCreateWithoutRankingListInput>
+  }
+
+  export type RankingListItemCreateManyRankingListInputEnvelope = {
+    data: RankingListItemCreateManyRankingListInput | RankingListItemCreateManyRankingListInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutRankingListsInput = {
+    update: XOR<UserUpdateWithoutRankingListsInput, UserUncheckedUpdateWithoutRankingListsInput>
+    create: XOR<UserCreateWithoutRankingListsInput, UserUncheckedCreateWithoutRankingListsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutRankingListsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutRankingListsInput, UserUncheckedUpdateWithoutRankingListsInput>
+  }
+
+  export type UserUpdateWithoutRankingListsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutRankingListsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    reviews?: ReviewUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type RankingListItemUpsertWithWhereUniqueWithoutRankingListInput = {
+    where: RankingListItemWhereUniqueInput
+    update: XOR<RankingListItemUpdateWithoutRankingListInput, RankingListItemUncheckedUpdateWithoutRankingListInput>
+    create: XOR<RankingListItemCreateWithoutRankingListInput, RankingListItemUncheckedCreateWithoutRankingListInput>
+  }
+
+  export type RankingListItemUpdateWithWhereUniqueWithoutRankingListInput = {
+    where: RankingListItemWhereUniqueInput
+    data: XOR<RankingListItemUpdateWithoutRankingListInput, RankingListItemUncheckedUpdateWithoutRankingListInput>
+  }
+
+  export type RankingListItemUpdateManyWithWhereWithoutRankingListInput = {
+    where: RankingListItemScalarWhereInput
+    data: XOR<RankingListItemUpdateManyMutationInput, RankingListItemUncheckedUpdateManyWithoutRankingListInput>
+  }
+
+  export type RankingListCreateWithoutItemsInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    user: UserCreateNestedOneWithoutRankingListsInput
+  }
+
+  export type RankingListUncheckedCreateWithoutItemsInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
+    userId: string
+  }
+
+  export type RankingListCreateOrConnectWithoutItemsInput = {
+    where: RankingListWhereUniqueInput
+    create: XOR<RankingListCreateWithoutItemsInput, RankingListUncheckedCreateWithoutItemsInput>
+  }
+
+  export type ItemReviewCreateWithoutRankingListItemsInput = {
+    id?: string
+    externalId: string
+    title: string
+    coverUrl?: string | null
+    type: $Enums.ContentType
+    reviews?: ReviewCreateNestedManyWithoutItemReviewInput
+  }
+
+  export type ItemReviewUncheckedCreateWithoutRankingListItemsInput = {
+    id?: string
+    externalId: string
+    title: string
+    coverUrl?: string | null
+    type: $Enums.ContentType
+    reviews?: ReviewUncheckedCreateNestedManyWithoutItemReviewInput
+  }
+
+  export type ItemReviewCreateOrConnectWithoutRankingListItemsInput = {
+    where: ItemReviewWhereUniqueInput
+    create: XOR<ItemReviewCreateWithoutRankingListItemsInput, ItemReviewUncheckedCreateWithoutRankingListItemsInput>
+  }
+
+  export type RankingListUpsertWithoutItemsInput = {
+    update: XOR<RankingListUpdateWithoutItemsInput, RankingListUncheckedUpdateWithoutItemsInput>
+    create: XOR<RankingListCreateWithoutItemsInput, RankingListUncheckedCreateWithoutItemsInput>
+    where?: RankingListWhereInput
+  }
+
+  export type RankingListUpdateToOneWithWhereWithoutItemsInput = {
+    where?: RankingListWhereInput
+    data: XOR<RankingListUpdateWithoutItemsInput, RankingListUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type RankingListUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutRankingListsNestedInput
+  }
+
+  export type RankingListUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ItemReviewUpsertWithoutRankingListItemsInput = {
+    update: XOR<ItemReviewUpdateWithoutRankingListItemsInput, ItemReviewUncheckedUpdateWithoutRankingListItemsInput>
+    create: XOR<ItemReviewCreateWithoutRankingListItemsInput, ItemReviewUncheckedCreateWithoutRankingListItemsInput>
+    where?: ItemReviewWhereInput
+  }
+
+  export type ItemReviewUpdateToOneWithWhereWithoutRankingListItemsInput = {
+    where?: ItemReviewWhereInput
+    data: XOR<ItemReviewUpdateWithoutRankingListItemsInput, ItemReviewUncheckedUpdateWithoutRankingListItemsInput>
+  }
+
+  export type ItemReviewUpdateWithoutRankingListItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    reviews?: ReviewUpdateManyWithoutItemReviewNestedInput
+  }
+
+  export type ItemReviewUncheckedUpdateWithoutRankingListItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    externalId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    coverUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumContentTypeFieldUpdateOperationsInput | $Enums.ContentType
+    reviews?: ReviewUncheckedUpdateManyWithoutItemReviewNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -10245,6 +13498,12 @@ export namespace Prisma {
     review?: string | null
     createdAt?: Date | string
     itemReviewId: string
+  }
+
+  export type RankingListCreateManyUserInput = {
+    id?: string
+    title: string
+    createdAt?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -10334,12 +13593,38 @@ export namespace Prisma {
     itemReviewId?: StringFieldUpdateOperationsInput | string
   }
 
+  export type RankingListUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: RankingListItemUpdateManyWithoutRankingListNestedInput
+  }
+
+  export type RankingListUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: RankingListItemUncheckedUpdateManyWithoutRankingListNestedInput
+  }
+
+  export type RankingListUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ReviewCreateManyItemReviewInput = {
     id?: string
     rating: number
     review?: string | null
     createdAt?: Date | string
     userId: string
+  }
+
+  export type RankingListItemCreateManyItemReviewInput = {
+    id?: string
+    position: number
+    rankingListId: string
   }
 
   export type ReviewUpdateWithoutItemReviewInput = {
@@ -10364,6 +13649,48 @@ export namespace Prisma {
     review?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RankingListItemUpdateWithoutItemReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    rankingList?: RankingListUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type RankingListItemUncheckedUpdateWithoutItemReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    rankingListId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RankingListItemUncheckedUpdateManyWithoutItemReviewInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    rankingListId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RankingListItemCreateManyRankingListInput = {
+    id?: string
+    position: number
+    itemReviewId: string
+  }
+
+  export type RankingListItemUpdateWithoutRankingListInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    itemReview?: ItemReviewUpdateOneRequiredWithoutRankingListItemsNestedInput
+  }
+
+  export type RankingListItemUncheckedUpdateWithoutRankingListInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    itemReviewId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type RankingListItemUncheckedUpdateManyWithoutRankingListInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    position?: IntFieldUpdateOperationsInput | number
+    itemReviewId?: StringFieldUpdateOperationsInput | string
   }
 
 

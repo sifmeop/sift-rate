@@ -7,7 +7,7 @@ export const EmptyState = ({
 }: IEmptyStateProps) => {
   return (
     <div>
-      <p className='text-center text-2xl font-bold'>{message}</p>
+      <p className='text-center text-xl font-bold'>{message}</p>
     </div>
   )
 }

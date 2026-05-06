@@ -93,7 +93,7 @@ export const UpdateReview = ({
                   color='default'
                   variant='light'
                   onPress={onClose}
-                  disabled={isUpdating}>
+                  isDisabled={isUpdating}>
                   Отмена
                 </Button>
                 <Button color='danger' type='submit' isLoading={isUpdating}>

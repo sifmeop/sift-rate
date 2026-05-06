@@ -3,14 +3,164 @@ import type { IRatingCardData, ITimeline } from '~/components/features/rating'
 import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc'
 import { db } from '~/server/db'
 import {
+  addItemToRankingListSchema,
+  createRankingListSchema,
   createReviewSchema,
+  deleteRankingListSchema,
   deleteReviewSchema,
   getItemReviewsSchema,
+  updateRankingListItemPositionSchema,
   updateReviewSchema,
   validateDates
 } from '~/utils/validators'
 
 export const reviewRouter = createTRPCRouter({
+  createRatingList: protectedProcedure
+    .input(createRankingListSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.rankingList.create({
+        data: {
+          title: input.title,
+          userId: ctx.session.user.id
+        },
+        include: {
+          items: {
+            include: {
+              itemReview: true
+            },
+            orderBy: {
+              position: 'asc'
+            }
+          }
+        }
+      })
+    }),
+  addItemToRatingList: protectedProcedure
+    .input(addItemToRankingListSchema)
+    .mutation(async ({ ctx, input }) => {
+      const rankingList = await ctx.db.rankingList.findFirst({
+        where: {
+          id: input.rankingListId,
+          userId: ctx.session.user.id
+        },
+        select: {
+          id: true,
+          items: {
+            select: {
+              position: true
+            },
+            orderBy: {
+              position: 'desc'
+            },
+            take: 1
+          }
+        }
+      })
+
+      if (!rankingList) {
+        throw new Error('Ranking list not found')
+      }
+
+      const nextPosition = (rankingList.items[0]?.position ?? 0) + 1
+
+      return await ctx.db.rankingListItem.create({
+        data: {
+          rankingListId: input.rankingListId,
+          itemReviewId: input.itemReviewId,
+          position: nextPosition
+        },
+        include: {
+          itemReview: true
+        }
+      })
+    }),
+  updateRankingListItemPosition: protectedProcedure
+    .input(updateRankingListItemPositionSchema)
+    .mutation(async ({ ctx, input }) => {
+      const rankingListItem = await ctx.db.rankingListItem.findFirst({
+        where: {
+          id: input.rankingListItemId,
+          rankingList: {
+            userId: ctx.session.user.id
+          }
+        },
+        select: {
+          id: true,
+          rankingListId: true
+        }
+      })
+
+      if (!rankingListItem) {
+        throw new Error('Ranking list item not found')
+      }
+
+      const items = await ctx.db.rankingListItem.findMany({
+        where: {
+          rankingListId: rankingListItem.rankingListId
+        },
+        orderBy: {
+          position: 'asc'
+        },
+        select: {
+          id: true
+        }
+      })
+
+      if (input.targetPosition > items.length) {
+        throw new Error('Target position is out of range')
+      }
+
+      const currentIndex = items.findIndex((item) => item.id === input.rankingListItemId)
+
+      if (currentIndex === -1) {
+        throw new Error('Ranking list item not found')
+      }
+
+      if (currentIndex === input.targetPosition - 1) {
+        return {
+          rankingListId: rankingListItem.rankingListId
+        }
+      }
+
+      const reorderedItems = [...items]
+      const movedItem = reorderedItems[currentIndex]
+
+      if (!movedItem) {
+        throw new Error('Ranking list item not found')
+      }
+
+      reorderedItems.splice(currentIndex, 1)
+      reorderedItems.splice(input.targetPosition - 1, 0, movedItem)
+
+      await ctx.db.$transaction(async (tx) => {
+        for (const [index, item] of reorderedItems.entries()) {
+          await tx.rankingListItem.update({
+            where: {
+              id: item.id
+            },
+            data: {
+              // Move all positions into a temporary non-conflicting range first.
+              position: items.length + index + 1
+            }
+          })
+        }
+
+        for (const [index, item] of reorderedItems.entries()) {
+          await tx.rankingListItem.update({
+            where: {
+              id: item.id
+            },
+            data: {
+              position: index + 1
+            }
+          })
+        }
+      })
+
+      return {
+        rankingListId: rankingListItem.rankingListId
+      }
+    }),
   create: protectedProcedure
     .input(createReviewSchema)
     .mutation(async ({ ctx, input }) => {
@@ -81,6 +231,35 @@ export const reviewRouter = createTRPCRouter({
               externalId: true
             }
           }
+        }
+      })
+    }),
+  deleteRatingList: protectedProcedure
+    .input(deleteRankingListSchema)
+    .mutation(async ({ ctx, input }) => {
+      const rankingList = await ctx.db.rankingList.findFirst({
+        where: {
+          id: input.id,
+          userId: ctx.session.user.id
+        },
+        select: {
+          id: true
+        }
+      })
+
+      if (!rankingList) {
+        throw new Error('Ranking list not found')
+      }
+
+      await ctx.db.rankingListItem.deleteMany({
+        where: {
+          rankingListId: input.id
+        }
+      })
+
+      return await ctx.db.rankingList.delete({
+        where: {
+          id: input.id
         }
       })
     }),
@@ -203,5 +382,25 @@ export const reviewRouter = createTRPCRouter({
           createdAt: 'desc'
         }
       })
+    }),
+  getRatingList: protectedProcedure.query(async ({ ctx }) => {
+    return await ctx.db.rankingList.findMany({
+      where: {
+        userId: ctx.session.user.id
+      },
+      include: {
+        items: {
+          include: {
+            itemReview: true
+          },
+          orderBy: {
+            position: 'asc'
+          }
+        }
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
     })
+  })
 })

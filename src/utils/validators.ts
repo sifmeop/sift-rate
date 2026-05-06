@@ -28,6 +28,40 @@ export const deleteReviewSchema = z.object({
 
 export type DeleteReviewSchemaType = z.infer<typeof deleteReviewSchema>
 
+export const createRankingListSchema = z.object({
+  title: z.string().trim().min(1).max(80)
+})
+
+export type CreateRankingListSchemaType = z.infer<
+  typeof createRankingListSchema
+>
+
+export const deleteRankingListSchema = z.object({
+  id: z.string()
+})
+
+export type DeleteRankingListSchemaType = z.infer<
+  typeof deleteRankingListSchema
+>
+
+export const addItemToRankingListSchema = z.object({
+  rankingListId: z.string(),
+  itemReviewId: z.string()
+})
+
+export type AddItemToRankingListSchemaType = z.infer<
+  typeof addItemToRankingListSchema
+>
+
+export const updateRankingListItemPositionSchema = z.object({
+  rankingListItemId: z.string(),
+  targetPosition: z.number().int().min(1)
+})
+
+export type UpdateRankingListItemPositionSchemaType = z.infer<
+  typeof updateRankingListItemPositionSchema
+>
+
 export const validateDates = z
   .object({
     from: z.string().optional(),
