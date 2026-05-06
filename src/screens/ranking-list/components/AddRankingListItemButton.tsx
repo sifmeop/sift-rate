@@ -44,11 +44,7 @@ const AddRankingListItemButton = ({
       enabled: isOpen
     }
   )
-  const { handleAdd, isAdding } = useAddRankingListItem(() => {
-    setSearch('')
-    setActiveItemReviewId(null)
-    onOpenChange()
-  })
+  const { handleAdd, isAdding } = useAddRankingListItem()
 
   const existingItemIds = useMemo(
     () => new Set(rankingList.items.map((item) => item.itemReviewId)),

@@ -1,7 +1,7 @@
 import { addToast } from '@heroui/toast'
 import { api } from '~/trpc/react'
 
-export const useAddRankingListItem = (onClose: () => void) => {
+export const useAddRankingListItem = () => {
   const utils = api.useUtils()
   const { mutateAsync, isPending: isAdding } =
     api.review.addItemToRatingList.useMutation({
@@ -35,7 +35,6 @@ export const useAddRankingListItem = (onClose: () => void) => {
         title: 'Успешно',
         description: 'Объект добавлен в список'
       })
-      onClose()
     } catch (error) {
       console.error('Add ranking list item submit failed:', error)
     }

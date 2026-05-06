@@ -20,7 +20,9 @@ export const DeleteRankingListButton = ({
   title
 }: IDeleteRankingListButtonProps) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure()
-  const { handleDelete, isDeleting } = useDeleteRankingList(onOpenChange)
+  const { handleDelete, isDeleting } = useDeleteRankingList({
+    onClose: onOpenChange
+  })
 
   return (
     <>

@@ -8,7 +8,7 @@ import {
 } from '~/utils/validators'
 
 interface IUseCreateRankingListOptions {
-  onClose?: () => void
+  onClose: () => void
 }
 
 export const useCreateRankingList = ({
@@ -18,13 +18,44 @@ export const useCreateRankingList = ({
 
   const { mutateAsync, isPending: isCreating } =
     api.review.createRatingList.useMutation({
-      onError: (error) => {
-        console.error('Error creating ranking list:', error)
+      onMutate: async (newData) => {
+        await utils.review.getRatingList.cancel()
+
+        const prevData = utils.review.getRatingList.getData()
+
+        utils.review.getRatingList.setData(undefined, (oldData) => {
+          const newItem = {
+            id: crypto.randomUUID(),
+            title: newData.title,
+            userId: crypto.randomUUID(),
+            createdAt: new Date(),
+            items: []
+          }
+
+          if (!oldData) return [newItem]
+
+          return [newItem, ...oldData]
+        })
+
+        reset()
+        onClose()
+        addToast({
+          title: 'Успешно',
+          description: 'Список рейтинга создан'
+        })
+
+        return { prevData }
+      },
+      onError: (_, __, ctx) => {
+        utils.review.getRatingList.setData(undefined, ctx?.prevData)
 
         addToast({
           title: 'Ошибка',
           description: 'Не удалось создать список рейтинга'
         })
+      },
+      onSettled: () => {
+        void utils.review.getRatingList.invalidate()
       }
     })
 
@@ -41,14 +72,6 @@ export const useCreateRankingList = ({
   const onSubmit = handleSubmit(async (data) => {
     try {
       await mutateAsync(data)
-      await utils.review.getRatingList.invalidate()
-
-      reset()
-      onClose?.()
-      addToast({
-        title: 'Успешно',
-        description: 'Список рейтинга создан'
-      })
     } catch (error) {
       console.error('Create ranking list submit failed:', error)
     }

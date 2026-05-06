@@ -10,7 +10,7 @@ import {
 interface IUseUpdateRankingListOptions {
   ratingListId: string
   defaultTitle: string
-  onClose?: () => void
+  onClose: () => void
 }
 
 export const useUpdateRankingList = ({
@@ -20,15 +20,51 @@ export const useUpdateRankingList = ({
 }: IUseUpdateRankingListOptions) => {
   const utils = api.useUtils()
 
-  const { mutateAsync, isPending: isCreating } =
+  const { mutateAsync, isPending: isUpdating } =
     api.review.updateRatingList.useMutation({
-      onError: (error) => {
-        console.error('Error creating ranking list:', error)
+      onMutate: async (newData) => {
+        await utils.review.getRatingList.cancel()
+
+        const prevData = utils.review.getRatingList.getData()
+
+        utils.review.getRatingList.setData(undefined, (oldData) => {
+          if (!oldData) return
+
+          const updatedData = oldData.map((item) => {
+            if (item.id === newData.id) {
+              return {
+                ...item,
+                title: newData.title
+              }
+            }
+
+            return item
+          })
+
+          return updatedData
+        })
+
+        reset({
+          title: newData.title
+        })
+        onClose()
+        addToast({
+          title: 'Успешно',
+          description: 'Название обновлено'
+        })
+
+        return { prevData }
+      },
+      onError: (_, __, ctx) => {
+        utils.review.getRatingList.setData(undefined, ctx?.prevData)
 
         addToast({
           title: 'Ошибка',
-          description: 'Не удалось создать список рейтинга'
+          description: 'Не удалось обновить название'
         })
+      },
+      onSettled: () => {
+        void utils.review.getRatingList.invalidate()
       }
     })
 
@@ -52,16 +88,8 @@ export const useUpdateRankingList = ({
 
     try {
       await mutateAsync(data)
-      await utils.review.getRatingList.invalidate()
-
-      reset()
-      onClose?.()
-      addToast({
-        title: 'Успешно',
-        description: 'Список рейтинга создан'
-      })
     } catch (error) {
-      console.error('Create ranking list submit failed:', error)
+      console.error('Update ranking list submit failed:', error)
     }
   })
 
@@ -72,8 +100,9 @@ export const useUpdateRankingList = ({
 
   return {
     register,
+    reset,
     onSubmit,
-    isCreating,
+    isUpdating,
     title,
     handleClose
   }

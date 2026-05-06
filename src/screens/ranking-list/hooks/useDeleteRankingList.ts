@@ -1,30 +1,54 @@
 import { addToast } from '@heroui/toast'
 import { api } from '~/trpc/react'
 
-export const useDeleteRankingList = (onClose: () => void) => {
+interface IUseDeleteRankingListOptions {
+  onClose: () => void
+}
+
+export const useDeleteRankingList = ({
+  onClose
+}: IUseDeleteRankingListOptions) => {
   const utils = api.useUtils()
+
   const { mutateAsync, isPending: isDeleting } =
     api.review.deleteRatingList.useMutation({
-      onError: (error) => {
-        console.error('Error deleting ranking list:', error)
+      onMutate: async (newData) => {
+        await utils.review.getRatingList.cancel()
+
+        const prevData = utils.review.getRatingList.getData()
+
+        utils.review.getRatingList.setData(undefined, (oldData) => {
+          if (!oldData) return
+
+          const filteredData = oldData.filter((item) => item.id !== newData.id)
+
+          return filteredData
+        })
+
+        onClose()
+        addToast({
+          title: 'Успешно',
+          description: 'Список рейтинга удален'
+        })
+
+        return { prevData }
+      },
+      onError: (_, __, ctx) => {
+        utils.review.getRatingList.setData(undefined, ctx?.prevData)
 
         addToast({
           title: 'Ошибка',
           description: 'Не удалось удалить список рейтинга'
         })
+      },
+      onSettled: () => {
+        void utils.review.getRatingList.invalidate()
       }
     })
 
   const handleDelete = async (id: string) => {
     try {
       await mutateAsync({ id })
-      await utils.review.getRatingList.invalidate()
-
-      addToast({
-        title: 'Успешно',
-        description: 'Список рейтинга удален'
-      })
-      onClose()
     } catch (error) {
       console.error('Delete ranking list submit failed:', error)
     }

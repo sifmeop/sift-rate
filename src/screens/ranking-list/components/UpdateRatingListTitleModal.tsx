@@ -22,12 +22,20 @@ export const UpdateRatingListTitleModal = ({
 }: UpdateRatingListTitleModalProps) => {
   const { isOpen, onOpenChange } = useDisclosure()
 
-  const { register, onSubmit, isCreating, title, handleClose } =
+  const { register, onSubmit, isUpdating, title, reset, handleClose } =
     useUpdateRankingList({
       ratingListId,
       defaultTitle,
       onClose: onOpenChange
     })
+
+  const handleOpenChangeModal = (isOpen: boolean) => {
+    onOpenChange()
+
+    if (!isOpen) {
+      reset()
+    }
+  }
 
   return (
     <>
@@ -39,10 +47,13 @@ export const UpdateRatingListTitleModal = ({
         onPress={onOpenChange}>
         <PencilIcon size={16} />
       </Button>
-      <Modal placement='center' isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        placement='center'
+        isOpen={isOpen}
+        onOpenChange={handleOpenChangeModal}>
         <ModalContent>
           {() => (
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} onClick={(e) => e.stopPropagation()}>
               <ModalHeader className='flex flex-col gap-1'>
                 <span className='font-roboto-slab text-xl font-bold'>
                   Название списка
@@ -63,15 +74,15 @@ export const UpdateRatingListTitleModal = ({
                   color='default'
                   variant='light'
                   onPress={handleClose}
-                  isDisabled={isCreating}>
+                  isDisabled={isUpdating}>
                   Отмена
                 </Button>
                 <Button
                   color='primary'
                   type='submit'
-                  isLoading={isCreating}
+                  isLoading={isUpdating}
                   isDisabled={title.trim().length === 0}>
-                  {isCreating ? 'Обновляется...' : 'Обновить'}
+                  {isUpdating ? 'Обновляется...' : 'Обновить'}
                 </Button>
               </ModalFooter>
             </form>
