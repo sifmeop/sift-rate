@@ -24,7 +24,7 @@ export const Header = ({ email }: IHeaderProps) => {
 
   return (
     <header className='border-b-border bg-background-primary/60 pt-safe-or-4 fixed top-0 z-50 w-full border-b pb-4 backdrop-blur-xl'>
-      <div className='app-container flex h-full max-w-fit! items-center justify-center gap-4 md:justify-between'>
+      <div className='app-container flex h-full max-w-fit! items-center justify-center gap-4 lg:justify-between'>
         <Link
           prefetch
           href={ROUTES.REVIEWS}
@@ -36,7 +36,7 @@ export const Header = ({ email }: IHeaderProps) => {
             Sift-Rate
           </span>
         </Link>
-        <nav className='hidden w-full items-center gap-2 md:flex'>
+        <nav className='hidden w-full items-center gap-2 lg:flex'>
           {NAV_LINKS.map(({ label, href, icon: Icon }) => {
             const isActive = pathname === href
             return (
@@ -53,9 +53,9 @@ export const Header = ({ email }: IHeaderProps) => {
             )
           })}
         </nav>
-        <div className='absolute right-4 flex items-center gap-2 md:static'>
+        <div className='absolute right-4 flex items-center gap-2 lg:static'>
           <Show when={!!email}>
-            <div className='hidden items-center gap-2 md:flex'>
+            <div className='hidden items-center gap-2 lg:flex'>
               <UserIcon className='size-5' />
               <span className='text-sm'>{email}</span>
             </div>

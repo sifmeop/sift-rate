@@ -36,7 +36,7 @@ export const MonthSelector = ({ timeline }: IMonthSelectorProps) => {
       style={{
         gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))'
       }}
-      className='hidden gap-3 md:grid'>
+      className='hidden gap-3 lg:grid'>
       {monthsMap.map((month) => {
         const { total, best } = months[+month]!
         const date = new Date(selectedYear, +month, 1)

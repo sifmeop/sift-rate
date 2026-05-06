@@ -22,7 +22,7 @@ export const AddRankingListItemRow = ({
   return (
     <div
       className={cn(
-        'group bg-card-background hover:bg-card-background-secondary/80 border-border relative flex gap-4 rounded-xl border p-4 hover:shadow-lg md:flex-row',
+        'group bg-card-background hover:bg-card-background-secondary/80 border-border relative flex gap-4 rounded-xl border p-4 hover:shadow-lg lg:flex-row',
         {
           'mb-3': !isLast
         }

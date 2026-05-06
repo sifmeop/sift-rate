@@ -32,7 +32,7 @@ export const RatingList = ({ items, isLoading, error }: IRatingListProps) => {
   return (
     <RatingListProvider>
       <div className='flex flex-col gap-3'>
-        <div className='grid gap-3 md:grid-cols-[200px_1fr]'>
+        <div className='grid gap-3 lg:grid-cols-[200px_1fr]'>
           <RatingListTabs items={items} />
           <RatingListSearch />
         </div>

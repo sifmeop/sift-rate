@@ -54,7 +54,7 @@ export const RatingCard = ({
       animate='animate'
       variants={cardVariants}
       className={cn(
-        'group bg-card-background relative flex flex-col gap-4 rounded-xl border p-4 hover:shadow-lg md:flex-row',
+        'group bg-card-background relative flex flex-col gap-4 rounded-xl border p-4 hover:shadow-lg lg:flex-row',
         isTopRated
           ? 'from-yellow/10 via-card to-card border-yellow/30 hover:border-yellow/50 bg-linear-to-r'
           : 'hover:bg-card-background-secondary/80 border-border',
@@ -75,7 +75,7 @@ export const RatingCard = ({
       <Show when={isTopRated}>
         <div className='from-yellow/10 pointer-events-none absolute -inset-px rounded-xl bg-linear-to-r to-transparent opacity-0 blur-xl transition-opacity group-hover:opacity-100' />
       </Show>
-      <div className='max-md:mx-auto'>
+      <div className='max-lg:mx-auto'>
         <ReviewCover title={title} coverUrl={coverUrl} />
       </div>
       <div className='flex w-full flex-col gap-2'>

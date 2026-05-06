@@ -44,10 +44,10 @@ export const RankingListItemRow = ({
   const badgeClassName = getPositionStyles(item.position)
 
   return (
-    <div className='bg-card-background border-border flex items-center gap-5 rounded-xl border p-3 pl-5 max-md:gap-3 max-md:pl-3'>
+    <div className='bg-card-background border-border flex items-center gap-5 rounded-xl border p-3 pl-5 max-lg:gap-3 max-lg:pl-3'>
       <div
         className={cn(
-          'flex size-12 shrink-0 items-center justify-center rounded-full border text-base font-black max-md:size-6',
+          'flex size-12 shrink-0 items-center justify-center rounded-full border text-base font-black max-lg:size-6',
           badgeClassName
         )}>
         {item.position}
@@ -56,12 +56,12 @@ export const RankingListItemRow = ({
       <ReviewCover
         title={item.itemReview.title}
         coverUrl={item.itemReview.coverUrl}
-        className='w-24 max-md:w-16'
+        className='w-24 max-lg:w-16'
       />
 
       <div className='min-w-0 flex-1 space-y-2 overflow-hidden'>
         <Badge type={item.itemReview.type} size='sm' />
-        <p className='line-clamp-2 font-semibold max-md:text-sm'>
+        <p className='line-clamp-2 font-semibold max-lg:text-sm'>
           {item.itemReview.title}
         </p>
       </div>

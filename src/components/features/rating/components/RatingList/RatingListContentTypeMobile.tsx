@@ -45,7 +45,7 @@ export const RatingListContentTypeMobile = ({
       selectedKeys={selectedKeys}
       onSelectionChange={onSelectionChange}
       classNames={{
-        base: 'inline-flex md:hidden',
+        base: 'inline-flex lg:hidden',
         trigger: selectedBg
       }}>
       {Object.entries(BADGE_TAB_META).map(

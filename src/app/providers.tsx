@@ -13,7 +13,7 @@ export const Providers = ({ children }: React.PropsWithChildren) => {
             placement='top-center'
             toastProps={{
               classNames: {
-                base: 'top-[calc(65px+env(safe-area-inset-top))] md:top-20'
+                base: 'top-[calc(65px+env(safe-area-inset-top))] lg:top-20'
               }
             }}
           />

@@ -27,7 +27,7 @@ export const RankingListCardContent = ({
   if (items.length === 0) {
     return (
       <div className='space-y-4'>
-        <div className='flex justify-end gap-3 max-md:grid max-md:grid-cols-2'>
+        <div className='flex justify-end gap-3 max-lg:grid max-lg:grid-cols-2'>
           <AddRankingListItemButton rankingList={list} />
           <DeleteRankingListButton id={list.id} title={list.title} />
         </div>
@@ -40,7 +40,7 @@ export const RankingListCardContent = ({
 
   return (
     <div className='space-y-4'>
-      <div className='flex flex-wrap justify-end gap-3 max-md:grid max-md:grid-cols-2'>
+      <div className='flex flex-wrap justify-end gap-3 max-lg:grid max-lg:grid-cols-2'>
         <AddRankingListItemButton rankingList={list} />
         <DeleteRankingListButton id={list.id} title={list.title} />
       </div>

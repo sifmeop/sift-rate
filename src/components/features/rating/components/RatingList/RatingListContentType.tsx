@@ -33,7 +33,7 @@ export const RatingListContentType = ({
       selectedKey={state.contentType}
       onSelectionChange={onSelectionChange}
       classNames={{
-        base: 'hidden md:inline-flex',
+        base: 'hidden lg:inline-flex',
         cursor: selectedContentTypeBg
       }}>
       {Object.entries(BADGE_TAB_META).map(([key, { icon: Icon, text }]) => {
