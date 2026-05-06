@@ -36,6 +36,15 @@ export type CreateRankingListSchemaType = z.infer<
   typeof createRankingListSchema
 >
 
+export const updateRankingListSchema = z.object({
+  id: z.string(),
+  title: z.string().trim().min(1).max(80)
+})
+
+export type UpdateRankingListSchemaType = z.infer<
+  typeof updateRankingListSchema
+>
+
 export const deleteRankingListSchema = z.object({
   id: z.string()
 })

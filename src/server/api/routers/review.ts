@@ -10,6 +10,7 @@ import {
   deleteReviewSchema,
   getItemReviewsSchema,
   updateRankingListItemPositionSchema,
+  updateRankingListSchema,
   updateReviewSchema,
   validateDates
 } from '~/utils/validators'
@@ -32,6 +33,19 @@ export const reviewRouter = createTRPCRouter({
               position: 'asc'
             }
           }
+        }
+      })
+    }),
+  updateRatingList: protectedProcedure
+    .input(updateRankingListSchema)
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.rankingList.update({
+        where: {
+          id: input.id,
+          userId: ctx.session.user.id
+        },
+        data: {
+          title: input.title
         }
       })
     }),
@@ -110,7 +124,9 @@ export const reviewRouter = createTRPCRouter({
         throw new Error('Target position is out of range')
       }
 
-      const currentIndex = items.findIndex((item) => item.id === input.rankingListItemId)
+      const currentIndex = items.findIndex(
+        (item) => item.id === input.rankingListItemId
+      )
 
       if (currentIndex === -1) {
         throw new Error('Ranking list item not found')

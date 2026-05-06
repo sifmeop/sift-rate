@@ -262,7 +262,6 @@ export class SearchService {
     }>('https://api.rawg.io/api/games?search', {
       params: {
         search: encodeURIComponent(query),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         key: env.NEXT_PUBLIC_RAWG_API_KEY,
         page
       }
