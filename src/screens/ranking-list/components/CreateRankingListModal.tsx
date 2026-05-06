@@ -22,8 +22,9 @@ export const CreateRankingListModal = () => {
   return (
     <>
       <Button
+        fullWidth
         color='primary'
-        className='ml-auto w-fit font-semibold'
+        className='font-semibold'
         startContent={<ListPlusIcon size={18} />}
         onPress={onOpen}>
         Создать список

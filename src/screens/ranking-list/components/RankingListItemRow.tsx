@@ -8,34 +8,18 @@ import { MoveRankingListItemModal } from './MoveRankingListItemModal'
 
 const getPositionStyles = (position: number) => {
   if (position === 1) {
-    return {
-      badgeClassName:
-        'border-yellow/40 bg-linear-to-br from-yellow/35 via-yellow/20 to-amber-500/25 text-yellow shadow-[0_0_24px_rgba(234,179,8,0.24)]',
-      label: 'Gold'
-    }
+    return 'border-yellow/40 bg-linear-to-br from-yellow/35 via-yellow/20 to-amber-500/25 text-yellow shadow-[0_0_24px_rgba(234,179,8,0.24)]'
   }
 
   if (position === 2) {
-    return {
-      badgeClassName:
-        'border-slate-300/35 bg-linear-to-br from-slate-200/30 via-slate-300/20 to-slate-400/20 text-slate-100 shadow-[0_0_20px_rgba(203,213,225,0.2)]',
-      label: 'Silver'
-    }
+    return 'border-slate-300/35 bg-linear-to-br from-slate-200/30 via-slate-300/20 to-slate-400/20 text-slate-100 shadow-[0_0_20px_rgba(203,213,225,0.2)]'
   }
 
   if (position === 3) {
-    return {
-      badgeClassName:
-        'border-amber-700/40 bg-linear-to-br from-amber-700/35 via-orange-700/20 to-amber-900/25 text-amber-200 shadow-[0_0_20px_rgba(180,83,9,0.22)]',
-      label: 'Bronze'
-    }
+    return 'border-amber-700/40 bg-linear-to-br from-amber-700/35 via-orange-700/20 to-amber-900/25 text-amber-200 shadow-[0_0_20px_rgba(180,83,9,0.22)]'
   }
 
-  return {
-    badgeClassName:
-      'border-border bg-card-background-secondary text-foreground shadow-none',
-    label: 'Rank'
-  }
+  return 'border-border bg-card-background-secondary text-foreground shadow-none'
 }
 
 interface IRankingListItemRowProps {
@@ -58,21 +42,16 @@ export const RankingListItemRow = ({
 }: IRankingListItemRowProps) => {
   const canMoveUp = item.position > 1
   const canMoveDown = item.position < maxPosition
-  const positionMeta = getPositionStyles(item.position)
+  const badgeClassName = getPositionStyles(item.position)
 
   return (
     <div className='bg-card-background border-border flex items-center gap-5 rounded-xl border p-3 pl-5'>
-      <div className='flex shrink-0 flex-col items-center gap-1'>
-        <div
-          className={cn(
-            'flex size-12 items-center justify-center rounded-full border text-base font-black',
-            positionMeta.badgeClassName
-          )}>
-          {item.position}
-        </div>
-        <span className='text-muted-foreground text-[10px] font-semibold tracking-[0.18em] uppercase'>
-          {positionMeta.label}
-        </span>
+      <div
+        className={cn(
+          'flex size-12 shrink-0 items-center justify-center rounded-full border text-base font-black',
+          badgeClassName
+        )}>
+        {item.position}
       </div>
 
       <ReviewCover
@@ -82,12 +61,7 @@ export const RankingListItemRow = ({
       />
 
       <div className='min-w-0 flex-1 space-y-2'>
-        <div className='flex flex-wrap items-center gap-2'>
-          <Badge type={item.itemReview.type} />
-          <span className='text-muted-foreground text-xs font-semibold tracking-wide'>
-            #{item.position} в списке
-          </span>
-        </div>
+        <Badge type={item.itemReview.type} />
         <p className='font-semibold'>{item.itemReview.title}</p>
       </div>
 
