@@ -1,11 +1,11 @@
 import { type AxiosError } from 'axios'
-import type { ContentType } from 'generated/prisma'
 import { useState } from 'react'
 import {
   SearchService,
   type ISelectedTargetItem,
   type ITargetItem
 } from '~/components/features/rating'
+import type { ContentType } from '~/generated/prisma'
 
 export const useTargetSearch = (
   selectedType: ContentType,

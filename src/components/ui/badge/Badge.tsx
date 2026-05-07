@@ -1,6 +1,6 @@
 import { cn } from '@heroui/theme'
-import type { ContentType } from 'generated/prisma'
 import { BADGE_META } from '~/constants/badge'
+import type { ContentType } from '~/generated/prisma'
 
 type ContentTypeModified = ContentType | 'BEST'
 

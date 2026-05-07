@@ -1,7 +1,7 @@
 import axios from 'axios'
 import dayjs from 'dayjs'
-import { type ContentType } from 'generated/prisma'
 import { env } from '~/env'
+import { type ContentType } from '~/generated/prisma'
 import type {
   IAlbumTargetItem,
   IBookTargetItem,

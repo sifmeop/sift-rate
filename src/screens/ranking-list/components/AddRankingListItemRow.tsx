@@ -32,7 +32,7 @@ export const AddRankingListItemRow = ({
         coverUrl={review.itemReview.coverUrl}
         className='w-20'
       />
-      <div className='min-w-0 flex-1 space-y-2'>
+      <div className='flex-1 space-y-2'>
         <div className='flex flex-wrap items-center gap-2'>
           <Badge type={review.itemReview.type} />
           <span className='text-muted-foreground text-sm'>

@@ -1,12 +1,12 @@
 import { Button } from '@heroui/button'
 import { Input } from '@heroui/input'
 import { Pagination } from '@heroui/pagination'
-import type { ContentType } from 'generated/prisma'
 import { ChevronRight, SearchIcon } from 'lucide-react'
 import type { ISelectedTargetItem } from '~/components/features/rating'
 import { LoadingSpinner } from '~/components/ui/loading-spinner'
 import { ReviewCover } from '~/components/ui/review-cover'
 import { Show } from '~/components/ui/show'
+import type { ContentType } from '~/generated/prisma'
 import { useTargetSearch } from '../hooks/useTargetSearch'
 import { getItemCountText } from '../utils/getItemCountText'
 

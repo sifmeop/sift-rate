@@ -17,7 +17,7 @@ export const Rating = ({ rating }: IRatingProps) => {
       )}>
       <Star
         className={cn(
-          'h-4 w-4',
+          'size-4',
           isTopRated ? 'fill-yellow text-yellow' : 'fill-yellow text-yellow'
         )}
       />

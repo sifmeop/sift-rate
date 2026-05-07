@@ -1,6 +1,6 @@
-import { ContentType } from 'generated/prisma'
 import z from 'zod'
 import { MAX_RATING, MAX_REVIEW_LENGTH } from '~/constants/review'
+import { ContentType } from '~/generated/prisma'
 
 export const createReviewSchema = z.object({
   externalId: z.string(),

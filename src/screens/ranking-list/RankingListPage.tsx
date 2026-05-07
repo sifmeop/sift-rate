@@ -8,7 +8,7 @@ import { RankingListCard } from './components/RankingListCard'
 
 export const RankingListPage = () => {
   const { data, isLoading, error, refetch } =
-    api.review.getRatingList.useQuery()
+    api.review.getRankingList.useQuery()
 
   const list = data ?? []
 

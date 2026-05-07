@@ -1,4 +1,4 @@
-import type { ContentType } from 'generated/prisma'
+import type { ContentType } from '~/generated/prisma'
 
 export const getItemCountText = (count: number, type: ContentType) => {
   const forms: Record<ContentType, string[]> = {

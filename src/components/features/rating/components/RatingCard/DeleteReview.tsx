@@ -7,9 +7,9 @@ import {
   ModalHeader,
   useDisclosure
 } from '@heroui/modal'
-import type { ContentType } from 'generated/prisma'
 import { Trash2Icon } from 'lucide-react'
 import { Badge } from '~/components/ui/badge'
+import type { ContentType } from '~/generated/prisma'
 import { useDeleteReview } from '../../hooks/useDeleteReview'
 
 interface IDeleteReviewProps {

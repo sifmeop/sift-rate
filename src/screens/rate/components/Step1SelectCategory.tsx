@@ -1,4 +1,3 @@
-import type { ContentType } from 'generated/prisma'
 import {
   BookOpenIcon,
   Disc3Icon,
@@ -9,6 +8,7 @@ import {
   type LucideIcon
 } from 'lucide-react'
 import { PageTitle } from '~/components/ui/page-title'
+import type { ContentType } from '~/generated/prisma'
 
 interface ICategoryItem {
   category: ContentType

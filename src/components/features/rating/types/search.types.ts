@@ -1,4 +1,4 @@
-import type { ContentType } from 'generated/prisma'
+import type { ContentType } from '~/generated/prisma'
 
 export interface ISearchResult {
   items: ITargetItem[]

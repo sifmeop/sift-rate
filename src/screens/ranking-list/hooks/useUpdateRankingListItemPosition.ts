@@ -25,7 +25,7 @@ export const useUpdateRankingListItemPosition = () => {
   }) => {
     try {
       await mutateAsync({ rankingListItemId, targetPosition })
-      await utils.review.getRatingList.invalidate()
+      await utils.review.getRankingList.invalidate()
 
       addToast({
         title: 'Успешно',

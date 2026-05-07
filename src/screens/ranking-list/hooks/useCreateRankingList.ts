@@ -19,11 +19,11 @@ export const useCreateRankingList = ({
   const { mutateAsync, isPending: isCreating } =
     api.review.createRatingList.useMutation({
       onMutate: async (newData) => {
-        await utils.review.getRatingList.cancel()
+        await utils.review.getRankingList.cancel()
 
-        const prevData = utils.review.getRatingList.getData()
+        const prevData = utils.review.getRankingList.getData()
 
-        utils.review.getRatingList.setData(undefined, (oldData) => {
+        utils.review.getRankingList.setData(undefined, (oldData) => {
           const newItem = {
             id: crypto.randomUUID(),
             title: newData.title,
@@ -47,7 +47,7 @@ export const useCreateRankingList = ({
         return { prevData }
       },
       onError: (_, __, ctx) => {
-        utils.review.getRatingList.setData(undefined, ctx?.prevData)
+        utils.review.getRankingList.setData(undefined, ctx?.prevData)
 
         addToast({
           title: 'Ошибка',
@@ -55,7 +55,7 @@ export const useCreateRankingList = ({
         })
       },
       onSettled: () => {
-        void utils.review.getRatingList.invalidate()
+        void utils.review.getRankingList.invalidate()
       }
     })
 

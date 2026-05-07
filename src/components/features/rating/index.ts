@@ -1,3 +1,4 @@
+export * from './components/RatingCard/Rating'
 export * from './components/RatingList'
 export * from './service/search.service'
 export * from './types/rating.types'

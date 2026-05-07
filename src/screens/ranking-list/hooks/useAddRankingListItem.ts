@@ -29,7 +29,7 @@ export const useAddRankingListItem = () => {
   }) => {
     try {
       await mutateAsync({ rankingListId, itemReviewId })
-      await utils.review.getRatingList.invalidate()
+      await utils.review.getRankingList.invalidate()
 
       addToast({
         title: 'Успешно',

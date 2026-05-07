@@ -1,6 +1,7 @@
 import { Button } from '@heroui/button'
 import { cn } from '@heroui/theme'
 import { ArrowDownIcon, ArrowUpIcon } from 'lucide-react'
+import { Rating } from '~/components/features/rating'
 import { Badge } from '~/components/ui/badge'
 import { ReviewCover } from '~/components/ui/review-cover'
 import type { RankingListWithItems } from '../types'
@@ -42,6 +43,7 @@ export const RankingListItemRow = ({
   const canMoveUp = item.position > 1
   const canMoveDown = item.position < maxPosition
   const badgeClassName = getPositionStyles(item.position)
+  const rating = item.itemReview.reviews[0]?.rating
 
   return (
     <div className='bg-card-background border-border flex items-center gap-5 rounded-xl border p-3 pl-5 max-lg:gap-3 max-lg:pl-3'>
@@ -56,11 +58,14 @@ export const RankingListItemRow = ({
       <ReviewCover
         title={item.itemReview.title}
         coverUrl={item.itemReview.coverUrl}
-        className='w-24 max-lg:w-16'
+        className='w-28 max-lg:w-16'
       />
 
-      <div className='min-w-0 flex-1 space-y-2 overflow-hidden'>
-        <Badge type={item.itemReview.type} size='sm' />
+      <div className='flex-1 space-y-2'>
+        <div className='flex items-center gap-2'>
+          <Badge type={item.itemReview.type} size='sm' />
+          {rating && <Rating rating={rating} />}
+        </div>
         <p className='line-clamp-2 font-semibold max-lg:text-sm'>
           {item.itemReview.title}
         </p>

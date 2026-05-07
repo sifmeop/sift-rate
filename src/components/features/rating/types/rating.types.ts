@@ -1,5 +1,5 @@
-import type { ContentType, ItemReview, Review, User } from 'generated/prisma'
 import z from 'zod'
+import type { ContentType, ItemReview, Review, User } from '~/generated/prisma'
 
 export interface IRatingCardData extends Review {
   itemReview: Pick<ItemReview, 'title' | 'coverUrl' | 'type' | 'externalId'>

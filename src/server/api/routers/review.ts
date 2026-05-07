@@ -155,7 +155,6 @@ export const reviewRouter = createTRPCRouter({
               id: item.id
             },
             data: {
-              // Move all positions into a temporary non-conflicting range first.
               position: items.length + index + 1
             }
           })
@@ -399,7 +398,7 @@ export const reviewRouter = createTRPCRouter({
         }
       })
     }),
-  getRatingList: protectedProcedure.query(async ({ ctx }) => {
+  getRankingList: protectedProcedure.query(async ({ ctx }) => {
     return await ctx.db.rankingList.findMany({
       where: {
         userId: ctx.session.user.id
@@ -407,7 +406,19 @@ export const reviewRouter = createTRPCRouter({
       include: {
         items: {
           include: {
-            itemReview: true
+            itemReview: {
+              include: {
+                reviews: {
+                  where: {
+                    userId: ctx.session.user.id
+                  },
+                  select: {
+                    rating: true
+                  },
+                  take: 1
+                }
+              }
+            }
           },
           orderBy: {
             position: 'asc'

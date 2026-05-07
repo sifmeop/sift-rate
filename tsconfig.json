@@ -23,6 +23,8 @@
     ],
     "incremental": true,
     "paths": {
+      "~/generated/prisma": ["./generated/prisma"],
+      "~/generated/prisma/*": ["./generated/prisma/*"],
       "~/*": ["./src/*"]
     }
   },

@@ -8,11 +8,11 @@ import {
   ModalHeader,
   useDisclosure
 } from '@heroui/modal'
-import type { ContentType } from 'generated/prisma'
 import { PencilIcon } from 'lucide-react'
 import { Badge } from '~/components/ui/badge'
 import { StarRating } from '~/components/ui/star-rating'
 import { MAX_REVIEW_LENGTH } from '~/constants/review'
+import type { ContentType } from '~/generated/prisma'
 import { useUpdateReview } from '../../hooks/useUpdateReview'
 
 interface IUpdateReviewProps {

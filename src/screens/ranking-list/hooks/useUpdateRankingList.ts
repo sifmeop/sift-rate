@@ -23,11 +23,11 @@ export const useUpdateRankingList = ({
   const { mutateAsync, isPending: isUpdating } =
     api.review.updateRatingList.useMutation({
       onMutate: async (newData) => {
-        await utils.review.getRatingList.cancel()
+        await utils.review.getRankingList.cancel()
 
-        const prevData = utils.review.getRatingList.getData()
+        const prevData = utils.review.getRankingList.getData()
 
-        utils.review.getRatingList.setData(undefined, (oldData) => {
+        utils.review.getRankingList.setData(undefined, (oldData) => {
           if (!oldData) return
 
           const updatedData = oldData.map((item) => {
@@ -56,7 +56,7 @@ export const useUpdateRankingList = ({
         return { prevData }
       },
       onError: (_, __, ctx) => {
-        utils.review.getRatingList.setData(undefined, ctx?.prevData)
+        utils.review.getRankingList.setData(undefined, ctx?.prevData)
 
         addToast({
           title: 'Ошибка',
@@ -64,7 +64,7 @@ export const useUpdateRankingList = ({
         })
       },
       onSettled: () => {
-        void utils.review.getRatingList.invalidate()
+        void utils.review.getRankingList.invalidate()
       }
     })
 
