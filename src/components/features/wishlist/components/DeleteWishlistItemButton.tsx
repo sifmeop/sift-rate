@@ -33,8 +33,9 @@ export const DeleteWishlistItemButton = ({
         variant='flat'
         color='danger'
         aria-label='Удалить из ожиданий'
-        onPress={onOpen}>
-        <Trash2Icon className='size-4' />
+        onPress={onOpen}
+        className='hover:scale-110'>
+        <Trash2Icon size={20} />
       </Button>
       <Modal
         placement='center'

@@ -1,6 +1,5 @@
 import { Button } from '@heroui/button'
-import { ExternalLinkIcon } from 'lucide-react'
-import { LoadingSpinner } from '~/components/ui/loading-spinner'
+import { EyeIcon } from 'lucide-react'
 import { useFetchWatchContent } from '../../hooks/useFetchWatchContent'
 
 interface IWatchContentProps {
@@ -15,14 +14,11 @@ export const WatchContent = ({ title }: IWatchContentProps) => {
       isIconOnly
       size='sm'
       variant='flat'
-      color='success'
+      color='primary'
       onPress={() => fetchWatchContent(title)}
-      isDisabled={isFetching}>
-      {isFetching ? (
-        <LoadingSpinner className='text-success' size={16} />
-      ) : (
-        <ExternalLinkIcon size={16} />
-      )}
+      className='hover:scale-110'
+      isLoading={isFetching}>
+      <EyeIcon size={16} />
     </Button>
   )
 }

@@ -1,8 +1,11 @@
 import { Button } from '@heroui/button'
-import { ArrowUpRightIcon } from 'lucide-react'
+import { EyeIcon, StarIcon } from 'lucide-react'
 import Link from 'next/link'
 import { Badge } from '~/components/ui/badge'
 import { ReviewCover } from '~/components/ui/review-cover'
+import { Show } from '~/components/ui/show'
+import { ContentType } from '~/generated/prisma'
+import { useFetchWatchContent } from '../../rating/hooks/useFetchWatchContent'
 import type { WishlistItemData } from '../types/wishlist.types'
 import { formatWishlistDate } from '../utils/formatWishlistDate'
 import { DeleteWishlistItemButton } from './DeleteWishlistItemButton'
@@ -12,7 +15,13 @@ interface IWishlistItemCardProps {
 }
 
 export const WishlistItemCard = ({ item }: IWishlistItemCardProps) => {
+  const { isFetching, fetchWatchContent } = useFetchWatchContent()
+
   const rateHref = `/rate/${item.itemReview.type.toLowerCase()}/${item.itemReview.externalId}`
+
+  const isVideoContent =
+    item.itemReview.type === ContentType.MOVIE ||
+    item.itemReview.type === ContentType.TV
 
   return (
     <article className='bg-card-background border-border hover:border-secondary/50 flex flex-col gap-4 rounded-2xl border p-4 transition-colors sm:flex-row sm:items-center'>
@@ -33,12 +42,29 @@ export const WishlistItemCard = ({ item }: IWishlistItemCardProps) => {
         </h2>
       </div>
       <div className='flex shrink-0 items-center gap-2 self-center max-lg:self-end'>
+        <Show when={isVideoContent}>
+          <Button
+            isIconOnly
+            color='primary'
+            variant='flat'
+            isLoading={isFetching}
+            onPress={
+              isVideoContent
+                ? () => fetchWatchContent(item.itemReview.title)
+                : undefined
+            }
+            className='hover:scale-110'>
+            <EyeIcon size={20} />
+          </Button>
+        </Show>
         <Button
+          isIconOnly
           as={Link}
           href={rateHref}
           color='secondary'
-          endContent={<ArrowUpRightIcon className='size-4' />}>
-          Оценить
+          variant='flat'
+          className='hover:scale-110'>
+          <StarIcon size={20} />
         </Button>
         <DeleteWishlistItemButton
           id={item.id}

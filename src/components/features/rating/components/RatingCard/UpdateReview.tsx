@@ -51,7 +51,8 @@ export const UpdateReview = ({
         size='sm'
         variant='flat'
         color='warning'
-        onPress={onOpen}>
+        onPress={onOpen}
+        className='hover:scale-110'>
         <PencilIcon size={16} />
       </Button>
       <Modal

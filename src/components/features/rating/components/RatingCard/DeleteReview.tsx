@@ -29,7 +29,8 @@ export const DeleteReview = ({ id, title, type }: IDeleteReviewProps) => {
         size='sm'
         variant='flat'
         color='danger'
-        onPress={onOpen}>
+        onPress={onOpen}
+        className='hover:scale-110'>
         <Trash2Icon size={16} />
       </Button>
       <Modal
