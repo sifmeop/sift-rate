@@ -1,12 +1,10 @@
+import { Button } from '@heroui/button'
 import { cn } from '@heroui/theme'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import { ChevronRight } from 'lucide-react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import type { ITargetItem } from '~/components/features/rating'
-import { LoadingSpinner } from '~/components/ui/loading-spinner'
 import { ReviewCover } from '~/components/ui/review-cover'
 import { Show } from '~/components/ui/show'
 import { ContentType } from '~/generated/prisma'
@@ -24,14 +22,11 @@ export const SearchTargetItem = ({
 
   const [isFetching, setIsFetching] = useState(false)
 
+  const rateHref = `/rate/${category.toLowerCase()}/${data.id}`
   const isVideoContent =
     category === ContentType.MOVIE || category === ContentType.TV
-  const rateHref = `/rate/${category.toLowerCase()}/${data.id}`
 
-  const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    e.stopPropagation()
-
+  const handleClick = async () => {
     setIsFetching(true)
 
     try {
@@ -55,38 +50,41 @@ export const SearchTargetItem = ({
       )
     } finally {
       setIsFetching(false)
-      router.push(rateHref)
     }
   }
 
   return (
-    <Link
-      key={data.id}
-      href={rateHref}
-      onClick={isVideoContent ? handleClick : undefined}
-      className={cn(
-        'bg-card-background border-border hover:border-secondary group relative flex w-full cursor-pointer items-center gap-4 overflow-hidden rounded-xl border p-4 transition-all',
-        {
-          'pointer-events-none': isFetching
-        }
-      )}>
-      <Show when={isFetching}>
-        <div className='bg-card-background/70 absolute inset-0 z-2 grid place-items-center'>
-          <LoadingSpinner size={32} />
-        </div>
-      </Show>
-
+    <div className='bg-card-background border-border hover:border-secondary group flex w-full items-center gap-4 overflow-hidden rounded-xl border p-4 transition-all max-lg:flex-col'>
       <ReviewCover title={data.title} coverUrl={data.cover} />
-      <div className='flex-1 overflow-hidden text-left'>
+      <div className='mr-auto shrink-0 overflow-hidden text-left max-lg:mr-0 max-lg:text-center'>
         <h3 className='group-hover:text-secondary line-clamp-2 text-base font-semibold transition-colors'>
           {data.title}
         </h3>
         <p className='text-muted-foreground text-sm'>{data.description}</p>
       </div>
-      <div className='relative size-5'>
-        <ChevronRight className='text-muted-foreground group-hover:text-secondary size-full transition-colors' />
-        <ChevronRight className='text-muted-foreground group-hover:text-secondary absolute top-0 left-0 size-full transition-all group-hover:translate-x-1.5' />
+      <div
+        className={cn('max-lg:w-full', {
+          'grid grid-rows-2 gap-2 max-lg:grid-cols-2 max-lg:grid-rows-1':
+            isVideoContent
+        })}>
+        <Show when={isVideoContent}>
+          <Button
+            color='primary'
+            variant='flat'
+            isLoading={isFetching}
+            className='min-w-37.5 max-lg:min-w-auto'
+            onPress={isVideoContent ? handleClick : undefined}>
+            {isFetching ? 'Загрузка...' : 'Смотреть'}
+          </Button>
+        </Show>
+        <Button
+          color='secondary'
+          variant='flat'
+          className='min-w-37.5 max-lg:min-w-auto'
+          onPress={() => router.push(rateHref)}>
+          Оценить
+        </Button>
       </div>
-    </Link>
+    </div>
   )
 }
