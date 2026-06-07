@@ -10,7 +10,11 @@ interface IResponse {
   }
 }
 
-export const useVideoData = (id: string, player: IPlayer | null) => {
+export const useVideoData = (
+  id: string,
+  player: IPlayer | null,
+  isLoadedIframe: boolean
+) => {
   return useQuery({
     queryKey: ['video-data', id],
     queryFn: async () => {
@@ -34,6 +38,6 @@ export const useVideoData = (id: string, player: IPlayer | null) => {
         isTv: !!data.data.last_episode
       }
     },
-    enabled: !!player
+    enabled: !!player && isLoadedIframe
   })
 }

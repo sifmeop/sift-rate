@@ -3,7 +3,9 @@
 import { Button } from '@heroui/button'
 import { MoveLeftIcon, MoveRightIcon } from 'lucide-react'
 import Link from 'next/link'
+import { useState } from 'react'
 import { LoadingSpinner } from '~/components/ui/loading-spinner'
+import { Show } from '~/components/ui/show'
 import { ROUTES } from '~/constants/routes'
 import { ContentType } from '~/generated/prisma'
 import { usePlayers } from './hooks/usePlayers'
@@ -14,36 +16,59 @@ interface IWatchPageProps {
 }
 
 export const WatchPage = ({ id }: IWatchPageProps) => {
-  const { isFetching, players, selectedPlayer, changePlayer } = usePlayers(id)
+  const [isLoadedIframe, setIsLoadedIframe] = useState(false)
 
-  const { data: videoData } = useVideoData(id, selectedPlayer)
+  const { isFetching, players, selectedPlayer, changePlayer, error } =
+    usePlayers(id)
 
-  if (isFetching) {
-    return <LoadingSpinner />
+  const { data: videoData } = useVideoData(id, selectedPlayer, isLoadedIframe)
+
+  if (error) {
+    return (
+      <div className='flex flex-col items-center gap-3'>
+        <p className='text-center text-2xl font-bold'>
+          Не удалось загрузить видео
+        </p>
+        <Button
+          as={Link}
+          href={ROUTES.REVIEWS}
+          color='primary'
+          variant='flat'
+          className='w-full max-w-62.5 max-sm:max-w-full'
+          startContent={<MoveLeftIcon />}>
+          Назад
+        </Button>
+      </div>
+    )
   }
 
   return (
     <div className='relative flex flex-1 flex-col gap-4'>
+      <Show when={isFetching}>
+        <LoadingSpinner />
+      </Show>
       {videoData && (
-        <div className='flex items-center justify-between gap-2'>
+        <div className='grid grid-cols-[auto_1fr_auto] items-center gap-2 max-sm:grid-cols-2'>
+          <h1 className='col-start-2 row-start-1 line-clamp-2 text-center text-4xl font-bold max-sm:col-span-2 max-sm:col-start-1'>
+            {videoData.title}
+          </h1>
+
           <Button
             as={Link}
             href={ROUTES.REVIEWS}
             color='primary'
             variant='flat'
-            className='w-full max-w-62.5 max-sm:max-w-full'
+            className='col-start-1 row-start-1 w-full max-w-62.5 max-sm:col-span-1 max-sm:row-start-2 max-sm:max-w-full'
             startContent={<MoveLeftIcon />}>
             Назад
           </Button>
-          <h1 className='mx-auto line-clamp-2 text-center text-4xl font-bold'>
-            {videoData.title}
-          </h1>
+
           <Button
             as={Link}
             href={`/rate/${(videoData.isTv ? ContentType.TV : ContentType.MOVIE).toLowerCase()}/${videoData.tmdbId}`}
             color='success'
             variant='flat'
-            className='w-full max-w-62.5 max-sm:max-w-full'
+            className='col-start-3 row-start-1 w-full max-w-62.5 max-sm:col-span-1 max-sm:row-start-2 max-sm:max-w-full'
             endContent={<MoveRightIcon />}>
             Оценить
           </Button>
@@ -67,6 +92,7 @@ export const WatchPage = ({ id }: IWatchPageProps) => {
         <iframe
           allowFullScreen
           className='size-full rounded-xl'
+          onLoad={() => setIsLoadedIframe(true)}
           src={selectedPlayer.iframeUrl}
         />
       )}
