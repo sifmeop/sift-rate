@@ -58,7 +58,7 @@ Sift-Rate is a full-stack web application designed for tracking personal ratings
 - **Language:** TypeScript 5.8 (strict mode)
 - **Linting:** ESLint 9 with Next.js config
 - **Formatting:** Prettier with Tailwind plugin
-- **Package Manager:** Yarn
+- **Package Manager:** Bun
 
 ## Architecture
 
@@ -105,7 +105,7 @@ src/
 ### Prerequisites
 
 - Node.js 20+
-- Yarn 1.22+
+- Bun 1.22+
 - PostgreSQL database
 
 ### Installation
@@ -120,7 +120,7 @@ src/
 2. **Install dependencies**
 
    ```bash
-   yarn install
+   bun install
    ```
 
 3. **Configure environment variables**
@@ -134,13 +134,13 @@ src/
 4. **Initialize the database**
 
    ```bash
-   yarn db:push
+   bun db:push
    ```
 
 5. **Start the development server**
 
    ```bash
-   yarn dev
+   bun dev
    ```
 
 6. Open [http://localhost:3000](http://localhost:3000)
@@ -182,23 +182,23 @@ NEXT_PUBLIC_RAWG_API_KEY="your-rawg-api-key"
 
 ## Available Scripts
 
-| Script              | Description                        |
-| ------------------- | ---------------------------------- |
-| `yarn dev`          | Start development server           |
-| `yarn build`        | Build for production               |
-| `yarn start`        | Start production server            |
-| `yarn preview`      | Build and start production preview |
-| `yarn check`        | Run linting and type checking      |
-| `yarn lint`         | Run ESLint                         |
-| `yarn lint:fix`     | Fix ESLint issues                  |
-| `yarn typecheck`    | Run TypeScript type checking       |
-| `yarn format:check` | Check code formatting              |
-| `yarn format:write` | Format code with Prettier          |
-| `yarn db:generate`  | Generate Prisma client             |
-| `yarn db:push`      | Push schema to database            |
-| `yarn db:migrate`   | Deploy database migrations         |
-| `yarn db:reset`     | Reset database (destructive)       |
-| `yarn db:studio`    | Open Prisma Studio GUI             |
+| Script             | Description                        |
+| ------------------ | ---------------------------------- |
+| `bun dev`          | Start development server           |
+| `bun build`        | Build for production               |
+| `bun start`        | Start production server            |
+| `bun preview`      | Build and start production preview |
+| `bun check`        | Run linting and type checking      |
+| `bun lint`         | Run ESLint                         |
+| `bun lint:fix`     | Fix ESLint issues                  |
+| `bun typecheck`    | Run TypeScript type checking       |
+| `bun format:check` | Check code formatting              |
+| `bun format:write` | Format code with Prettier          |
+| `bun db:generate`  | Generate Prisma client             |
+| `bun db:push`      | Push schema to database            |
+| `bun db:migrate`   | Deploy database migrations         |
+| `bun db:reset`     | Reset database (destructive)       |
+| `bun db:studio`    | Open Prisma Studio GUI             |
 
 ## Features in Detail
 

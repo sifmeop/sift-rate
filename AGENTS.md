@@ -15,7 +15,7 @@ The project uses:
 - Auth.js / NextAuth.js 5
 - TanStack Query
 - HeroUI, Tailwind CSS 4, and Framer Motion
-- Yarn 1.22
+- Bun package manager
 
 ## Repository Structure
 
@@ -84,24 +84,24 @@ The project uses:
 
 ## Validation Commands
 
-Use Yarn for package scripts.
+Use Bun for package scripts.
 
-- `yarn dev` - start the development server.
-- `yarn build` - create a production build.
-- `yarn start` - start the production server.
-- `yarn preview` - build and start a production preview.
-- `yarn check` - run linting and TypeScript checks.
-- `yarn lint` - run ESLint.
-- `yarn lint:fix` - run ESLint with fixes.
-- `yarn typecheck` - run TypeScript with `--noEmit`.
-- `yarn format:check` - check formatting.
-- `yarn format:write` - format code.
-- `yarn doctor` - run React Doctor.
-- `yarn db:generate` - generate Prisma client.
-- `yarn db:push` - push Prisma schema to the database.
-- `yarn db:migrate` - deploy Prisma migrations.
-- `yarn db:studio` - open Prisma Studio.
-- `yarn db:reset` - reset the database. This is destructive; ask first.
+- `bun dev` - start the development server.
+- `bun build` - create a production build.
+- `bun start` - start the production server.
+- `bun preview` - build and start a production preview.
+- `bun check` - run linting and TypeScript checks.
+- `bun lint` - run ESLint.
+- `bun lint:fix` - run ESLint with fixes.
+- `bun typecheck` - run TypeScript with `--noEmit`.
+- `bun format:check` - check formatting.
+- `bun format:write` - format code.
+- `bun doctor` - run React Doctor.
+- `bun db:generate` - generate Prisma client.
+- `bun db:push` - push Prisma schema to the database.
+- `bun db:migrate` - deploy Prisma migrations.
+- `bun db:studio` - open Prisma Studio.
+- `bun db:reset` - reset the database. This is destructive; ask first.
 
 For code changes, run the most focused validation first, then broader checks when
 appropriate. For documentation-only changes, no build or test run is required.
@@ -114,7 +114,7 @@ appropriate. For documentation-only changes, no build or test run is required.
 - Ask before changing core project configuration such as `next.config.js`,
   `tsconfig.json`, `eslint.config.js`, `tailwind.config.js`, Prisma config, or
   package manager settings.
-- Ask before running destructive database commands, especially `yarn db:reset`.
+- Ask before running destructive database commands, especially `bun db:reset`.
 - Do not remove tests, validation, or user data without explicit approval.
 - Do not rewrite unrelated code while working on a focused task.
 
