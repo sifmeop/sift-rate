@@ -82,10 +82,10 @@ model Review {
   review    String?
   createdAt DateTime @default(now())
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
-  itemReview   ItemReview @relation(fields: [itemReviewId], references: [id])
+  itemReview   ItemReview @relation(fields: [itemReviewId], references: [id], onDelete: Cascade)
   itemReviewId String
 
   @@unique([userId, itemReviewId])
@@ -96,7 +96,7 @@ model RankingList {
   title     String
   createdAt DateTime @default(now())
 
-  user   User   @relation(fields: [userId], references: [id])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
   items RankingListItem[]
@@ -106,10 +106,10 @@ model RankingListItem {
   id       String @id @default(cuid())
   position Int
 
-  rankingList   RankingList @relation(fields: [rankingListId], references: [id])
+  rankingList   RankingList @relation(fields: [rankingListId], references: [id], onDelete: Cascade)
   rankingListId String
 
-  itemReview   ItemReview @relation(fields: [itemReviewId], references: [id])
+  itemReview   ItemReview @relation(fields: [itemReviewId], references: [id], onDelete: Cascade)
   itemReviewId String
 
   @@unique([rankingListId, position])
@@ -123,7 +123,7 @@ model WishlistItem {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
-  itemReview   ItemReview @relation(fields: [itemReviewId], references: [id])
+  itemReview   ItemReview @relation(fields: [itemReviewId], references: [id], onDelete: Cascade)
   itemReviewId String
 
   @@unique([userId, itemReviewId])

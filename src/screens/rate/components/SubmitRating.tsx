@@ -3,7 +3,6 @@
 import { Alert } from '@heroui/alert'
 import { Button } from '@heroui/button'
 import { Textarea } from '@heroui/input'
-import { useEffect } from 'react'
 import { Controller } from 'react-hook-form'
 import type { ISelectedTargetItem } from '~/components/features/rating'
 import { Badge } from '~/components/ui/badge'
@@ -20,20 +19,12 @@ interface ISubmitRatingProps {
 }
 
 export const SubmitRating = ({ targetItem }: ISubmitRatingProps) => {
-  const { onSubmit, isCreating, control, setValue } = useRateSubmit(targetItem)
+  const { onSubmit, isCreating, control } = useRateSubmit(targetItem)
 
   const { data, isLoading } = api.review.getReviewByExternalId.useQuery({
     externalId: targetItem.externalId,
     type: targetItem.type
   })
-
-  useEffect(() => {
-    if (!data) return
-
-    setValue('rating', data.rating)
-    setValue('review', data.review ?? '')
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data])
 
   const hasReview = !!data
 
@@ -50,6 +41,8 @@ export const SubmitRating = ({ targetItem }: ISubmitRatingProps) => {
         <Badge type={targetItem.type} className='absolute top-6 right-6' />
         <div className='mb-6 flex items-center gap-4'>
           <ReviewCover
+            unoptimized
+            category={targetItem.type}
             title={targetItem.title}
             coverUrl={targetItem.coverUrl}
           />

@@ -46,7 +46,12 @@ const config = {
       },
       { protocol: 'https', hostname: 'cdn-images.deezer.com' },
       { protocol: 'https', hostname: 'e-cdns-images.dzcdn.net' },
-      { protocol: 'https', hostname: '*.dzcdn.net' }
+      { protocol: 'https', hostname: '*.dzcdn.net' },
+      { protocol: 'https', hostname: 'coverartarchive.org' },
+      {
+        protocol: 'https',
+        hostname: 'sift-rate-bucket.s3.eu-central-1.amazonaws.com'
+      }
     ]
   }
 }

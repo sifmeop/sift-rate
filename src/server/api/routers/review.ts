@@ -1,5 +1,8 @@
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import dayjs from 'dayjs'
+import sharp from 'sharp'
 import type { ITimeline } from '~/components/features/rating'
+import { env } from '~/env'
 import { createTRPCRouter, protectedProcedure } from '~/server/api/trpc'
 import { db } from '~/server/db'
 import {
@@ -14,6 +17,19 @@ import {
   updateReviewSchema,
   validateDates
 } from '~/utils/validators'
+
+export const runtime = 'nodejs'
+
+const client = new S3Client({
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  region: env.S3_REGION,
+  credentials: {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    accessKeyId: env.S3_ACCESS_KEY_ID,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    secretAccessKey: env.S3_SECRET_ACCESS_KEY
+  }
+})
 
 export const reviewRouter = createTRPCRouter({
   createRatingList: protectedProcedure
@@ -185,11 +201,54 @@ export const reviewRouter = createTRPCRouter({
         }
       })
 
+      let coverUrl
+
+      const exists = itemReview?.coverUrl
+
+      if (!exists && input.coverUrl) {
+        const imageRes = await fetch(input.coverUrl)
+        const buffer = Buffer.from(await imageRes.arrayBuffer())
+
+        const optimized = await sharp(buffer)
+          .resize({
+            width: 600,
+            height: 600,
+            fit: 'inside',
+            withoutEnlargement: true
+          })
+          .webp({ quality: 90 })
+          .toBuffer()
+
+        const bytes = new Uint8Array(16)
+        crypto.getRandomValues(bytes)
+
+        const s3Id = Buffer.from(bytes)
+          .toString('base64')
+          .replace(/\+/g, '')
+          .replace(/\//g, '')
+          .replace(/=/g, '')
+          .slice(0, 16)
+
+        const key = `covers/${s3Id}.webp`
+
+        await client.send(
+          new PutObjectCommand({
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+            Bucket: env.S3_BUCKET,
+            Key: key,
+            Body: optimized,
+            ContentType: 'image/webp'
+          })
+        )
+
+        coverUrl = `https://${env.S3_BUCKET}.s3.${env.S3_REGION}.amazonaws.com/${key}`
+      }
+
       itemReview ??= await ctx.db.itemReview.create({
         data: {
           externalId: input.externalId,
           title: input.title,
-          coverUrl: input.coverUrl,
+          coverUrl,
           type: input.type
         }
       })
@@ -219,7 +278,8 @@ export const reviewRouter = createTRPCRouter({
               name: true,
               image: true
             }
-          }
+          },
+          itemReview: true
         }
       })
 

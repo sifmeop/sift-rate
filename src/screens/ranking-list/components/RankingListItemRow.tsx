@@ -56,6 +56,7 @@ export const RankingListItemRow = ({
       </div>
 
       <ReviewCover
+        category={item.itemReview.type}
         title={item.itemReview.title}
         coverUrl={item.itemReview.coverUrl}
         className='w-28 max-lg:w-16'

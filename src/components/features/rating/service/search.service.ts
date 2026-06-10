@@ -16,7 +16,8 @@ import type {
 
 const isDefined = <T>(value: T | undefined): value is T => value !== undefined
 
-const LIMIT_PER_PAGE = 20
+const LIMIT_PER_PAGE = 10
+
 const getPages = (total: number, limit = LIMIT_PER_PAGE) =>
   Math.ceil(total / limit)
 
@@ -87,8 +88,7 @@ export class SearchService {
       return {
         items: [],
         page,
-        totalPages: 1,
-        totalResults: 0
+        totalPages: 1
       }
     }
 
@@ -119,8 +119,7 @@ export class SearchService {
     return {
       items: result,
       page: data.page,
-      totalPages: data.total_pages,
-      totalResults: data.total_results
+      totalPages: data.total_pages
     }
   }
 
@@ -190,8 +189,7 @@ export class SearchService {
       return {
         items: [],
         page,
-        totalPages: 1,
-        totalResults: 0
+        totalPages: 1
       }
     }
 
@@ -222,8 +220,7 @@ export class SearchService {
     return {
       items: result,
       page: data.page,
-      totalPages: data.total_pages,
-      totalResults: data.total_results
+      totalPages: data.total_pages
     }
   }
 
@@ -274,69 +271,106 @@ export class SearchService {
     page: number
   ): Promise<ISearchResult> {
     const { data } = await axios.get<{
-      data: ISongTargetItem[]
-      total: number
-    }>('/api/deezer/search/song', {
+      recordings: ISongTargetItem[]
+      count: number
+    }>('https://musicbrainz.org/ws/2/recording', {
       params: {
-        q: query,
+        query,
         limit: LIMIT_PER_PAGE,
-        index: (page - 1) * LIMIT_PER_PAGE
+        offset: (page - 1) * LIMIT_PER_PAGE,
+        fmt: 'json'
       }
     })
 
-    if (data.total === 0) {
+    if (data.count === 0) {
       return {
         items: [],
         page,
-        totalPages: 1,
-        totalResults: 0
+        totalPages: 1
       }
     }
 
-    const songs = data.data.filter((album) => album.type === 'track')
+    const songs = data.recordings.filter((song) => song.releases.length > 0)
 
-    const transformedData: ITargetItem[] = songs.map((track) => ({
-      id: String(track.id),
-      title: track.title,
-      description: track.artist.name,
-      cover: track.album.cover_big
-    }))
+    const transformedData: ITargetItem[] = await Promise.all(
+      songs.map(async (song) => {
+        const releaseId = song.releases[0]!.id
+
+        let cover = `https://coverartarchive.org/release/${releaseId}/front`
+
+        try {
+          const { data } = await axios.get<{
+            images: {
+              thumbnails: { '250': string }
+            }[]
+          }>(`https://coverartarchive.org/release/${releaseId}`)
+
+          if (data.images[0]) {
+            cover = data.images[0].thumbnails[250]
+          }
+        } catch {}
+
+        return {
+          id: song.id,
+          title: song.title,
+          description: this.joinDescription([
+            ...song['artist-credit'].map((artist) => artist.name),
+            dayjs(song['first-release-date']).format('YYYY')
+          ]),
+          cover
+        }
+      })
+    )
 
     return {
       items: transformedData,
       page: page + 1,
-      totalPages: getPages(data.total),
-      totalResults: data.total
+      totalPages: getPages(data.count)
     }
   }
 
   private async searchSongById(
     id: string
   ): Promise<ISelectedTargetItem | null> {
-    console.debug('WINDOW', typeof window)
+    const { data } = await axios.get<ISongTargetItem>(
+      `https://musicbrainz.org/ws/2/recording/${id}`,
+      {
+        params: {
+          fmt: 'json',
+          inc: 'releases+artist-credits'
+        }
+      }
+    )
 
-    const { data } = await axios.get<{
-      title: string
-      album: { cover_big: string }
-      artist: { name: string }
-      release_date: string
-    }>(`/api/deezer/search/song/${id}`)
+    const song = data.releases[0]
 
-    if (!data) {
+    if (!song) {
       return null
     }
 
-    const description = this.joinDescription([
-      data.artist.name,
-      data.release_date ? dayjs(data.release_date).format('YYYY') : ''
-    ])
+    let coverUrl = `https://coverartarchive.org/release/${song.id}/front`
+
+    try {
+      const { data } = await axios.get<{
+        images: {
+          thumbnails: { '250': string }
+        }[]
+      }>(`https://coverartarchive.org/release/${song.id}`)
+
+      if (data.images[0]) {
+        coverUrl = data.images[0].thumbnails[250]
+      }
+    } catch {}
 
     return {
-      externalId: id,
+      externalId: song.id,
       type: ContentType.SONG,
       title: data.title,
-      coverUrl: data.album.cover_big,
-      description
+      coverUrl,
+      description: this.joinDescription([
+        ...data['artist-credit'].map((artist) => artist.name),
+        dayjs(data['first-release-date']).format('YYYY')
+      ])
     }
   }
 
@@ -345,64 +379,108 @@ export class SearchService {
     page: number
   ): Promise<ISearchResult> {
     const { data } = await axios.get<{
-      data: IAlbumTargetItem[]
-      total: number
-    }>('/api/deezer/search/album', {
+      'release-groups': IAlbumTargetItem[]
+      count: number
+    }>('https://musicbrainz.org/ws/2/release-group', {
       params: {
-        q: query,
+        query,
         limit: LIMIT_PER_PAGE,
-        index: (page - 1) * LIMIT_PER_PAGE
+        offset: (page - 1) * LIMIT_PER_PAGE,
+        fmt: 'json'
       }
     })
 
-    if (data.total === 0) {
+    if (data.count === 0) {
       return {
         items: [],
         page,
-        totalPages: 1,
-        totalResults: 0
+        totalPages: 1
       }
     }
 
-    const albums = data.data.filter((album) => album.type === 'album')
+    const albums = data['release-groups'].filter(
+      (album) => album['primary-type'] === 'Album' && album.releases.length > 0
+    )
 
-    const transformedData: ITargetItem[] = albums.map((album) => ({
-      id: String(album.id),
-      title: album.title,
-      description: album.artist.name,
-      cover: album.cover_big
-    }))
+    const transformedData: ITargetItem[] = await Promise.all(
+      albums.map(async (album) => {
+        const releaseId = album.releases[0]!.id
+
+        let cover = `https://coverartarchive.org/release/${releaseId}/front`
+
+        try {
+          const { data } = await axios.get<{
+            images: {
+              thumbnails: { '250': string }
+            }[]
+          }>(`https://coverartarchive.org/release/${releaseId}`)
+
+          if (data.images[0]) {
+            cover = data.images[0].thumbnails[250]
+          }
+        } catch {}
+
+        return {
+          id: album.id,
+          title: album.title,
+          description: this.joinDescription([
+            ...album['artist-credit'].map((artist) => artist.name),
+            dayjs(album['first-release-date']).format('YYYY')
+          ]),
+          cover
+        }
+      })
+    )
 
     return {
       items: transformedData,
       page: page + 1,
-      totalPages: getPages(data.total),
-      totalResults: data.total
+      totalPages: getPages(data.count)
     }
   }
 
   private async searchAlbumById(
     id: string
   ): Promise<ISelectedTargetItem | null> {
-    const { data } = await axios.get<{
-      title: string
-      cover_big: string
-      artist: { name: string }
-      release_date: string
-    }>(`${env.NEXT_PUBLIC_SITE_URL}/api/deezer/search/album/${id}`)
+    const { data } = await axios.get<IAlbumTargetItem>(
+      `https://musicbrainz.org/ws/2/release-group/${id}`,
+      {
+        params: {
+          fmt: 'json',
+          inc: 'releases+artist-credits'
+        }
+      }
+    )
 
-    if (!data) {
+    const album = data.releases[0]
+
+    if (!album) {
       return null
     }
 
-    const description = `${data.artist.name} • ${dayjs(data.release_date).format('YYYY')}`
+    let coverUrl = `https://coverartarchive.org/release/${album.id}/front`
+
+    try {
+      const { data } = await axios.get<{
+        images: {
+          thumbnails: { '250': string }
+        }[]
+      }>(`https://coverartarchive.org/release/${album.id}`)
+
+      if (data.images[0]) {
+        coverUrl = data.images[0].thumbnails[250]
+      }
+    } catch {}
 
     return {
-      externalId: id,
+      externalId: album.id,
       type: ContentType.ALBUM,
       title: data.title,
-      coverUrl: data.cover_big,
-      description
+      coverUrl,
+      description: this.joinDescription([
+        ...data['artist-credit'].map((artist) => artist.name),
+        dayjs(data['first-release-date']).format('YYYY')
+      ])
     }
   }
 
@@ -425,8 +503,7 @@ export class SearchService {
       return {
         items: [],
         page,
-        totalPages: 1,
-        totalResults: 0
+        totalPages: 1
       }
     }
 
@@ -449,8 +526,7 @@ export class SearchService {
     return {
       items: transformedData,
       page: page + 1,
-      totalPages: getPages(data.count),
-      totalResults: data.count
+      totalPages: getPages(data.count)
     }
   }
 
@@ -507,8 +583,7 @@ export class SearchService {
       return {
         items: [],
         page,
-        totalPages: 0,
-        totalResults: 0
+        totalPages: 0
       }
     }
 
@@ -531,8 +606,7 @@ export class SearchService {
     return {
       items: transformedData,
       page: page + 1,
-      totalPages: getPages(data.totalItems),
-      totalResults: data.totalItems
+      totalPages: getPages(data.totalItems)
     }
   }
 

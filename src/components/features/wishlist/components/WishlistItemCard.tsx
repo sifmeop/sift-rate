@@ -27,6 +27,7 @@ export const WishlistItemCard = ({ item }: IWishlistItemCardProps) => {
   return (
     <article className='bg-card-background border-border hover:border-secondary/50 flex flex-col gap-4 rounded-2xl border p-4 transition-colors sm:flex-row sm:items-center'>
       <ReviewCover
+        category={item.itemReview.type}
         title={item.itemReview.title}
         coverUrl={item.itemReview.coverUrl}
         className='w-24'

@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ url })
   } catch (error) {
-    console.log('error', error)
+    console.error(`Error searching for "${title}"`, error)
     return NextResponse.json({ error: 'search failed' }, { status: 500 })
   }
 }

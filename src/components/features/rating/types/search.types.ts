@@ -4,7 +4,6 @@ export interface ISearchResult {
   items: ITargetItem[]
   page: number
   totalPages: number
-  totalResults: number
 }
 
 export interface ITargetItem {
@@ -32,27 +31,24 @@ export interface ITvTargetItem {
 }
 
 export interface ISongTargetItem {
-  id: number
+  id: string
   title: string
-  genre_id: number
-  artist: {
-    name: string
-  }
-  album: {
-    cover_big: string
-  }
-  type: string
+  'first-release-date': string
+  'artist-credit': { name: string }[]
+  releases: {
+    id: string
+  }[]
 }
 
 export interface IAlbumTargetItem {
-  id: number
+  id: string
   title: string
-  genre_id: number
-  cover_big: string
-  artist: {
-    name: string
-  }
-  type: string
+  'primary-type': string
+  'first-release-date': string
+  'artist-credit': { name: string }[]
+  releases: {
+    id: string
+  }[]
 }
 
 export interface IGameTargetItem {

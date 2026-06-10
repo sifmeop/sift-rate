@@ -1,25 +1,33 @@
-import { notFound } from 'next/navigation'
-import { use } from 'react'
-import { SearchService } from '~/components/features/rating'
+'use client'
+
+import { LoadingSpinner } from '~/components/ui/loading-spinner'
+import { ErrorMessage } from '~/components/ui/query'
 import type { ContentType } from '~/generated/prisma'
 import { SubmitRating } from './components/SubmitRating'
+import { useGetTargetItemById } from './hooks/useGetTargetItemById'
 
 interface IRateTargetItemPageProps {
-  id: string
   category: ContentType
+  id: string
 }
 
 export const RateTargetItemPage = ({
-  id,
-  category
+  category,
+  id
 }: IRateTargetItemPageProps) => {
-  const searchService = new SearchService()
+  const { data, isLoading, isError } = useGetTargetItemById(category, id)
 
-  const targetItem = use(searchService.searchById(category, id))
-
-  if (!targetItem) {
-    notFound()
+  if (isError) {
+    return <ErrorMessage message='Не удалось получить данные' />
   }
 
-  return <SubmitRating targetItem={targetItem} />
+  if (isLoading) {
+    return <LoadingSpinner />
+  }
+
+  if (!data) {
+    return <ErrorMessage message='Не удалось получить данные' />
+  }
+
+  return <SubmitRating targetItem={data} />
 }

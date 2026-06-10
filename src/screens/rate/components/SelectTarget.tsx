@@ -3,10 +3,10 @@ import { Input } from '@heroui/input'
 import { Pagination } from '@heroui/pagination'
 import { SearchIcon } from 'lucide-react'
 import { LoadingSpinner } from '~/components/ui/loading-spinner'
+import { ErrorMessage } from '~/components/ui/query'
 import { Show } from '~/components/ui/show'
 import { type ContentType } from '~/generated/prisma'
 import { useTargetSearch } from '../hooks/useTargetSearch'
-import { getItemCountText } from '../utils/getItemCountText'
 import { SearchTargetItem } from './SelectTargetItem'
 
 interface ISelectTargetProps {
@@ -20,12 +20,10 @@ export const SelectTarget = ({ category }: ISelectTargetProps) => {
     clearSearch,
     result,
     isLoading,
-    searchTargets,
+    handleSearch,
     currentPage,
     onChangePage,
-    totalPages,
-    totalResults,
-    error
+    isError
   } = useTargetSearch(category)
 
   return (
@@ -39,7 +37,7 @@ export const SelectTarget = ({ category }: ISelectTargetProps) => {
           onValueChange={changeSearchTerm}
           size='lg'
           onKeyDown={async (e) => {
-            if (e.key === 'Enter') await searchTargets()
+            if (e.key === 'Enter') handleSearch()
           }}
           onClear={clearSearch}
           isDisabled={isLoading}
@@ -48,7 +46,7 @@ export const SelectTarget = ({ category }: ISelectTargetProps) => {
           isIconOnly
           size='lg'
           variant='flat'
-          onPress={() => searchTargets()}
+          onPress={() => handleSearch()}
           isDisabled={isLoading || searchTerm.trim().length === 0}>
           <SearchIcon />
         </Button>
@@ -56,25 +54,24 @@ export const SelectTarget = ({ category }: ISelectTargetProps) => {
       <Show when={isLoading}>
         <LoadingSpinner />
       </Show>
-      {error && (
-        <p className='text-muted-foreground text-center text-base'>{error}</p>
-      )}
-      {!isLoading && totalResults > 0 && (
-        <p className='text-muted-foreground text-center text-base'>
-          Всего: {totalResults} {getItemCountText(totalResults, category)}
-        </p>
-      )}
-      {!isLoading && result?.length === 0 && (
+      {isError && <ErrorMessage message='Не удалось получить данные' />}
+      {!isLoading && result?.items.length === 0 && (
         <p className='text-muted-foreground text-center text-base'>
           Ничего не найдено
         </p>
       )}
-      <div className='z-px flex flex-col gap-3'>
-        {result?.map((result) => (
-          <SearchTargetItem key={result.id} category={category} data={result} />
-        ))}
-      </div>
-      {!isLoading && totalPages > 1 && (
+      {!isLoading && result && result.items.length > 0 && (
+        <div className='z-px flex flex-col gap-3'>
+          {result.items.map((result) => (
+            <SearchTargetItem
+              key={result.id}
+              category={category}
+              data={result}
+            />
+          ))}
+        </div>
+      )}
+      {!isLoading && result && result.totalPages > 1 && (
         <Pagination
           showControls
           classNames={{
@@ -83,7 +80,7 @@ export const SelectTarget = ({ category }: ISelectTargetProps) => {
           }}
           page={currentPage}
           onChange={onChangePage}
-          total={totalPages}
+          total={Math.min(result.totalPages, 5)}
         />
       )}
     </div>

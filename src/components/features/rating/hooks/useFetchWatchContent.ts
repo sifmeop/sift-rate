@@ -38,7 +38,7 @@ export const useFetchWatchContent = () => {
         color: 'danger'
       })
 
-      console.debug(
+      console.error(
         `Error fetching watch link for ${title}: ${JSON.stringify(error)}`
       )
     } finally {

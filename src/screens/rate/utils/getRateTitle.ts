@@ -1,12 +1,12 @@
 import type { ContentType } from '~/generated/prisma'
 
 const TITLE_MAP: Record<ContentType, string> = {
-  MOVIE: 'Выберите фильм',
-  TV: 'Выберите сериал',
-  SONG: 'Выберите песню',
-  ALBUM: 'Выберите альбом',
-  GAME: 'Выберите игру',
-  BOOK: 'Выберите книгу'
+  MOVIE: 'Фильм',
+  TV: 'Сериал',
+  SONG: 'Песня',
+  ALBUM: 'Альбом',
+  GAME: 'Игра',
+  BOOK: 'Книга'
 }
 
 export const getRateTitle = (selectedType: ContentType) =>

@@ -16,15 +16,15 @@ export const useRateSubmit = (targetItem: ISelectedTargetItem) => {
   const utils = api.useUtils()
 
   const { mutateAsync, isPending: isCreating } = api.review.create.useMutation({
-    onSuccess: (data, variables) => {
+    onSuccess: (data) => {
       const transformedData: IRatingCardData = {
         createdAt: data.createdAt,
         id: data.id,
         itemReview: {
-          title: variables.title,
-          coverUrl: variables.coverUrl ?? null,
-          type: variables.type,
-          externalId: variables.externalId
+          title: data.itemReview.title,
+          coverUrl: data.itemReview.coverUrl,
+          type: data.itemReview.type,
+          externalId: data.itemReview.externalId
         },
         itemReviewId: data.itemReviewId,
         rating: data.rating,
@@ -33,14 +33,14 @@ export const useRateSubmit = (targetItem: ISelectedTargetItem) => {
       }
 
       const hasReview = utils.review.getReviewByExternalId.getData({
-        externalId: variables.externalId,
-        type: variables.type
+        externalId: data.itemReview.externalId,
+        type: data.itemReview.type
       })
 
       utils.review.getReviewByExternalId.setData(
         {
-          externalId: variables.externalId,
-          type: variables.type
+          externalId: data.itemReview.externalId,
+          type: data.itemReview.type
         },
         () => ({
           rating: data.rating,
@@ -53,7 +53,7 @@ export const useRateSubmit = (targetItem: ISelectedTargetItem) => {
 
         if (hasReview) {
           return oldData.map((item) => {
-            if (item.itemReview.externalId === variables.externalId) {
+            if (item.itemReview.externalId === data.itemReview.externalId) {
               return transformedData
             }
 
@@ -93,7 +93,7 @@ export const useRateSubmit = (targetItem: ISelectedTargetItem) => {
 
         if (hasReview) {
           return oldData.map((item) => {
-            if (item.itemReview.externalId === variables.externalId) {
+            if (item.itemReview.externalId === data.itemReview.externalId) {
               return transformedData
             }
 
@@ -107,35 +107,45 @@ export const useRateSubmit = (targetItem: ISelectedTargetItem) => {
       utils.wishlist.getAll.setData(undefined, (oldData) => {
         if (!oldData) return
         return oldData.filter(
-          (item) => item.itemReview.externalId !== variables.externalId
+          (item) => item.itemReview.externalId !== data.itemReview.externalId
         )
       })
     }
   })
 
-  const { control, handleSubmit, reset, setValue } =
-    useForm<CreateReviewSchemaType>({
-      defaultValues: {
-        coverUrl: targetItem.coverUrl,
-        externalId: targetItem.externalId,
-        title: targetItem.title,
-        type: targetItem.type,
-        rating: 0,
-        review: ''
-      },
-      resolver: zodResolver(createReviewSchema)
-    })
+  const { control, handleSubmit } = useForm<CreateReviewSchemaType>({
+    defaultValues: {
+      coverUrl: targetItem.coverUrl,
+      externalId: targetItem.externalId,
+      title: targetItem.title,
+      type: targetItem.type,
+      rating: 0,
+      review: ''
+    },
+    resolver: zodResolver(createReviewSchema)
+  })
 
   const onSubmit = handleSubmit(async (data: CreateReviewSchemaType) => {
     try {
-      await mutateAsync(data)
-
       const hasReview = utils.review.getReviewByExternalId.getData({
         externalId: data.externalId,
         type: data.type
       })
 
-      reset()
+      if (
+        hasReview?.rating === data.rating &&
+        hasReview.review === data.review
+      ) {
+        addToast({
+          title: 'Ошибка',
+          description: 'Отзыв не изменился',
+          color: 'danger'
+        })
+        return
+      }
+
+      await mutateAsync(data)
+
       addToast({
         title: 'Успешно',
         description: hasReview
@@ -160,7 +170,6 @@ export const useRateSubmit = (targetItem: ISelectedTargetItem) => {
 
   return {
     control,
-    setValue,
     isCreating,
     onSubmit
   }

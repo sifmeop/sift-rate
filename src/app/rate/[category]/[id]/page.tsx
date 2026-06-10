@@ -1,7 +1,6 @@
 import { notFound } from 'next/navigation'
-import { Suspense, use } from 'react'
+import { use } from 'react'
 import z from 'zod'
-import { LoadingSpinner } from '~/components/ui/loading-spinner'
 import { PageTitle } from '~/components/ui/page-title'
 import { ContentType } from '~/generated/prisma'
 import { RateTargetItemPage } from '~/screens/rate'
@@ -24,10 +23,8 @@ export default function RateTargetItem({ params }: IRateTargetItemProps) {
 
   return (
     <>
-      <PageTitle>Ваша оценка</PageTitle>
-      <Suspense fallback={<LoadingSpinner />}>
-        <RateTargetItemPage id={id} category={validated.data} />
-      </Suspense>
+      <PageTitle hrefOnBack={`/rate/${category}`}>Оценка</PageTitle>
+      <RateTargetItemPage id={id} category={validated.data} />
     </>
   )
 }

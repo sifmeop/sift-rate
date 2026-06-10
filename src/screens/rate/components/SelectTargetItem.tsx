@@ -26,8 +26,13 @@ export const SearchTargetItem = ({
 
   return (
     <div className='bg-card-background border-border hover:border-secondary group flex w-full items-center gap-4 overflow-hidden rounded-xl border p-4 transition-all max-lg:flex-col'>
-      <ReviewCover title={data.title} coverUrl={data.cover} />
-      <div className='mr-auto shrink-0 overflow-hidden text-left max-lg:mr-0 max-lg:text-center'>
+      <ReviewCover
+        unoptimized
+        category={category}
+        title={data.title}
+        coverUrl={data.cover}
+      />
+      <div className='mr-auto flex-1 overflow-hidden text-left max-lg:mr-0 max-lg:text-center'>
         <h3 className='group-hover:text-secondary line-clamp-2 text-base font-semibold transition-colors'>
           {data.title}
         </h3>

@@ -28,6 +28,7 @@ export const AddRankingListItemRow = ({
         }
       )}>
       <ReviewCover
+        category={review.itemReview.type}
         title={review.itemReview.title}
         coverUrl={review.itemReview.coverUrl}
         className='w-20'

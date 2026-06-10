@@ -5,7 +5,10 @@ interface IErrorMessageProps {
   onRetry?: () => void
 }
 
-export const ErrorMessage = ({ message, onRetry }: IErrorMessageProps) => {
+export const ErrorMessage = ({
+  message = 'Не удалось получить данные',
+  onRetry
+}: IErrorMessageProps) => {
   return (
     <div className='flex flex-col gap-2'>
       <p className='text-center text-2xl font-bold'>{message}</p>

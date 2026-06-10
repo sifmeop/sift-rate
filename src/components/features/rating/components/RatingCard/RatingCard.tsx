@@ -81,7 +81,7 @@ export const RatingCard = ({
         <div className='from-yellow/10 pointer-events-none absolute -inset-px rounded-xl bg-linear-to-r to-transparent opacity-0 blur-xl transition-opacity group-hover:opacity-100' />
       </Show>
       <div className='max-lg:mx-auto'>
-        <ReviewCover title={title} coverUrl={coverUrl} />
+        <ReviewCover category={type} title={title} coverUrl={coverUrl} />
       </div>
       <div className='flex w-full flex-col gap-2'>
         <div className='flex gap-2'>

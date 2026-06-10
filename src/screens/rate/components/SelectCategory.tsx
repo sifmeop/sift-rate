@@ -1,3 +1,4 @@
+import { cn } from '@heroui/theme'
 import {
   BookOpenIcon,
   Disc3Icon,
@@ -14,6 +15,7 @@ interface ICategoryItem {
   category: ContentType
   title: string
   icon: LucideIcon
+  isDisabled?: boolean
 }
 
 const CATEGORIES: ICategoryItem[] = [
@@ -45,27 +47,30 @@ const CATEGORIES: ICategoryItem[] = [
   {
     category: 'BOOK',
     title: 'Книга',
-    icon: BookOpenIcon
+    icon: BookOpenIcon,
+    isDisabled: true
   }
 ]
 
 export const SelectCategory = () => {
   return (
-    <>
-      <p className='text-muted-foreground mb-4'>Выберите категорию</p>
-      <div className='grid grid-cols-2 gap-3'>
-        {CATEGORIES.map(({ category, title, icon: Icon }) => (
-          <Link
-            key={category}
-            href={`/rate/${category.toLowerCase()}`}
-            className='bg-card-background border-border hover:border-secondary hover:bg-secondary/5 group z-px relative flex cursor-pointer flex-col items-center gap-3 rounded-xl border p-6 transition-all'>
-            <div className='bg-muted text-muted-foreground group-hover:text-secondary grid size-14 place-items-center rounded-full transition-colors'>
-              <Icon className='size-7' />
-            </div>
-            <span className='font-medium'>{title}</span>
-          </Link>
-        ))}
-      </div>
-    </>
+    <div className='grid grid-cols-2 gap-3'>
+      {CATEGORIES.map(({ category, title, icon: Icon, isDisabled }) => (
+        <Link
+          key={category}
+          href={`/rate/${category.toLowerCase()}`}
+          className={cn(
+            'bg-card-background border-border hover:border-secondary hover:bg-secondary/5 group z-px relative flex cursor-pointer flex-col items-center gap-3 rounded-xl border p-6 transition-all',
+            {
+              'pointer-events-none opacity-50': isDisabled
+            }
+          )}>
+          <div className='bg-muted text-muted-foreground group-hover:text-secondary grid size-14 place-items-center rounded-full transition-colors'>
+            <Icon className='size-7' />
+          </div>
+          <span className='font-medium'>{title}</span>
+        </Link>
+      ))}
+    </div>
   )
 }

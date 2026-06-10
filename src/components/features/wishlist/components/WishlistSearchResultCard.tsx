@@ -31,7 +31,12 @@ export const WishlistSearchResultCard = ({
 
   return (
     <article className='group bg-card-background border-border hover:border-secondary/50 flex items-center gap-4 rounded-2xl border p-3 transition-colors max-lg:flex-col'>
-      <ReviewCover title={item.title} coverUrl={item.cover} className='w-24' />
+      <ReviewCover
+        category={type}
+        title={item.title}
+        coverUrl={item.cover}
+        className='w-24'
+      />
       <div className='min-w-0 flex-1 space-y-2'>
         <div className='flex flex-wrap items-center gap-2'>
           <Badge type={type} size='sm' />

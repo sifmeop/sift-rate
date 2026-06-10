@@ -25,7 +25,7 @@ export default function RateCategory({ params }: IRateCategoryProps) {
 
   return (
     <>
-      <PageTitle>{title}</PageTitle>
+      <PageTitle hrefOnBack='/rate'>{title}</PageTitle>
       <RateCategoryPage category={validated.data} />
     </>
   )
