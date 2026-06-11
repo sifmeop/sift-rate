@@ -16,9 +16,10 @@ export const PageTitle = ({
 }: IPageTitleProps) => {
   return (
     <div
-      className={cn('flex items-center gap-2', {
-        'mb-6': !!hrefOnBack
-      })}>
+      className={cn(
+        'flex items-center gap-2',
+        hrefOnBack ? 'mb-6' : 'justify-center'
+      )}>
       {hrefOnBack && (
         <Link
           href={hrefOnBack}
@@ -30,7 +31,7 @@ export const PageTitle = ({
       <h1
         className={cn(
           'text-center text-2xl font-bold lg:text-4xl',
-          hrefOnBack ? 'ml-auto' : 'mb-6 text-center',
+          hrefOnBack ? 'ml-auto' : 'mb-6',
           className
         )}>
         {children}
